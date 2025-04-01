@@ -1,3 +1,186 @@
 .text-danger {
     margin-left: 10px;
 }
+.text-danger {
+    margin-left: 10px;
+}
+
+::ng-deep .p-vacio .p-card {
+    height: 25rem;
+}
+
+::ng-deep .p-vacio .p-card .p-card-body {
+    padding-top: 6rem;
+}
+
+.rotate {
+    animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+.content {
+    width: 700px;
+    height: 400px;
+    line-height: 400px;
+    margin: 0px auto;
+    text-align: center;
+    /* background-color: #CCCCCC; */
+}
+
+.content img {
+    vertical-align: middle;
+}
+
+.img-mini {
+    width: 18em;
+    height: 18em;
+}
+
+.btn-primary {
+    background: #1a5e32;
+    border-color: #1a5e32;
+}
+
+.btn-primary:hover {
+    background: #1a5e32;
+    border-color: #1a5e32;
+}
+
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+    background: #1a5e32;
+    border-color: #1a5e32;
+}
+
+@media screen and (min-width: 1920px) {
+    .content {
+        height: 700px;
+        line-height: 700px;
+    }
+     ::ng-deep .p-vacio .p-card {
+        height: 45rem;
+    }
+     ::ng-deep .p-vacio .p-card .p-card-body {
+        padding-top: 17rem;
+    }
+    .img-mini {
+        width: 25em;
+        height: 25em;
+    }
+}
+
+
+.resaltado {
+    background-color: #dff0d8; /* Fondo verde claro para texto resaltado */
+    font-weight: bold;
+}
+
+/* Estilos del contenedor */
+.custom-container {
+    background-color: #f4f9f4; /* Fondo suave, casi blanco, para todo el contenedor */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+/* Título */
+.custom-title {
+    color: #1a5e32; /* Verde Wiked */
+    font-family: 'Transat', sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Divider */
+.custom-divider {
+    border-top: 2px solid #1a5e32; /* Línea divisoria en verde */
+    margin-bottom: 20px;
+}
+
+/* Estilos para la tabla */
+.custom-table {
+    font-family: 'Transat', sans-serif;
+    font-size: 1rem;
+}
+
+.p-datatable-striped .p-datatable-tbody > tr:nth-child(odd) {
+    background-color: #f1f9f1; /* Fondo claro para filas impares */
+}
+
+.p-datatable-tbody > tr:hover {
+    background-color: #e3f6e3; /* Fondo suave al pasar el ratón */
+}
+
+.p-datatable-tbody > tr {
+    cursor: pointer;
+}
+
+/* Estilos para los botones */
+.custom-button {
+    background-color: #1a5e32; /* Verde Wiked */
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px 15px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-button:hover {
+    background-color: #155d2b; /* Verde más oscuro al pasar el ratón */
+}
+
+/* Input de búsqueda */
+.custom-search-input {
+    width: 100%;
+}
+
+.custom-input {
+    width: 100%;
+    border-radius: 5px;
+    padding: 8px 15px;
+    border: 1px solid #d1e8d0;
+}
+
+.custom-input:focus {
+    border-color: #1a5e32; /* Resaltar el borde con verde al hacer focus */
+}
+
+/* Estilos del dropdown */
+.custom-dropdown {
+    width: 100%;
+    border-radius: 8px;
+    background-color: #f0f4f0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos del sidebar */
+.custom-sidebar {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}
+
+.p-sidebar .p-sidebar-header {
+    background-color: #1a5e32; /* Fondo verde Wiked */
+    color: #fff;
+    font-family: 'Transat', sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.p-sidebar .p-sidebar-footer {
+    background-color: #f4f9f4; /* Fondo suave para el pie del sidebar */
+}
+
+.p-sidebar .p-sidebar-content {
+    padding: 20px;
+}

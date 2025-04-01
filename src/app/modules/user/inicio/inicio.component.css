@@ -1,0 +1,54 @@
+/* Estilos personalizados para la sección */
+.custom-section {
+    background-color: #f4f7f9; /* Color de fondo suave */
+    border-radius: 8px;  /* Bordes redondeados */
+    padding: 20px;  /* Espaciado interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+    margin: 20px 0;  /* Margen superior e inferior */
+  }
+  
+  /* Título con nueva tipografía y color */
+  .custom-title {
+    font-family: 'Transat', sans-serif;
+    font-size: 2rem;  /* Tamaño de fuente grande */
+    color: #1a5e32; /* Verde oscuro */
+    margin-bottom: 15px;  /* Espaciado debajo del título */
+  }
+  
+  /* Texto descriptivo */
+  .custom-text {
+    font-family: 'Transat', sans-serif;
+    font-size: 1rem;
+    color: #333333;  /* Gris oscuro */
+    line-height: 1.6;  /* Altura de línea para mejor legibilidad */
+    margin-bottom: 15px;  /* Espaciado inferior */
+    text-align: justify;  /* Justificar texto */
+  }
+  
+  /* Botón con estilo moderno */
+  .custom-btn {
+    background-color: #1a5e32;  /* Verde oscuro */
+    color: white;
+    border-radius: 25px;  /* Bordes redondeados */
+    padding: 12px 25px;  /* Espaciado interno */
+    text-transform: uppercase;  /* Texto en mayúsculas */
+    font-family: 'Transat', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    transition: background-color 0.3s ease;  /* Transición suave para hover */
+    text-decoration: none;
+    margin-top: 20px;
+  }
+  
+  .custom-btn:hover {
+    background-color: #2d7f56;  /* Color verde más oscuro al pasar el ratón */
+  }
+  
+  /* Enlaces de texto */
+  .custom-btn:focus, .custom-btn:hover {
+    outline: none;  /* Quitar borde al hacer hover/focus */
+    text-decoration: none;  /* Eliminar subrayado */
+  }
+  
+  

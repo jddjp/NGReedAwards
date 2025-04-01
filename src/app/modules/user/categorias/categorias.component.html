@@ -1,61 +1,55 @@
-<div class="container mt-3 mb-5">
-    <h3>Categorias</h3>
-    <!-- <div class="row g-3">
-        <div class="col-sm">
-            <label for="categoria" class="form-label">Convocatoria</label>
-            <p-dropdown [options]="convocatorias" placeholder="Selecciona una Convocatoria" optionLabel="titulo" [style]="{'width':'100%'}"></p-dropdown>
-        </div>
-    </div> -->
-    <hr>
+<div class="container mt-3 mb-5 custom-container">
+    <h3 class="custom-title">Categorías</h3>
+
+    <hr class="custom-divider">
+
     <p-table #tableCategorias [value]="categoriasFilters" selectionMode="single" [(selection)]="selectedCategoria" (onRowSelect)="addNominacion($event)" dataKey="nombre" [loading]="loading" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
-        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} categorias" [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-striped" [globalFilterFields]="['nombre','categoria.nombre']">
+        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} categorías" [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-striped custom-table" [globalFilterFields]="['nombre','categoria.nombre']">
         <ng-template pTemplate="caption">
-            <div class="field">
+            <div class="field custom-field">
                 <p-dropdown appendTo="body" 
-                placeholder="SELECIONA UNA CATEGORIA" 
-                optionLabel="nombre"
-                [showClear]="true"
-                [options] = "categoriasN" 
-                [(ngModel)] = "categoriaNSelected"
-                (onChange)="onChange($event)"
-                optionValue="id">
+                    placeholder="SELECCIONA UNA CATEGORÍA" 
+                    optionLabel="nombre"
+                    [showClear]="true"
+                    [options]="categoriasN" 
+                    [(ngModel)]="categoriaNSelected"
+                    (onChange)="onChange($event)"
+                    optionValue="id"
+                    class="custom-dropdown">
                 </p-dropdown>
-                
             </div>
             <br>
             <div class="flex">
-                <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(tableCategorias)"></button> &nbsp; &nbsp;
-                <span class="p-input-icon-left ml-auto" style="width: 89%;">
-                  <i class="pi pi-search"></i>
-                  <input pInputText type="text"
-                  [(ngModel)]="categorieName" 
-                  (ngModelChange) = "onChangeInput($event)"
-                  placeholder="Buscar categoria" [style]="{ width: '100%' }"/>
+                <button pButton label="Clear" class="p-button-outlined custom-button" icon="pi pi-filter-slash" (click)="clear(tableCategorias)"></button>
+                <span class="p-input-icon-left ml-auto custom-search-input">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text"
+                        [(ngModel)]="categorieName" 
+                        (ngModelChange)="onChangeInput($event)"
+                        placeholder="Buscar categoría" class="custom-input" />
                 </span>
             </div>
         </ng-template>
+
         <ng-template pTemplate="header">
             <tr>
                 <th>Categoria</th>
             </tr>
         </ng-template>
+
         <ng-template pTemplate="body" let-categoria>
             <tr [pSelectableRowDblClick]="categoria">
-                <td >
+                <td>
                     <ng-container *ngFor="let parte of partesResaltadas(categoria.nombre)">
                         <span [class.resaltado]="parte.resaltado">{{ parte.texto }}</span>
-                      </ng-container>
-
-                    <!--<div   [class.resaltado]="textoCoincide(categoria.nombre)"
-                    data-bs-toggle="tooltip" data-bs-placement="top" title="Doble click para agregar una nominación con ésta categoria">
-                        {{categoria.nombre}}
-                    </div>-->
+                    </ng-container>
                 </td>
             </tr>
         </ng-template>
     </p-table>
 </div>
 
-<p-sidebar [(visible)]="visibleSide" position="right" [blockScroll]="true" [baseZIndex]="2" [style]="{ 'width': '60%'}">
+<!-- Sidebar para agregar nominaciones -->
+<p-sidebar [(visible)]="visibleSide" position="right" [blockScroll]="true" [baseZIndex]="2" [style]="{ 'width': '60%'}" class="custom-sidebar">
     <app-add-nominacion *ngIf="visibleSide" [accion]="accion" (fetchNominaciones)="fetchNominacion()"></app-add-nominacion>
 </p-sidebar>

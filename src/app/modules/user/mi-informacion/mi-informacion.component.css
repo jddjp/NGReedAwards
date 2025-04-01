@@ -1,16 +1,78 @@
-button {
-    background: #5b4bad;
-    border-color: #5b4bad;
-}
-
-button:hover {
-    background: #3c3174;
-    border-color: #3c3174;
-}
-
-button:active,
-button:visited,
-button:focus {
-    background: #3c3174;
-    border-color: #3c3174;
-}
+/* Estilos generales del contenedor */
+.custom-container {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos del título */
+  .custom-title {
+    color: #1a5e32; /* Color violeta */
+    font-size: 1.75rem;
+    font-family: 'Transat', sans-serif;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos del formulario */
+  .custom-form {
+    margin-top: 30px;
+  }
+  
+  .custom-form-label {
+    font-size: 1rem;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .custom-form-control {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #d1e8d0;
+    transition: border-color 0.3s ease;
+  }
+  
+  .custom-form-control:focus {
+    border-color: #1a5e32;
+  }
+  
+  /* Estilos de los botones */
+  .custom-btn {
+    background-color: #1a5e32;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-btn:hover {
+    background-color: #1a5e32; /* Violeta más oscuro */
+  }
+  
+  /* Estilos para los errores en los formularios */
+  .is-invalid {
+    border-color: #dc3545;
+  }
+  
+  .text-danger {
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+  
+  .d-grid {
+    display: grid;
+  }
+  
+  .gap-2 {
+    gap: 10px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .custom-title {
+      font-size: 1.5rem;
+    }
+  }
+  

@@ -1,0 +1,51 @@
+/* Navbar personalizado con el color verde Wiked y tipografía Transat */
+.custom-navbar {
+    background-color: #1a5e32; /* Verde Wiked */
+    font-family: 'Transat', sans-serif;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Sombra sutil para agregar profundidad */
+  }
+  
+  /* Color de los enlaces en el navbar */
+  .custom-nav-link {
+    color: #ffffff; /* Texto blanco por defecto */
+    text-transform: uppercase;  /* Convertir texto a mayúsculas */
+    font-size: 1rem;  /* Tamaño de fuente legible */
+    margin-right: 15px;  /* Espaciado entre los enlaces */
+    transition: color 0.3s ease;  /* Transición suave al pasar el ratón */
+  }
+  
+  .custom-nav-link:hover, .custom-nav-link:focus {
+    color: #d4e6d5; /* Color más claro al pasar el ratón */
+  }
+  
+  /* Estilo para el dropdown */
+  .custom-dropdown-item {
+    color: #1a5e32; /* Verde Wiked */
+    font-size: 1rem;
+  }
+  
+  .custom-dropdown-item:hover {
+    background-color: #e9f7e6; /* Fondo verde claro al pasar el ratón */
+  }
+  
+  /* Navbar cuando se ve el logo */
+  .navbar-brand img {
+    filter: brightness(0) invert(1); /* Hacer que el logo se vea más claro */
+  }
+  
+  /* Estilo del toggle (hamburguesa) para móviles */
+  .navbar-toggler-icon {
+    background-color: #ffffff;  /* Color blanco para el ícono de hamburguesa */
+  }
+  
+  /* Añadir bordes redondeados a los enlaces de la cuenta */
+  .nav-link.dropdown-toggle {
+    border-radius: 25px; /* Bordes redondeados */
+    padding: 8px 15px;  /* Espaciado */
+  }
+  
+  /* Hover para la cuenta */
+  .nav-link.dropdown-toggle:hover {
+    background-color: #2d7f56; /* Fondo más oscuro en hover */
+  }
+  

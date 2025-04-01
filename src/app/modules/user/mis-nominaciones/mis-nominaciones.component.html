@@ -1,7 +1,7 @@
-<div class="contenedor mt-4 mb-lg-5">
-    <h3 class="text-bold text-center">Mis Nominaciones</h3>
-    <button type="button" class="btn btn-primary" (click)="nuevaNominacion()">Nueva Nominación</button>
-    <hr>
+<div class="custom-container mt-4 mb-lg-5">
+    <h3 class="custom-title text-center">Mis Nominaciones</h3>
+    <button type="button" class="custom-button" (click)="nuevaNominacion()">Nueva Nominación</button>
+    <hr class="custom-divider">
 
     <div class="row" *ngIf="loading">
         <div class="content">
@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <div class="row" *ngIf="!listNominaciones !loading">
+    <div class="row" *ngIf="!listNominaciones && !loading">
         <p-card class="p-vacio">
             <div class="text-center">
                 <h1>No tienes ninguna nominaci&oacute;n</h1>
@@ -18,7 +18,7 @@
         </p-card>
     </div>
 
-    <div class="row" *ngIf="listNominaciones && listNominaciones.length && listNominaciones.length > 0 && !loading">
+    <div class="row" *ngIf="listNominaciones && listNominaciones.length && !loading">
         <div class="col-12 col-md-3" *ngFor="let nominacion of listNominaciones">
             <p-card [header]="nominacion.titulo" [subheader]="nominacion.categoria" [style]="{ 'width': '100%', 'margin-bottom': '2em'}" styleClass="p-card-shadow">
                 <ng-template pTemplate="header">
@@ -27,12 +27,13 @@
                         <img class="img-mini" alt="Card" src="assets/svg/logo.svg" *ngIf="!nominacion?.fileLogoEmpresa?.url">
                     </div>
                 </ng-template>
-                <label *ngIf="nominacion.statuspago == 'Pago Realizado'">Estatus del Pago: <span class="badge bg-success" >{{nominacion.statuspago}}</span></label>
-                <label *ngIf="nominacion.statuspago == 'Pago Pendiente'">Estatus del Pago: <span class="badge bg-warning text-dark" >{{nominacion.statuspago}}</span></label>
-                <label *ngIf="nominacion.statuspago == 'Pago Rechazado'">Estatus del Pago: <span class="badge bg-danger" >{{nominacion.statuspago}}</span></label>
-                <label *ngIf="nominacion.statuspago == '' || nominacion.statuspago == 'Pago No Realizado'">Estatus del Pago: <span class="badge bg-danger" >Pago No Realizado</span></label>
 
-                <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p> -->
+                <!-- Status Payment -->
+                <label *ngIf="nominacion.statuspago == 'Pago Realizado'" class="resaltado">Estatus del Pago: <span class="badge bg-success">{{nominacion.statuspago}}</span></label>
+                <label *ngIf="nominacion.statuspago == 'Pago Pendiente'" class="resaltado">Estatus del Pago: <span class="badge bg-warning text-dark">{{nominacion.statuspago}}</span></label>
+                <label *ngIf="nominacion.statuspago == 'Pago Rechazado'" class="resaltado">Estatus del Pago: <span class="badge bg-danger">{{nominacion.statuspago}}</span></label>
+                <label *ngIf="nominacion.statuspago == '' || nominacion.statuspago == 'Pago No Realizado'" class="resaltado">Estatus del Pago: <span class="badge bg-danger">Pago No Realizado</span></label>
+
                 <div *ngIf="nominacion.mostrarMas">
                     <label>Nominado: {{nominacion.nominado}}</label><br>
                     <label>Descripcion: {{nominacion.descripcion}}</label><br>
@@ -41,24 +42,26 @@
                     <label>Telefono: {{nominacion.telefono}}</label><br>
                     <label>Pais: {{nominacion.pais}}</label><br>
                     <label>Metodo de Pago: <i [class]="nominacion.pagarCon == 'paypal' ? 'fa-brands fa-cc-paypal fa-xl' : 'fa-solid fa-money-bill-transfer fa-xl'"></i></label><br>
-                    <label *ngIf="nominacion.statuspago == 'Pago Realizado'">Estatus del Pago: <span class="badge bg-success" >{{nominacion.statuspago}}</span></label>
-                    <label *ngIf="nominacion.statuspago == 'Pago Pendiente'">Estatus del Pago: <span class="badge bg-warning text-dark" >{{nominacion.statuspago}}</span></label>
-                    <label *ngIf="nominacion.statuspago == 'Pago Rechazado'">Estatus del Pago: <span class="badge bg-danger" >{{nominacion.statuspago}}</span></label>
-                    <label *ngIf="nominacion.statuspago == '' || nominacion.statuspago == 'Pago No Realizado'">Estatus del Pago: <span class="badge bg-danger" >Pago No Realizado</span></label>
+                    <label *ngIf="nominacion.statuspago == 'Pago Realizado'" class="resaltado">Estatus del Pago: <span class="badge bg-success">{{nominacion.statuspago}}</span></label>
 
+                    <!-- Links -->
                     <div *ngIf="nominacion.fileBaucher">
                         <br><label><a target="blank" [href]="nominacion?.fileBaucher?.url | safeurl : ''">Documento de Pago</a></label> &nbsp;
                     </div>
                     <br><label><a target="blank" [href]="nominacion?.fileCartaIntencion?.url | safeurl : ''">Archivo Carta Intencion</a></label> &nbsp;
                     <label><a target="blank" [href]="nominacion?.fileCesionDerechos?.url | safeurl : ''">Archivo Cesion Derechos</a></label><br>
+
                     <div *ngFor="let item of nominacion.materialMultimedia; let i=index">
                         <label><a target="blank" [href]="item?.url | safeurl : ''">Material Multimedia {{i+1}}</a></label> &nbsp;
                     </div>
+
+                    <!-- Social Links -->
                     <label><i class="fa-brands fa-instagram"></i> &nbsp; <a target="blank" [href]="nominacion.rsInstagram | safeurl : ''">{{nominacion.rsInstagram}}</a></label>
                     <label><i class="fa-brands fa-twitter"></i> &nbsp; <a target="blank" [href]="nominacion.rsTwitter | safeurl : ''">{{nominacion.rsTwitter}}</a></label>
                     <label><i class="fa-brands fa-facebook"></i> &nbsp; <a target="blank" [href]="nominacion.rsFacebook | safeurl : ''">{{nominacion.rsFacebook}}</a></label>
                     <label><i class="fa-brands fa-youtube"></i> &nbsp; <a target="blank" [href]="nominacion.rsYoutube | safeurl : ''">{{nominacion.rsYoutube}}</a></label>
                 </div>
+
                 <ng-template pTemplate="footer">
                     <button class="btn btn-primary" (click)="vistaPrevia(nominacion)"><i [ngClass]="nominacion.mostrarMas ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i> {{ nominacion.mostrarMas ? 'Mostrar menos' : 'Vista Previa' }}</button>
                     <button class="btn btn-secondary" (click)="editarNominacion(nominacion)" [style]="{'margin-left': '.5em'}"><i class="fa-solid fa-pen"></i></button>
@@ -67,9 +70,9 @@
             </p-card>
         </div>
     </div>
-
 </div>
 
+<!-- Sidebar -->
 <p-sidebar [(visible)]="visibleSide" position="right" [blockScroll]="true" [baseZIndex]="2" [style]="{ 'width': '60%'}">
     <app-add-nominacion *ngIf="visibleSide" [accion]="accion" [nominacionEditar]="nominacionEditar" (fetchNominaciones)="fetchNominacion()"></app-add-nominacion>
 </p-sidebar>

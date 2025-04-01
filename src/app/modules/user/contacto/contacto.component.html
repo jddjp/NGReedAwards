@@ -1,51 +1,52 @@
-<div class="container">
+<div class="container custom-container">
     <div class="row">
         <br>
     </div>
+
     <div class="row">
         <div class="col">
-            <div class="card text-center">
-                <div class="card-header" style="background-color:#4c3f91;">
-
+            <div class="card text-center custom-card">
+                <div class="card-header custom-card-header">
+                    <!-- Espacio para el header si es necesario -->
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title"> Información de Contacto</h5>
-                    <p class="card-text">En caso de problemas, sugerencia o preguntas. Favor de comunicarse ha alguno de los siguientes medios</p>
-                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    <h5 class="card-title custom-card-title">Información de Contacto</h5>
+                    <p class="card-text custom-card-text">En caso de problemas, sugerencias o preguntas, favor de comunicarse a alguno de los siguientes medios:</p>
                 </div>
-                <a href="tel:+522221361005" target="_blank">+52 222 136 1005</a>
-                <a href="mailto:isaac969@gmail.com?Subject=Reed%20Latino%20Contacto" target="_blank">isaac969@gmail.com</a>
-                <div class="card-footer text-muted">
-
+                <div class="contact-links">
+                    <a href="tel:+522221361005" target="_blank" class="contact-link">+52 222 136 1005</a>
+                    <a href="mailto:isaac969@gmail.com?Subject=Reed%20Latino%20Contacto" target="_blank" class="contact-link">isaac969@gmail.com</a>
+                </div>
+                <div class="card-footer text-muted custom-card-footer">
+                    <!-- Espacio para pie de tarjeta si es necesario -->
                 </div>
             </div>
         </div>
-        <form class="add">
+
+        <!-- Formulario de contacto -->
+        <form class="add custom-form">
             <div class="col">
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Nombre *</label>
-                    <input type="text" class="form-control" placeholder="nombre" type="text" id="nombre" name="name" required [(ngModel)]="contactomodel.name" >
+                    <label for="nombre" class="form-label custom-form-label">Nombre *</label>
+                    <input type="text" class="form-control custom-form-control" id="nombre" name="name" placeholder="Nombre" required [(ngModel)]="contactomodel.name">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Correo Electronico *</label>
-                    <input type="email" class="form-control" placeholder="correo" type="text" id="correo" name="correo" required [(ngModel)]="contactomodel.correo">
+                    <label for="correo" class="form-label custom-form-label">Correo Electrónico *</label>
+                    <input type="email" class="form-control custom-form-control" id="correo" name="correo" placeholder="Correo" required [(ngModel)]="contactomodel.correo">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Telefono *</label>
-                    <input type="telefono" class="form-control" placeholder="telefono" id="telefono" name="telefono" required [(ngModel)]="contactomodel.telefono">
+                    <label for="telefono" class="form-label custom-form-label">Teléfono *</label>
+                    <input type="tel" class="form-control custom-form-control" id="telefono" name="telefono" placeholder="Teléfono" required [(ngModel)]="contactomodel.telefono">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Mensaje *</label>
-                    <textarea class="form-control"  rows="3" placeholder="mensaje" type="text" id="mensaje" name="mensaje" required [(ngModel)]="contactomodel.mensaje" ></textarea>
-                    
+                    <label for="mensaje" class="form-label custom-form-label">Mensaje *</label>
+                    <textarea class="form-control custom-form-control" id="mensaje" name="mensaje" rows="3" placeholder="Mensaje" required [(ngModel)]="contactomodel.mensaje"></textarea>
                 </div>
 
                 <div class="mb-3">
-                    <button type="button" class="btn btn-primary" style="background-color:#4c3f91;" type="submit"  (click)="add()">Enviar</button>
+                    <button type="submit" class="btn custom-btn" (click)="add()">Enviar</button>
                 </div>
             </div>
         </form>
     </div>
-
-
 </div>
