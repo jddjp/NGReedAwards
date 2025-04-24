@@ -20,8 +20,8 @@
           </li>
         </ul>
         <div class="d-flex">
-          <a class="nav-link custom-nav-link" style="cursor: pointer;" routerLink="/portal/registro" *ngIf="!configService.Usuario">Registrate</a>
-          <a class="nav-link custom-nav-link" style="cursor: pointer;" routerLink="/portal/login" *ngIf="!configService.Usuario">Iniciar Sesión</a>
+          <a class="nav-link custom-nav-link" style="cursor: pointer;" routerLink="/portal/registro" *ngIf="!this.currentUser">Registrate</a>
+          <a class="nav-link custom-nav-link" style="cursor: pointer;" routerLink="/portal/login" *ngIf="!this.currentUser">Iniciar Sesión</a>
         </div>
       </div>
     </div>
@@ -52,10 +52,10 @@
           </li>
         </ul>
         <div class="d-flex">
-          <a class="nav-link custom-nav-link" style="cursor: pointer;" routerLink="/portal/registro" *ngIf="!configService.Usuario">Registrate</a>
-          <a class="nav-link custom-nav-link" style="cursor: pointer;" routerLink="/portal/login" *ngIf="!configService.Usuario">Iniciar Sesión</a>
+          <a class="nav-link custom-nav-link" style="cursor: pointer;" routerLink="/portal/registro" *ngIf="!this.currentUser">Registrate</a>
+          <a class="nav-link custom-nav-link" style="cursor: pointer;" routerLink="/portal/login" *ngIf="!this.currentUser">Iniciar Sesión</a>
   
-          <div *ngIf="configService.Usuario">
+          <div *ngIf="this.currentUser">
             <a class="nav-link custom-nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Mi Cuenta
             </a>
@@ -64,7 +64,7 @@
                <li><a class="dropdown-item custom-dropdown-item" routerLink="/portal/mis-nominaciones">Mis Nominaciones</a></li>
             </ul>
           </div>
-          <a class="nav-link custom-nav-link" style="cursor: pointer;" (click)="logout()" *ngIf="configService.Usuario">Cerrar Sesión</a>
+          <a class="nav-link custom-nav-link" style="cursor: pointer;" (click)="logout()" *ngIf="this.currentUser">Cerrar Sesión</a>
         </div>
       </div>
     </div>
@@ -110,7 +110,7 @@
                 </li>
             </ul>
             <div class="d-flex">
-                <a class="nav-link" style="cursor: pointer;" (click)="logout()"  *ngIf="configService.Usuario">
+                <a class="nav-link" style="cursor: pointer;" (click)="logout()"  *ngIf="this.currentUser">
                     <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
                 </a>
             </div>

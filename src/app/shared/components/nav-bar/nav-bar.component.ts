@@ -45,7 +45,7 @@ export class NavBarComponent implements OnInit {
       }
       // console.log(localStorage.d)
       // if(localStorage.d){
-      //  // this.userUid = JSON.parse(localStorage.d);
+      //  this.userUid = JSON.parse(localStorage.d);
       //   console.log(this.userUid)
       // } else {
       //   this.userUid = undefined;

@@ -88,8 +88,9 @@ export class CategoriasComponent implements OnInit {
   }
 
   addNominacion(event){
-
-    if(this.configService.Usuario){
+   console.log('this.configService.Usuario---->',this.configService.Usuario)
+    if(  this.configService.Usuario != null &&
+      this.configService.Usuario !== 'undefined'){
       this.variablesGL.preloadCategoria.next(this.selectedCategoria);
       this.accion = 'agregar';
       this.visibleSide = true;
