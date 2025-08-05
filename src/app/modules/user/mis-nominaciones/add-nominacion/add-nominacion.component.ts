@@ -27,11 +27,11 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
   @Output() fetchNominaciones: EventEmitter<boolean> = new EventEmitter<boolean>()
    producto = {
      descripcion : 'Compra por Nominacion de Reedlatino',
-     precio      :  149.00
+     precio      :  165.00
    }
 
   codigosDescuento = [
-    { codigo: 'AICODI20', descuento: 20 },
+    // { codigo: 'AICODI20', descuento: 20 },
     // { codigo: 'REED20DESC', descuento: 20 },
     // { codigo: 'ANUNREED2024', descuento: 20 },
     // { codigo: 'REED20QROMPIO', descuento: 20 },
@@ -132,7 +132,7 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
           this.nominacionForm.controls['statuspago'].setValue("Pago Realizado");
           this.nominacionForm.controls['idpago'].setValue(JSON.stringify(order));
 
-            this. crearNominacionPago();
+         this. crearNominacionPago();
 
 
         },
@@ -207,7 +207,7 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
       fileCartaIntencion: ['', [Validators.required]],
       fileMaterialMultimedia: ['', [Validators.required]],
       fileBaucher: ['', []],
-      pagarCon: ['paypal', [Validators.required]],
+      pagarCon: ['', [Validators.required]],
       statuspago: ['', []],
       idpago: ['', []],
     });

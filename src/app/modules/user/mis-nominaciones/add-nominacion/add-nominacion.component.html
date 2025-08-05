@@ -304,10 +304,10 @@
         <p-card header="Pagar con:" *ngIf="nominacionForm.controls['statuspago'].value != 'Pago Realizado'">
             <label>Selecciona un método de pago:</label>
             <select id="objetivo" class="form-control text-center" formControlName="pagarCon">
-              <option default value="" disabled>Selecciona un metodo de pago</option>
-              <option value="proceso">Proceso de Pago</option>
-              <option value="swift">Transferencia SWIFT</option>
-              <option value="paypal">PayPal</option>
+                <option default value="" disabled>Selecciona un metodo de pago</option>
+                <option value="proceso">Proceso de Pago</option>
+                <option value="swift">Transferencia SWIFT</option>
+                <option value="paypal" [disabled]="!nominacionForm.valid">PayPal</option>
             </select>
             <br>
             <div class="row" >
@@ -342,7 +342,7 @@
             <span class="text-danger">Únicamente se aceptan los siguientes tipos de archivos: "pdf, doc, docx e imagenes"</span>
         </p-card>
         <br *ngIf="nominacionForm.controls['pagarCon'].value === 'swift'">
-        <p-card [hidden]="nominacionForm.controls['pagarCon'].value === 'swift'" header="Pagar con Paypal">
+        <p-card [hidden]="nominacionForm.controls['pagarCon'].value === '' || nominacionForm.controls['pagarCon'].value === 'swift'|| nominacionForm.controls['pagarCon'].value === 'proceso'" header="Pagar con Paypal">
 
             <!-- <div class="select">
             <label class="form-label">Tipo de pago</label>
