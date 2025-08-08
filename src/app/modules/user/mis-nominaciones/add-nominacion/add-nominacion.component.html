@@ -307,7 +307,7 @@
                 <option default value="" disabled>Selecciona un metodo de pago</option>
                 <option value="proceso">Proceso de Pago</option>
                 <option value="swift">Transferencia SWIFT</option>
-                <option value="paypal" [disabled]="!nominacionForm.valid">PayPal</option>
+                <option value="paypal" [disabled]="disabledPaypal">PayPal</option>
             </select>
             <br>
             <div class="row" >

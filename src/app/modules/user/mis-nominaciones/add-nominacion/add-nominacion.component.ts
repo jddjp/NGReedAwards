@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2'
 import { ToastrService } from 'ngx-toastr';
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FileItem } from 'src/app/models/img.model';
 import { PaisesService } from 'src/app/services/paises.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -92,6 +92,7 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
   agregarFilesMultimedia: boolean = true;
   agregarFileBaucher: boolean = true;
   preloadCategoria: CategoriaModel;
+  disabledPaypal: boolean = true;
   constructor(
     private fb: FormBuilder,
     private toastr: ToastrService,
@@ -100,6 +101,7 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
     private nominacionService: NominacionService,
     private categoriasService: CategoriasService,
     private cargaImagenesFBService: CargaImagenesService,
+    private cdr: ChangeDetectorRef
   ) {
     this.getCategorias();
     this.getPaises();
@@ -149,7 +151,30 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
-
+      this.nominacionForm.valueChanges.subscribe(() => {
+          if(this.nominacionForm.get('titulo')?.valid &&
+          this.nominacionForm.get('categoria')?.valid  && 
+          this.nominacionForm.get('nominado')?.valid  &&
+          this.nominacionForm.get('descripcion')?.valid  &&
+          this.nominacionForm.get('fileLogoEmpresa')?.valid  &&
+          this.nominacionForm.get('organizacion')?.valid  &&
+          this.nominacionForm.get('responsable')?.valid  &&
+          this.nominacionForm.get('telefono')?.valid  &&
+          this.nominacionForm.get('pais')?.valid  &&
+          this.nominacionForm.get('rsInstagram')?.valid  &&
+          this.nominacionForm.get('rsTwitter')?.valid  &&
+          this.nominacionForm.get('rsFacebook')?.valid  &&
+          this.nominacionForm.get('rsYoutube')?.valid  &&
+          this.nominacionForm.get('fileCesionDerechos')?.valid  &&
+          this.nominacionForm.get('fileCartaIntencion')?.valid  &&
+          this.nominacionForm.get('fileMaterialMultimedia')?.valid )
+          {
+            this.disabledPaypal = false;
+          }
+          else{
+            this.disabledPaypal = true;
+          }
+    });
    }
 
   ngOnDestroy(): void {
