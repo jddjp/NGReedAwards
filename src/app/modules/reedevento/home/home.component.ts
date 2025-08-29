@@ -17,22 +17,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class HomeComponent implements OnInit {
   targetVip = ''
-  mesas: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-  mesasVIP: string[][] = [["A", "B", "C", "D", "E"], ["F", "G", "H", "I", "J"]]
-  mesasN: string[][] = [["K", "L", "M", "N", "O"], ["P", "Q", "R", "S","T", "U","V", "W","X","Y" ],
-  ["Z", "A2", "B2", "C2", "D2"/*, /*"E2", "F2", "G2", "H2", "I2"*/,/*"J2","K2","L2","M2","N2"*/]]
+  sillas: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
   styleOBJ = { 'background': "RGB(217, 222, 224)" }
   toggle = true;
   status = "Enable";
   componetesSeleccionados: ElementRef[] = [];
-  // txt1="A partir de esta fila son lugares individuales, \n aunque tambien puedes adquirir si lo prefieres \n mesas completas";
   txt2 = "De la mesa A a la D son venta mesas completas";
-  // txt3="Ahora al escoger tú lugar, también puedes escoger entre tu plato fuerte en la cena:";
-  // txt4="1.- Short Rib, espuma de bernesesa, pure de papa al tartufo y textura de papa";
-  // txt5="2.- Salmón glaseado, risotto de tomate ahumado, tierra de parmesano y tomate seco";
-  // txt6="El cual puede ser seleccionado al momento de pagar";
-
-
   @ViewChildren('MyRef') inputsArray: QueryList<ElementRef>
   selectedColor = 'background-color:rgb(143, 191, 22)'
   unselectedColor = 'background-color:rgb(0, 0, 0)&:hover:{background: rgb(211, 202, 26)}'
@@ -54,6 +44,35 @@ export class HomeComponent implements OnInit {
   mesa: boolean = true;
   StatusCargaLugares: boolean = false;
   userData: any;
+
+  mesas = [
+    { id: 'A2', type: 'M', precio: 7200, x: 40, y: 80 },
+    { id: 'B2', type: 'M', precio: 7200, x: 1120, y: 80 },
+    { id: 'C2', type: 'M', precio: 7200, x: 40, y: 270 },
+    { id: 'D2', type: 'M', precio: 7200, x: 1120, y: 270 },
+    { id: 'E1', type: 'M', precio: 7300, x: 40, y: 460 },
+    { id: 'F1', type: 'M', precio: 7300, x: 220, y: 400 },
+    { id: 'G1', type: 'M', precio: 7300, x: 940, y: 400 },
+    { id: 'H1', type: 'M', precio: 7300, x: 1120, y: 460 },
+    { id: 'J1', type: 'M', precio: 7300, x: 760, y: 500 },
+    { id: 'K3', type: 'U', precio: 7100, x: 40, y: 650 },
+    { id: 'I1', type: 'M', precio: 7300, x: 400, y: 500 },
+    { id: 'L3', type: 'U', precio: 7100, x: 220, y: 590 },
+    { id: 'M2', type: 'M', precio: 7200, x: 580, y: 600 },
+    { id: 'N3', type: 'U', precio: 7100, x: 940, y: 590 },
+    { id: 'O3', type: 'U', precio: 7100, x: 1120, y: 650 },
+    { id: 'P3', type: 'U', precio: 7100, x: 400, y: 680 },
+    { id: 'Q3', type: 'U', precio: 7100, x: 760, y: 680 },
+    { id: 'R3', type: 'U', precio: 7100, x: 40, y: 840 },
+    { id: 'S3', type: 'U', precio: 7100, x: 220, y: 780 },
+    { id: 'T3', type: 'U', precio: 7100, x: 580, y: 780 },
+    { id: 'U3', type: 'U', precio: 7100, x: 940, y: 780 },
+    { id: 'V3', type: 'U', precio: 7100, x: 1120, y: 840 },
+    { id: 'W3', type: 'U', precio: 7100, x: 220, y: 970 },
+    { id: 'X3', type: 'U', precio: 7100, x: 760, y: 970 },
+    { id: 'Y3', type: 'U', precio: 7100, x: 940, y: 970 },
+  ];
+
   constructor(
     private lugaresService: LugaresService,
     public datepipe: DatePipe,
@@ -81,7 +100,6 @@ export class HomeComponent implements OnInit {
       'Realizar el proceso de reserva en PC para tener una mejor experiencia',
       'info'
     )
-
   }
 
   async getLugares() {
@@ -224,7 +242,7 @@ export class HomeComponent implements OnInit {
           let newBoleto = { "idLugar": boleto?.nativeElement?.id, "precio": "690USD", "comprado": false, "apartado": false, "hora": this.now.toLocaleString('en-US') }
           this.boletosSeleccionados.push(newBoleto)
         }
-      }  else if (this.targetVip === 'VIP3') {
+      } else if (this.targetVip === 'VIP3') {
         for (let boleto of this.componetesSeleccionados) {
           let newBoleto = { "idLugar": boleto?.nativeElement?.id, "precio": "670USD", "comprado": false, "apartado": false, "hora": this.now.toLocaleString('en-US') }
           this.boletosSeleccionados.push(newBoleto)
@@ -266,12 +284,12 @@ export class HomeComponent implements OnInit {
   }
 
   comprarMesa(idMesa, target: string) {
-    ///console.log(idMesa+"0")
+    console.log(idMesa);
     let disponiblidad = this.lugaresDisponibles.find(el => el.idLugar == idMesa + "1")
     if (!disponiblidad.comprado && !disponiblidad.apartado) {
       let toArray = this.inputsArray.toArray()
       let colorMesa = false
-      for (let silla of this.mesas) {
+      for (let silla of this.sillas) {
         let item = idMesa + silla
         let ref: ElementRef<HTMLInputElement> = toArray.find(el => el?.nativeElement?.id == item)
         let status = this.componetesSeleccionados.find(el => el?.nativeElement?.id == ref?.nativeElement?.id)
@@ -302,27 +320,90 @@ export class HomeComponent implements OnInit {
     this.displayBasic = true;
   }
 
-  addedLugares(){
+  addedLugares() {
     var mesa = "B2"
-    for(let i = 0; i < 11 ; i++){
-      console.log(mesa+i)
+    for (let i = 0; i < 11; i++) {
+      console.log(mesa + i)
       this.lugaresService.addLugar(mesa + i, true, true, '', '575');
     }
   }
 
-  updateLugar(){
-    var boletos  = []
+  updateLugar() {
+    var boletos = []
     var mesa = 'C2';
-   for (let i = 1; i < 11; i++)
-    {
+    for (let i = 1; i < 11; i++) {
       var updateBoleto = new boleto();
       updateBoleto.idLugar = mesa + i;
       updateBoleto.apartado = false
       updateBoleto.comprado = false;
       updateBoleto.precio = '575'
       boletos.push(updateBoleto)
+    }
+    console.log(boletos)
+    this.lugaresService.updatelugarApartadoV2(boletos);
   }
-  console.log(boletos)
-  this.lugaresService.updatelugarApartadoV2(boletos);
+
+    async putNewLugar() {
+    function generarCombinaciones(ids: string[], numeros: string[]): string[] {
+      const combinaciones: string[] = [];
+      for (let i = 0; i < ids.length; i++) {
+        for (let j = 0; j < numeros.length; j++) {
+          combinaciones.push(ids[i] + numeros[j]);
+        }
+      }
+      return combinaciones;
+    }
+
+    const mesasId = [
+      'A2',
+      'B2',
+      'C2',
+      'D2',
+      'E1',
+      'F1',
+      'G1',
+      'H1',
+      'I1',
+      'J1',
+      'K3',
+      'L3',
+      'M2',
+      'N3',
+      'O3',
+      'P3',
+      'Q3',
+      'R3',
+      'S3',
+      'T3',
+      'U3',
+      'V3',
+      'W3',
+      'X3',
+      'Y3'
+    ];
+
+    const chair = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+    const combinacionesGeneradas = generarCombinaciones(mesasId, chair);
+
+    combinacionesGeneradas.forEach(combinacion => {
+      {
+        if (combinacion[1] === '1') {
+          this.lugaresService.addLugar(combinacion, false, false, '', '7300');
+          //console.log(combinacion);
+        }
+        if (combinacion[1] === '2') {
+          this.lugaresService.addLugar(combinacion, false, false, '', '7200');
+          //console.log(combinacion);
+
+        }
+        if (combinacion[1] === '3') {
+          this.lugaresService.addLugar(combinacion, false, false, '', '7100');
+          //console.log(combinacion);
+        }
+
+      }
+    })
+
   }
+
 }

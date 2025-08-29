@@ -43,7 +43,7 @@
     border: 8px solid rgb(255, 236, 0);
 } */
 .icon {
-  user-select: none;
+    user-select: none;
     position: relative;
     background: rgb(207, 201, 201);
     cursor: pointer;
@@ -54,7 +54,7 @@
     width: 100px;
     line-height: 100px;
     text-align: center;
-    font-size: 2.75em;
+    font-size: 2.5em;
     font-weight: bold;
     transform: rotate(90);
 
@@ -95,9 +95,9 @@
 
   .spread {
     position: absolute;
-    top: -100px;
-    left: -100px;
-    transform-origin: 100px 100px;
+    top: -90px;
+    left: -90px;
+    transform-origin: 90px 90px;
     cursor: pointer;
   }
 
@@ -447,4 +447,124 @@
 		bottom: 20px;
 		right: 20px;
 	}
+}
+
+
+/* Imagen de estado */
+.status-img {
+  width: 10%;
+  height: 10%;
+}
+
+/* Contenedor principal */
+.main-card {
+  height: 1200px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(0, 0, 0);
+  width: 100%;
+  margin-top: 1rem;
+  position: relative;
+}
+
+/* Logo */
+.logo-img {
+  width: 1090px;
+}
+
+/* Grid de contenido */
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-top: 5rem;
+  margin-bottom: 7rem;
+}
+
+/* Etiqueta personalizada */
+.custom-label {
+  background-color: rgb(255, 255, 255);
+  color: white;
+  padding: 1rem;
+  margin-left: 2rem;
+  width: 100px;
+  font-size: 20px;
+  margin-top: 6rem;
+}
+
+/* Zona de lugares */
+.zonas {
+  /* Aquí puedes agregar estilos adicionales si se requieren */
+}
+
+/* Botón flotante */
+.btn-flotante {
+  user-select: none;
+}
+
+/* Contenedor que rodea la imagen */
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem;
+}
+
+/* Estilos del rectángulo */
+.pantalla {
+  margin-top: 2rem; 
+  display: flex;
+  justify-content: center; /* Centrado horizontal */
+  align-items: center;     /* Centrado vertical */
+  width: 800px;            /* Tamaño del rectángulo */
+  height: 50px;
+  background-color: #ccc;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+
+.tarima {
+  display: flex;
+  justify-content: center; /* Centrado horizontal */
+  align-items: center;     /* Centrado vertical */
+  width: 800px;            /* Tamaño del rectángulo */
+  height: 250px;
+  background-color: #ccc;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+
+
+.fuente {
+  display: flex;
+  justify-content: center; /* Centrado horizontal */
+  align-items: center;     /* Centrado vertical */
+  width: 150px;            /* Tamaño del rectángulo */
+  height: 150px;
+  background-color: #ccc;
+  border: 2px solid #333;
+  border-radius: 8px;
+   margin-top: 3rem; 
+}
+
+
+
+/* Texto dentro del rectángulo */
+.rectangle-text {
+  font-size: 15px;         /* Tamaño del texto */
+  color: #333;             /* Color del texto */
+  font-weight: bold;       /* Estilo en negrita */
+}
+
+
+.positioned-component {
+  position: absolute;
+  /* Opcional: tamaño, fondo, etc. */
+  width: 100px;
+  height: 100px;
+}
+
+.bg-blue {
+    background-color: rgba(98, 98, 238, 0.432);  /* Cambia el fondo a azul */
+    color: white;  /* Cambia el texto a blanco */
 }

@@ -10,140 +10,106 @@
     </p-card>
 </div>
 <p-card style="background-color: white;" header="Selecciona un lugar" align="center"
-subheader="Selecciona tu lugar en la cena de Premiación Reed Latino 2024" [style]="styleOBJ">
-  <div style="display: flex; flex-direction: column; text-align: start; margin-left: auto; margin-right: auto; width: 40%;">
-    <label style="display: block;">1 - Escoge una mesa dependiendo de tus necesidades</label>
-    <label style="display: block;">2 - Selecciona el lugar que deseas</label>
-    <label style="display: block;">3 - Dirígete al apartado "CONTINUAR COMPRA" ( hay 5 minutos de tolerancia para poder confirmar asientos )</label>
-    <label style="display: block;">4 - Verifica que tus asientos son los que realmente seleccionaste</label>
-    <label style="display: block;">5 - Sube tu comprobante de pago en el apartado "cambiar método de pago"</label>
-  </div>
+    subheader="Selecciona tu lugar en la cena de Premiación Reed Latino 2024" [style]="styleOBJ">
+    <div
+        style="display: flex; flex-direction: column; text-align: start; margin-left: auto; margin-right: auto; width: 40%;">
+        <label style="display: block;">1 - Escoge una mesa dependiendo de tus necesidades</label>
+        <label style="display: block;">2 - Selecciona el lugar que deseas</label>
+        <label style="display: block;">3 - Dirígete al apartado "CONTINUAR COMPRA" ( hay 5 minutos de tolerancia para
+            poder confirmar asientos )</label>
+        <label style="display: block;">4 - Verifica que tus asientos son los que realmente seleccionaste</label>
+        <label style="display: block;">5 - Sube tu comprobante de pago en el apartado "cambiar método de pago"</label>
+    </div>
 
     <div class="card-body">
         <div class="row">
             <div>
                 <div class="content">
                     <img src="https://firebasestorage.googleapis.com/v0/b/rewards-latino.appspot.com/o/baners%2Fcolores%20status%20mesas.jpg?alt=media&token=658281c4-5edc-4279-96c8-d82f3f097b53"
-                        alt="" style="width: 10%; height: 10%;">
+                        alt="" class="status-img">
                 </div>
-                <!-- <p style="font-size: 1em; font-weight: bold;">{{txt3}}</p>
-                <p style="font-size: 1em; font-weight: bold;">{{txt4}}</p>
-                <p style="font-size: 1em; font-weight: bold;">{{txt5}}</p>
-                <p style="font-size: 1em; font-weight: bold;">{{txt6}}</p> -->
             </div>
 
-            <div class="container-fluid" id="zonasOcultar"  pTooltip="Seleccione sus lugares" tooltipPosition="top">
+            <div class="container-fluid zonas" id="zonasOcultar" pTooltip="Seleccione sus lugares"
+                tooltipPosition="top">
                 <div class="container">
-                    <div class="col-15">
-                        <div
-                            style="display: flex; flex-direction: column; border: 6px solid black; width: 100%; margin-top: 1rem;">
-                            <div>
+                    <div class="col-18">
+                        <div class="main-card">
 
-                                <h2>Escenario</h2>
-                                <img alt="Card"
-                                    src="https://firebasestorage.googleapis.com/v0/b/rewards-latino.appspot.com/o/baners%2FLogoReed2024.png?alt=media&token=32b99683-269a-4791-b722-0ad067780079"
-                                    [style]="{width: '1090px'}">
+                            <div class="logo-container">
+                                <div class="pantalla">
+                                    <span class="rectangle-text">PANTALLA</span>
+                                </div>
+                                <div class="tarima">
+                                    <span class="rectangle-text">TARIMA</span>
+                                </div>
+                                <div class="fuente">
+                                    <span class="rectangle-text">FUENTE</span>
+                                </div>
                             </div>
-                            <div
-                                style="display: grid; grid-template-columns: repeat(5, 1fr); margin-top: 5rem; margin-bottom: 7rem;">
-                                <div *ngFor="let tables of mesasVIP[0]"
-                                    style="display: grid; place-items: center; position: relative;">
-                                    <div class="icon" #MyRef [id]="tables" (click)="comprarMesa(tables, 'VIP1') "
-                                        [pTooltip]="'Mesa: '+tables+'\n Precio: 7000 USD'">
-                                        {{tables}}
+
+
+                            <div *ngFor="let mesa of mesas">
+                                <div class="positioned-component" [style.left.px]="mesa.x" [style.top.px]="mesa.y">
+                                    <div *ngIf="mesa.type =='M'" class="icon" #MyRef [id]="mesa.id"
+                                        [ngClass]="{'bg-blue': mesa.type === 'M'}" 
+                                        (click)="comprarMesa(mesa.id, 'VIP1') "
+                                        [pTooltip]="'Mesa: '+mesa.id+'\n Precio: '+  mesa.precio+ ' USD'">
+                                        {{mesa.id}}
                                         <ul class="menu">
-                                            <li class="spread" *ngFor="let name of mesas">
-                                                <a #MyRef [id]="tables+name" class="unitVIP">{{name}}</a>
+                                            <li class="spread" *ngFor="let name of sillas">
+                                                <a #MyRef [id]="mesa.id+name" class="unitVIP">{{name}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="icon" *ngIf="mesa.type =='U'">
+                                        {{mesa.id }}
+                                        <ul class="menu">
+                                            <li class="spread" *ngFor="let name of sillas | slice:0:10">
+                                                <a #MyRef [id]="mesa.id+name" class="unit"
+                                                    [pTooltip]="'Asiento: '+mesa.id+name+'\n Precio: '+ mesa.precio+' USD'"
+                                                    (click)="selectedAsiento(mesa.id+name)">{{name}}</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                style="display: grid; grid-template-columns: repeat(5, 1fr); margin-bottom: 7rem; ">
-                                <div *ngFor="let tables of mesasVIP[1]"
-                                    style="display: grid; place-items: center; position: relative;">
-                                    <div class="icon" #MyRef [id]="tables" (click)="comprarMesa(tables, 'VIP2') "
-                                        [pTooltip]="'Mesa: '+tables+'\n Precio: 6900 USD'">
-                                        {{tables}}
+
+
+
+                            <!-- <div class="icon" #MyRef [id]="1" (click)="comprarMesa(1, 'VIP1') "
+                                        [pTooltip]="'Mesa: A1'+'\n Precio: 7000 USD'">
+                                        {{"A1"}}
                                         <ul class="menu">
                                             <li class="spread" *ngFor="let name of mesas">
-                                                <a #MyRef [id]="tables+name" class="unitVIP">{{name}}</a>
+                                                <a #MyRef [id]="1+name" class="unitVIP">{{name}}</a>
                                             </li>
                                         </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                style="display: grid; grid-template-columns: repeat(5, 1fr); row-gap: 7rem; margin-bottom: 3rem;">
-                                <div *ngFor="let tables of mesasN[0]"
-                                    style="display: grid; place-items: center; position: relative;">
-                                    <div class="icon" #MyRef [id]="tables" (click)="comprarMesa(tables, 'VIP3') "
-                                        [pTooltip]="'Mesa: '+tables+'\n Precio: 6700 USD'">
-                                        {{tables}}
-                                        <ul class="menu">
-                                            <li class="spread" *ngFor="let name of mesas">
-                                                <a #MyRef [id]="tables+name" class="unitVIP">{{name}}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                style="width: 11rem; align-self: end; height: 6px; background-color: rgb(255, 255, 255); margin-top: 2rem; margin-bottom: 1rem;">
-                            </div>
-                            <!--<div
-                                style="width: 11rem; align-self: end; height: 6px; background-color: black; margin-bottom: 3rem; margin-top: 1rem;">
                             </div>-->
-                            <div
-                                style="display: grid; grid-template-columns: repeat(5, 1fr); row-gap: 7rem; margin-top: 1rem; ">
-                                <div *ngFor="let tables of mesasN[1]"
-                                    style="display: grid; place-items: center; position: relative;">
-                                    <div class="icon">
-                                        {{tables}}
-                                        <ul class="menu">
-                                            <li class="spread" *ngFor="let name of mesas | slice:0:10">
-                                                <a #MyRef [id]="tables+name" class="unit"
-                                                    [pTooltip]="'Asiento: '+tables+name+'\n Precio: 660 USD'"
-                                                    (click)="selectedAsiento(tables+name)">{{name}}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div
-                                style="display: grid; grid-template-columns: repeat(5, 1fr); row-gap: 8rem; margin-top: 7rem; ">
-                                <div *ngFor="let tables of mesasN[2]"
-                                    style="display: grid; place-items: center; position: relative;">
-                                    <div class="icon">
-                                        {{tables}}
-                                        <ul class="menu">
-                                            <li class="spread" *ngFor="let name of mesas | slice:0:10">
-                                                <a #MyRef [id]="tables+name" class="unit"
-                                                    [pTooltip]="'Asiento: '+tables+name+'\n Precio: 660 USD'"
-                                                    (click)="selectedAsiento(tables+name)">{{name}}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <label
-                                style="background-color: rgb(255, 255, 255); color: white; padding: 1rem; margin-left: 2rem; width: 100px; font-size: 20px; margin-top: 6rem">
+                            <div class="grid-layout">
 
+                                <!-- Contenido de grilla aquí -->
+                            </div>
+
+                            <label class="custom-label">
+                                <!-- Texto aquí -->
                             </label>
                         </div>
                     </div>
                 </div>
+
                 <br>
+
                 <div *ngIf="StatusCargaLugares==true">
                     <div class="container-fluid">
-                        <a  class="btn-flotante" style="user-select: none;" (click)="realizarCompra()"  pTooltip="Pagar Lugares seleccionados" tooltipPosition="left" ><i class="pi pi-shopping-cart"></i> Continuar compra</a>
-                        <!-- <p-button label="Continuar compra" icon="pi pi-shopping-cart" styleClass="p-button-lg " (click)="realizarCompra()"></p-button> -->
-                        <!-- <button class="btn btn-primary" (click)="realizarCompra()">Siguiente</button> -->
+                        <a class="btn-flotante" (click)="realizarCompra()" pTooltip="Pagar Lugares seleccionados"
+                            tooltipPosition="left">
+                            <i class="pi pi-shopping-cart"></i> Continuar compra
+                        </a>
                     </div>
                 </div>
-                <br>
-                <br>
+
+                <br><br>
             </div>
         </div>
     </div>
