@@ -383,8 +383,8 @@
   display: flex;
   justify-content: center; /* Centrado horizontal */
   align-items: center;     /* Centrado vertical */
-  width: 600px;            /* Tamaño del rectángulo */
-  height: 50px;
+  width: 50vw;            /* Tamaño del rectángulo */
+  height: 2.5vw;
   background-color: #ccc;
   border: 2px solid #333;
   border-radius: 8px;
@@ -394,8 +394,8 @@
   display: flex;
   justify-content: center; /* Centrado horizontal */
   align-items: center;     /* Centrado vertical */
-  width: 600px;            /* Tamaño del rectángulo */
-  height: 250px;
+  width: 50vw;            /* Tamaño del rectángulo */
+  height: 5vw;
   background-color: #ccc;
   border: 2px solid #333;
   border-radius: 8px;
@@ -406,8 +406,8 @@
   display: flex;
   justify-content: center; /* Centrado horizontal */
   align-items: center;     /* Centrado vertical */
-  width: 200px;            /* Tamaño del rectángulo */
-  height: 200px;
+  width: 10vh;            /* Tamaño del rectángulo */
+  height: 10vh;
   background-color: #ccc;
   border: 2px solid #333;
   border-radius: 8px;
