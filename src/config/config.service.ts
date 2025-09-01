@@ -24,8 +24,16 @@ export class ConfigService {
     // this.headers.next(headers);
   }
 
-  get Usuario() {
-    //return localStorage.d;
-    return localStorage.d;
+get Usuario() {
+  const data = localStorage.getItem('x');
+  if (!data) return null;
+
+  try {
+    const parsed = JSON.parse(data);
+    return parsed.uid; 
+  } catch (e) {
+    console.error("Error al parsear localStorage.x:", e);
+    return null;
   }
+}
 }

@@ -106,7 +106,7 @@ export class ReservasService {
 
   async getreservaciones() {
     this.listareservaciones = [];
-    let uid = JSON.parse(localStorage.d).uid;
+    let uid = JSON.parse(localStorage.x).uid;
     const itemsCollection = collection(this.afs, 'reservas');
     const q = query(itemsCollection, where('uid', '==', uid));
     const querySnapshot = await getDocs(q);
@@ -137,7 +137,7 @@ export class ReservasService {
 
   async getAllreservaciones() {
     this.listareservaciones = [];
-    let uid = JSON.parse(localStorage.d).uid;
+    let uid = JSON.parse(localStorage.x).uid;
     const itemsCollection = collection(this.afs, 'reservas');
 
     const q = query(itemsCollection);

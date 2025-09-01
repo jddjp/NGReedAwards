@@ -40,7 +40,7 @@ export class LoginUserEventoComponent implements OnInit {
 
         if (userCredential.user?.emailVerified) {
           this.toastr.success('Bienvenido', 'Login correcto');
-          localStorage.d = JSON.stringify(userCredential.user);
+          localStorage.x = JSON.stringify(userCredential.user);
           // this.setLocalStorage(userCredential.user);
           this.router.navigate(['/reedevento/home']);
         } else {

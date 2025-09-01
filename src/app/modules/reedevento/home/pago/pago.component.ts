@@ -55,7 +55,7 @@ export class PagoComponent implements OnInit {
   //comidaOpcion2 = "Salmón glaseado, risotto de tomate ahumado, tierra de parmesano y tomate seco";
   comidaOpcionSelected = "";
   userData: any;
-  uid = JSON.parse(localStorage.d).uid;
+  uid = JSON.parse(localStorage.x).uid;
   constructor(    private printingService: PrintingService,
                   private lugaresService:LugaresService,
                   private reservacionService: reservacionService,
@@ -128,7 +128,7 @@ opcionSeleccionado:any;
           statuspago: this.statuspago ==true ? 'pagado':'No pagado',
           descripcionpago: this.statuspago ==true ? 'pagado':'No pagado',
           montopago: this.total,
-          uid: JSON.parse(localStorage.d).uid,
+          uid: JSON.parse(localStorage.x).uid,
           fechaCreacion: "",
           fechaActualizacion: "",
           Nombrecomprador:this.nombrecomprador,
@@ -169,7 +169,7 @@ opcionSeleccionado:any;
             statuspago: this.statuspago == true ? 'pagado':'No pagado',
             descripcionpago: this.statuspago ==true ? 'pagado':'No pagado',
             montopago: this.total,
-            uid: JSON.parse(localStorage.d).uid,
+            uid: JSON.parse(localStorage.x).uid,
             fechaCreacion: "",
             fechaActualizacion: "",
             Nombrecomprador:this.nombrecomprador,

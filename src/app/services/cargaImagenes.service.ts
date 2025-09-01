@@ -91,7 +91,7 @@ export class CargaImagenesService {
               nombre: file.nombreArchivo,
               url: file.url,
               fileMapped: file.fileMapped,
-              uid: JSON.parse(localStorage.d).uid
+              uid: JSON.parse(localStorage.x).uid
             }, file);
 
             //this.validaEndUpload();

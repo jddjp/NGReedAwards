@@ -26,7 +26,7 @@ export class MiInformacionComponent implements OnInit {
   //   lastName: new FormControl(''),
   //   phone: new FormControl(''),
   // })
-  uid = JSON.parse(localStorage.d).uid;
+  uid = JSON.parse(localStorage.x).uid;
   userData: any;
   constructor(
     private fb: FormBuilder,
@@ -81,7 +81,7 @@ export class MiInformacionComponent implements OnInit {
     this.submitedF1 = true;
     console.log('content form info ', this.formMiInformacion);
       if(this.formMiInformacion.valid){
-        let uid = JSON.parse(localStorage.d).uid;
+        let uid = JSON.parse(localStorage.x).uid;
         const db = getFirestore();
         //get current user email
         const user = await getAuth().currentUser;

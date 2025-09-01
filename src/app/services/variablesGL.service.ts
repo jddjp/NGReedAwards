@@ -44,21 +44,21 @@ export class VariablesService {
   }
 
   removeCredential() {
-    localStorage.d = "";
+    localStorage.x = "";
     localStorage.clear();
     location.reload();
     this.router.navigate(['/'], { replaceUrl: true });
   }
 
   removeCredentialAdmin() {
-    localStorage.d = "";
+    localStorage.x = "";
     localStorage.clear();
     location.reload();
     this.router.navigate(['/admin/login'], { replaceUrl: true });
   }
 
   removeCredentialAdminEvento() {
-    localStorage.d = "";
+    localStorage.x = "";
     localStorage.clear();
     location.reload();
     this.router.navigate(['/reedeventoadmin/login'], { replaceUrl: true });

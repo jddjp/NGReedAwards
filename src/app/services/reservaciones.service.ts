@@ -106,7 +106,7 @@ export class reservacionService {
 
   async getreservaciones(){
     this.listareservaciones = [];
-    let uid = JSON.parse(localStorage.d).uid;
+    let uid = JSON.parse(localStorage.x).uid;
     const itemsCollection = collection(this.afs,'reservaciones'); //where('uid', '==', uid)
     // return collectionData(query(itemsCollection, where("uid", "==", uid)));
     const q = query(itemsCollection, where("uid", "==", uid));
@@ -142,7 +142,7 @@ export class reservacionService {
 
   async getAllreservaciones(){
     this.listareservaciones = [];
-    let uid = JSON.parse(localStorage.d).uid;
+    let uid = JSON.parse(localStorage.x).uid;
     const itemsCollection = collection(this.afs,'reservaciones'); //where('uid', '==', uid)
     // return collectionData(query(itemsCollection, where("uid", "==", uid)));
     const q = query(itemsCollection);

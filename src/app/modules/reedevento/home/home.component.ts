@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
     this.getUserData().subscribe(data => {
       if (data) {
 
-        const d = localStorage.getItem('d');
+        const d = localStorage.getItem('x');
         const user = d ? JSON.parse(d) : null;
 
         this.userData = data.filter(item => item.uid === user?.uid);
@@ -202,8 +202,9 @@ export class HomeComponent implements OnInit {
   }
 
   realizarCompra() {
-    console.log(localStorage.d)
-    if (localStorage.d == undefined) {
+    console.log(localStorage.x)
+      const d = localStorage.getItem('x');
+    if (d == undefined) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',

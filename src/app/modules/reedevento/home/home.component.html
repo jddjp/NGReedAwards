@@ -92,6 +92,15 @@
 </div>
 
       </div>
+      <div>
+                        <div *ngIf="StatusCargaLugares==true">
+                    <div class="container-fluid">
+                        <a  class="btn-flotante" style="user-select: none;" (click)="realizarCompra()"  pTooltip="Pagar Lugares seleccionados" tooltipPosition="left" ><i class="pi pi-shopping-cart"></i> Continuar compra</a>
+                        <!-- <p-button label="Continuar compra" icon="pi pi-shopping-cart" styleClass="p-button-lg " (click)="realizarCompra()"></p-button> -->
+                        <!-- <button class="btn btn-primary" (click)="realizarCompra()">Siguiente</button> -->
+                    </div>
+                </div>
+      </div>
     </div>
   </div>
 </div>
@@ -101,6 +110,7 @@
     <app-pago *ngIf="visibleSidebar2" [boletosSeleccionados]="boletosSeleccionados" (fetchNominaciones)="unseled()">
     </app-pago>
 </p-sidebar>
+
 <p-dialog header="Error" [(visible)]="displayBasic" [style]="{width: '20vw'}" [baseZIndex]="1000">
     <p> Debes Seleccionar un lugar</p>
     <ng-template pTemplate="footer">

@@ -90,7 +90,7 @@ export class NominacionService {
 
   async getNominaciones(){
     this.listaNominaciones = [];
-    let uid = JSON.parse(localStorage.d).uid;
+    let uid = JSON.parse(localStorage.x).uid;
     const itemsCollection = collection(this.afs,'nominaciones'); //where('uid', '==', uid)
     // return collectionData(query(itemsCollection, where("uid", "==", uid)));
     const q = query(itemsCollection, where("uid", "==", uid));
@@ -132,7 +132,7 @@ export class NominacionService {
 
   async getAllNominaciones(){
     this.listaNominaciones = [];
-    let uid = JSON.parse(localStorage.d).uid;
+    let uid = JSON.parse(localStorage.x).uid;
     const itemsCollection = collection(this.afs,'nominaciones'); //where('uid', '==', uid)
     // return collectionData(query(itemsCollection, where("uid", "==", uid)));
     const q = query(itemsCollection);
@@ -174,7 +174,7 @@ export class NominacionService {
 
   async getAllNominacionesFilterCategorias(filter:string[]){
     this.listaNominaciones = [];
-    let uid = JSON.parse(localStorage.d).uid;
+    let uid = JSON.parse(localStorage.x).uid;
     const itemsCollection = collection(this.afs,'nominaciones'); //where('uid', '==', uid)
    
     console.log(filter.length==0)
