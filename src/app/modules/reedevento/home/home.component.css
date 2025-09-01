@@ -1,47 +1,14 @@
 /* Styles: */
 
-
 .card {
     background-color: rgb(217, 222, 224);
   }
   .ui-card-title {
     text-align: center;
 }
-.escenario{
-  background-color: black;
-}
-/* .grid{
-    display: grid;
-
-    grid-template-columns: 33% 33% 33%;
 
 
-}
-.grid4{
-    display: grid;
 
-    grid-template-columns: 25% 25% 25% 25% ;
-
-
-} */
-/* .grid5{
-  display: grid;
-
-  grid-template-columns: 20% 20% 20% 20% 20% ;
-
-
-} */
-/* .grid2{
-    display: grid;
-    grid-template-columns: 40% 10% 40%;
-} */
-
-/* .zonaGeneral{
-    border: 8px solid rgb(34, 167, 160);
-} */
-/* .zonaVIP{
-    border: 8px solid rgb(255, 236, 0);
-} */
 .icon {
     user-select: none;
     position: relative;
@@ -60,27 +27,7 @@
 
   }
 
-  /* .iconVIP{
-    position: relative;
-    background: rgb(6, 29, 241);
-    cursor: pointer;
-    margin: auto;
-    color: rgb(255, 255, 255);
-    border-radius: 50%;
-    height: 100px;
-    width: 100px;
-    line-height: 100px;
-    text-align: center;
-    font-size: 2.75em;
-    font-weight: bold;
-    transition: 1.0s 0.s;
-  } */
-  /* .iconVIP:hover{
-    background:  rgb(211, 202, 26);
-
-  } */
-
-
+  
 
   .menu {
     position: absolute;
@@ -102,16 +49,6 @@
   }
 
 
-/*
-  .spreadVIP {
-    position: absolute;
-    top: -100px;
-    left: -100px;
-    transform-origin: 100px 100px;
-
-
-  } */
-
 
   .icon::content .menu {
     transition: transform 0.4s 0.08s, z-index 0s 0.5s;
@@ -120,56 +57,6 @@
   }
 
 
-  /** ALINEADO PARA 6 SILLAS */
-
-  /* .icon::content .spread:nth-child(1) {
-
-    transform: rotate(130deg);
-  }
-  .icon::content .spread:nth-child(1) .unit {
-
-    transform: rotate(590deg);
-  }
-  .icon::content .spread:nth-child(2) {
-
-    transform: rotate(165deg);
-  }
-  .icon::content .spread:nth-child(2) .unit {
-
-    transform: rotate(555deg);
-  }
-  .icon::content .spread:nth-child(3) {
-
-    transform: rotate(203deg);
-  }
-  .icon::content .spread:nth-child(3) .unit {
-
-    transform: rotate(515deg);
-  }
-  .icon::content .spread:nth-child(4) {
-
-    transform: rotate(245deg);
-  }
-  .icon::content .spread:nth-child(4) .unit {
-
-    transform: rotate(475deg);
-  }
-  .icon::content .spread:nth-child(5) {
-
-    transform: rotate(285deg);
-  }
-  .icon::content .spread:nth-child(5) .unit {
-
-    transform: rotate(435deg);
-  }
-  .icon::content .spread:nth-child(6) {
-
-    transform: rotate(320deg);
-  }
-  .icon::content .spread:nth-child(6) .unit {
-
-    transform: rotate(405deg);
-  } */
 
   /** ALINEADO PARA 10 SILLAS */
   .icon::content .spread:nth-child(1) {
@@ -267,16 +154,8 @@
     /* transition: 0.6s; */
   }
   .unit:hover {
-    /* position: absolute; */
     background: rgb(211, 202, 26);
-    /* font-size: 60%;
-    text-decoration: none;
-    width: 50px;
-    height: 45px;
-    line-height: 45px;
-    color: rgb(255, 255, 255);
-    border-radius: 50%;
-    transition: 0.6s; */
+
   }
 
   .unitVIP {
@@ -289,20 +168,12 @@
     line-height: 45px;
     color: rgb(255, 255, 255);
     border-radius: 50%;
-    /* transition: 0.6s; */
   }
 
   .unitVIP:hover {
     /* position: absolute; */
     background: rgb(211, 202, 26);
-    /* font-size: 60%;
-    text-decoration: none;
-    width: 50px;
-    height: 45px;
-    line-height: 45px;
-    color: rgb(255, 255, 255);
-    border-radius: 50%; */
-    /* transition: 0.6s; */
+
   }
   /* Just CodePen layout stuff: */
   body,
@@ -324,19 +195,7 @@
     background: radial-gradient(#00bfff, #1e90ff);
     transform: translate3d(0, 0, 0);
   }
-  /* .icon {
-    top: 50%;
-    margin-top: -75px;
-  } */
-  /* .iconVIP {
-    top: 50%;
-    margin-top: -75px;
-  }
-  .iconVIP::content .menu {
-    transition: transform 0.4s 0.08s, z-index 0s 0.5s;
-    transform: scale(.7);
-    z-index: 5;
-  } */
+  
 
   .icon::content .spread:nth-child(1) {
 
@@ -458,6 +317,18 @@
 
 /* Contenedor principal */
 .main-card {
+  width: 100vw;            /* ancho completo de la pantalla */
+  height: 100vh;           /* alto completo de la pantalla */
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(0, 0, 0);
+  margin: 0;               /* quitar margin-top si quieres ocupar toda la pantalla */
+  position: relative;
+  box-sizing: border-box;  /* para que el borde no salga de la pantalla */
+  align-items: center; /* centra horizontalmente */
+  justify-content: flex-start; /* mantiene el contenido arriba */
+}
+/* .main-card {
   height: 1200px;
   display: flex;
   flex-direction: column;
@@ -465,7 +336,7 @@
   width: 100%;
   margin-top: 1rem;
   position: relative;
-}
+} */
 
 /* Logo */
 .logo-img {
@@ -491,10 +362,6 @@
   margin-top: 6rem;
 }
 
-/* Zona de lugares */
-.zonas {
-  /* Aquí puedes agregar estilos adicionales si se requieren */
-}
 
 /* Botón flotante */
 .btn-flotante {
@@ -516,7 +383,7 @@
   display: flex;
   justify-content: center; /* Centrado horizontal */
   align-items: center;     /* Centrado vertical */
-  width: 800px;            /* Tamaño del rectángulo */
+  width: 600px;            /* Tamaño del rectángulo */
   height: 50px;
   background-color: #ccc;
   border: 2px solid #333;
@@ -527,7 +394,7 @@
   display: flex;
   justify-content: center; /* Centrado horizontal */
   align-items: center;     /* Centrado vertical */
-  width: 800px;            /* Tamaño del rectángulo */
+  width: 600px;            /* Tamaño del rectángulo */
   height: 250px;
   background-color: #ccc;
   border: 2px solid #333;
@@ -539,8 +406,8 @@
   display: flex;
   justify-content: center; /* Centrado horizontal */
   align-items: center;     /* Centrado vertical */
-  width: 150px;            /* Tamaño del rectángulo */
-  height: 150px;
+  width: 200px;            /* Tamaño del rectángulo */
+  height: 200px;
   background-color: #ccc;
   border: 2px solid #333;
   border-radius: 8px;
@@ -568,3 +435,5 @@
     background-color: rgba(98, 98, 238, 0.432);  /* Cambia el fondo a azul */
     color: white;  /* Cambia el texto a blanco */
 }
+
+

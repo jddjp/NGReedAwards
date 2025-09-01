@@ -1,119 +1,102 @@
 <!-- Aqui se agrega el spiner antes de cargar los lugares -->
-<div *ngIf="StatusCargaLugares==false">
-    <p-card style="background-color: white;" header="Selecciona un lugar" align="center"
-        subheader="Selecciona tu lugar en la cena de Premiación Reed Latino 2024" [style]="styleOBJ">
-        <div class="card-body">
-            <h5>Cargando Informacion...Solo spodra continuar su compra si termino de cargar la informacion</h5>
-            <p-progressSpinner [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8"
-                fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
-        </div>
-    </p-card>
+ 
+ <div *ngIf="StatusCargaLugares==false" class="flex flex-column align-items-center justify-content-center" [style]="styleOBJ">
+  <h5>Cargando Información... Solo podrá continuar su compra si terminó de cargar la información</h5>
+
+  <p-progressSpinner 
+      [style]="{width: '50px', height: '50px'}" 
+      styleClass="custom-spinner" 
+      strokeWidth="8"
+      fill="var(--surface-ground)" 
+      animationDuration=".5s">
+  </p-progressSpinner>
 </div>
-<p-card style="background-color: white;" header="Selecciona un lugar" align="center"
-    subheader="Selecciona tu lugar en la cena de Premiación Reed Latino 2024" [style]="styleOBJ">
-    <div
-        style="display: flex; flex-direction: column; text-align: start; margin-left: auto; margin-right: auto; width: 40%;">
-        <label style="display: block;">1 - Escoge una mesa dependiendo de tus necesidades</label>
-        <label style="display: block;">2 - Selecciona el lugar que deseas</label>
-        <label style="display: block;">3 - Dirígete al apartado "CONTINUAR COMPRA" ( hay 5 minutos de tolerancia para
-            poder confirmar asientos )</label>
-        <label style="display: block;">4 - Verifica que tus asientos son los que realmente seleccionaste</label>
-        <label style="display: block;">5 - Sube tu comprobante de pago en el apartado "cambiar método de pago"</label>
+
+<div class="container">
+  <div class="row align-items-center">
+    <!-- Columna de texto -->
+    <div class="col-12 col-md-6">
+      <p>1 - Escoge una mesa dependiendo de tus necesidades</p>
+      <p>2 - Selecciona el lugar que deseas</p>
+      <p>3 - Dirígete al apartado "CONTINUAR COMPRA" (hay 5 minutos de tolerancia para poder confirmar asientos)</p>
+      <p>4 - Verifica que tus asientos son los que realmente seleccionaste</p>
+      <p>5 - Sube tu comprobante de pago en el apartado "cambiar método de pago"</p>
     </div>
 
-    <div class="card-body">
-        <div class="row">
-            <div>
-                <div class="content">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/rewards-latino.appspot.com/o/baners%2Fcolores%20status%20mesas.jpg?alt=media&token=658281c4-5edc-4279-96c8-d82f3f097b53"
-                        alt="" class="status-img">
-                </div>
-            </div>
-
-            <div class="container-fluid zonas" id="zonasOcultar" pTooltip="Seleccione sus lugares"
-                tooltipPosition="top">
-                <div class="container">
-                    <div class="col-18">
-                        <div class="main-card">
-
-                            <div class="logo-container">
-                                <div class="pantalla">
-                                    <span class="rectangle-text">PANTALLA</span>
-                                </div>
-                                <div class="tarima">
-                                    <span class="rectangle-text">TARIMA</span>
-                                </div>
-                                <div class="fuente">
-                                    <span class="rectangle-text">FUENTE</span>
-                                </div>
-                            </div>
-
-
-                            <div *ngFor="let mesa of mesas">
-                                <div class="positioned-component" [style.left.px]="mesa.x" [style.top.px]="mesa.y">
-                                    <div *ngIf="mesa.type =='M'" class="icon" #MyRef [id]="mesa.id"
-                                        [ngClass]="{'bg-blue': mesa.type === 'M'}" 
-                                        (click)="comprarMesa(mesa.id, 'VIP1') "
-                                        [pTooltip]="'Mesa: '+mesa.id+'\n Precio: '+  mesa.precio+ ' USD'">
-                                        {{mesa.id}}
-                                        <ul class="menu">
-                                            <li class="spread" *ngFor="let name of sillas">
-                                                <a #MyRef [id]="mesa.id+name" class="unitVIP">{{name}}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="icon" *ngIf="mesa.type =='U'">
-                                        {{mesa.id }}
-                                        <ul class="menu">
-                                            <li class="spread" *ngFor="let name of sillas | slice:0:10">
-                                                <a #MyRef [id]="mesa.id+name" class="unit"
-                                                    [pTooltip]="'Asiento: '+mesa.id+name+'\n Precio: '+ mesa.precio+' USD'"
-                                                    (click)="selectedAsiento(mesa.id+name)">{{name}}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+    <!-- Columna de imagen -->
+    <div class="col-12 col-md-6 text-center">
+      <img src="https://firebasestorage.googleapis.com/v0/b/rewards-latino.appspot.com/o/baners%2Fcolores%20status%20mesas.jpg?alt=media&token=658281c4-5edc-4279-96c8-d82f3f097b53"
+           alt="Estado mesas"
+           style="max-width: 100%; height: auto;">
+    </div>
+  </div>
+</div>
 
 
 
-                            <!-- <div class="icon" #MyRef [id]="1" (click)="comprarMesa(1, 'VIP1') "
-                                        [pTooltip]="'Mesa: A1'+'\n Precio: 7000 USD'">
-                                        {{"A1"}}
-                                        <ul class="menu">
-                                            <li class="spread" *ngFor="let name of mesas">
-                                                <a #MyRef [id]="1+name" class="unitVIP">{{name}}</a>
-                                            </li>
-                                        </ul>
-                            </div>-->
-                            <div class="grid-layout">
+<div class="container-fluid" pTooltip="Seleccione sus lugares" tooltipPosition="top">
 
-                                <!-- Contenido de grilla aquí -->
-                            </div>
 
-                            <label class="custom-label">
-                                <!-- Texto aquí -->
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <br>
-
-                <div *ngIf="StatusCargaLugares==true">
-                    <div class="container-fluid">
-                        <a class="btn-flotante" (click)="realizarCompra()" pTooltip="Pagar Lugares seleccionados"
-                            tooltipPosition="left">
-                            <i class="pi pi-shopping-cart"></i> Continuar compra
-                        </a>
-                    </div>
-                </div>
-
-                <br><br>
-            </div>
+  <div class="container">
+    
+    <div class="col-12">
+      <!-- <div class="main-card responsive-scale" style="position: relative; width: 100%; min-height: 400px;"> -->
+<div class="main-card responsive-scale"
+     style="position: relative; width: 100%; max-width: 1200px; margin: 0 auto; aspect-ratio: 1024 / 1200; border: 1px solid #000;">
+        <!-- Logos / Pantalla / Tarima / Fuente -->
+        <div class="logo-container d-flex justify-content-around flex-wrap mb-3">
+          <div class="pantalla">
+            <span class="rectangle-text">PANTALLA</span>
+          </div>
+          <div class="tarima">
+            <span class="rectangle-text">TARIMA</span>
+          </div>
+          <div class="fuente">
+            <span class="rectangle-text">FUENTE</span>
+          </div>
         </div>
+
+        <!-- Mesas -->
+      <div *ngFor="let mesa of mesas">
+  <div class="positioned-component"
+    [style.left.%]="(mesa.x/1024)*100-8"
+    [style.top.%]="(mesa.y/1200)*100"
+       style="position: absolute;">
+       
+    <div *ngIf="mesa.type =='M'" class="icon bg-blue" #MyRef
+         [id]="mesa.id"
+         (click)="comprarMesa(mesa.id, 'VIP1')"
+         [pTooltip]="'Mesa: '+mesa.id+'\n Precio: '+mesa.precio+' USD'">
+      {{mesa.id}}
+      <ul class="menu">
+        <li class="spread" *ngFor="let name of sillas">
+          <a #MyRef [id]="mesa.id+name" class="unitVIP">{{name}}</a>
+        </li>
+      </ul>
     </div>
-</p-card>
+
+    <div *ngIf="mesa.type =='U'" class="icon">
+      {{mesa.id}}
+      <ul class="menu">
+        <li class="spread" *ngFor="let name of sillas | slice:0:10">
+          <a #MyRef [id]="mesa.id+name" class="unit"
+             [pTooltip]="'Asiento: '+mesa.id+name+'\n Precio: '+mesa.precio+' USD'"
+             (click)="selectedAsiento(mesa.id+name)">
+             {{name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <p-sidebar [(visible)]="visibleSidebar2" position="right" [baseZIndex]="10000" [style]="{'width':'50vw'}">
     <app-pago *ngIf="visibleSidebar2" [boletosSeleccionados]="boletosSeleccionados" (fetchNominaciones)="unseled()">
     </app-pago>

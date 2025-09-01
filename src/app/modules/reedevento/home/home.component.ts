@@ -16,6 +16,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
   targetVip = ''
   sillas: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
   styleOBJ = { 'background': "RGB(217, 222, 224)" }
@@ -81,7 +82,12 @@ export class HomeComponent implements OnInit {
   ) {
     this.getUserData().subscribe(data => {
       if (data) {
-        this.userData = data.filter(item => item.uid === JSON.parse(localStorage.d).uid);
+
+        const d = localStorage.getItem('d');
+        const user = d ? JSON.parse(d) : null;
+
+        this.userData = data.filter(item => item.uid === user?.uid);
+
         console.log(this.userData[0])
 
 
