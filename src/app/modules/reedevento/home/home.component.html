@@ -66,7 +66,7 @@
     <div *ngIf="mesa.type =='M'" class="icon bg-blue" #MyRef
          [id]="mesa.id"
          (click)="comprarMesa(mesa.id, 'VIP1')"
-         [pTooltip]="'Mesa: '+mesa.id+'\n Precio: '+mesa.precio+' USD'">
+         [pTooltip]="'Mesa: '+mesa.id+'\n Precio: '+mesa.precio">
       {{mesa.id}}
       <ul class="menu">
         <li class="spread" *ngFor="let name of sillas">
@@ -80,7 +80,7 @@
       <ul class="menu">
         <li class="spread" *ngFor="let name of sillas | slice:0:10">
           <a #MyRef [id]="mesa.id+name" class="unit"
-             [pTooltip]="'Asiento: '+mesa.id+name+'\n Precio: '+mesa.precio+' USD'"
+             [pTooltip]="'Asiento: '+mesa.id+name+'\n Precio: '+mesa.precio"
              (click)="selectedAsiento(mesa.id+name)">
              {{name}}
           </a>
