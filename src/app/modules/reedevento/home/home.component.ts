@@ -56,22 +56,22 @@ export class HomeComponent implements OnInit {
     { id: 'G1', type: 'M', precio: '7300 USD', x: 940, y: 400 },
     { id: 'H1', type: 'M', precio: '7300 USD', x: 1120, y: 460 },
     { id: 'J1', type: 'M', precio: '7300 USD', x: 760, y: 500 },
-    { id: 'K3', type: 'U', precio: '7100 USD', x: 40, y: 650 },
+    { id: 'K3', type: 'M', precio: '7100 USD', x: 40, y: 650 },
     { id: 'I1', type: 'M', precio: '7300 USD', x: 400, y: 500 },
-    { id: 'L3', type: 'U', precio: '7100 USD', x: 220, y: 590 },
+    { id: 'L3', type: 'M', precio: '7100 USD', x: 220, y: 590 },
     { id: 'M2', type: 'M', precio: '7200 USD', x: 580, y: 600 },
-    { id: 'N3', type: 'U', precio: '7100 USD', x: 940, y: 590 },
-    { id: 'O3', type: 'U', precio: '7100 USD', x: 1120, y: 650 },
-    { id: 'P3', type: 'U', precio: '7100 USD', x: 400, y: 680 },
-    { id: 'Q3', type: 'U', precio: '7100 USD', x: 760, y: 680 },
-    { id: 'R3', type: 'U', precio: '7100 USD', x: 40, y: 840 },
-    { id: 'S3', type: 'U', precio: '7100 USD', x: 220, y: 780 },
-    { id: 'T3', type: 'U', precio: '7100 USD', x: 580, y: 780 },
-    { id: 'U3', type: 'U', precio: '7100 USD', x: 940, y: 780 },
-    { id: 'V3', type: 'U', precio: '7100 USD', x: 1120, y: 840 },
-    { id: 'W3', type: 'U', precio: '7100 USD', x: 220, y: 970 },
-    { id: 'X3', type: 'U', precio: '7100 USD', x: 760, y: 970 },
-    { id: 'Y3', type: 'U', precio: '7100 USD', x: 940, y: 970 },
+    { id: 'N3', type: 'M', precio: '7100 USD', x: 940, y: 590 },
+    { id: 'O3', type: 'M', precio: '7100 USD', x: 1120, y: 650 },
+    { id: 'P3', type: 'U', precio: '700 USD Individual', x: 400, y: 680 },
+    { id: 'Q3', type: 'U', precio: '700 USD Individual', x: 760, y: 680 },
+    { id: 'R3', type: 'U', precio: '700 USD Individual', x: 40, y: 840 },
+    { id: 'S3', type: 'U', precio: '700 USD Individual', x: 220, y: 780 },
+    { id: 'T3', type: 'U', precio: '700 USD Individual', x: 580, y: 780 },
+    { id: 'U3', type: 'U', precio: '700 USD Individual', x: 940, y: 780 },
+    { id: 'V3', type: 'U', precio: '700 USD Individual', x: 1120, y: 840 },
+    { id: 'W3', type: 'U', precio: '700 USD Individual', x: 220, y: 970 },
+    { id: 'X3', type: 'U', precio: '700 USD Individual', x: 760, y: 970 },
+    { id: 'Y3', type: 'U', precio: '700 USD Individual', x: 940, y: 970 },
   ];
 
   constructor(
@@ -115,8 +115,24 @@ export class HomeComponent implements OnInit {
 
       this.lugaresDisponibles = []
       for (let dato of data) {
-        let lug: boleto = { idLugar: dato['idLugar'], precio: dato['precio'], comprado: dato['comprado'], apartado: dato['apartado'], hora: dato['fecha'] }
-        this.lugaresDisponibles.push(lug)
+
+      const idLugar: string = dato['idLugar'] ?? '';
+      const prefijos = ['R3', 'S3', 'W3', 'P3', 'T3', 'Q3', 'U3', 'V3', 'X3', 'Y3'];
+      
+      let precio = dato['precio'];
+      if (prefijos.some(pref => idLugar.startsWith(pref))) {
+        precio = 700;
+      }
+
+      let lug: boleto = {
+        idLugar: idLugar,
+        precio: precio,
+        comprado: dato['comprado'],
+        apartado: dato['apartado'],
+        hora: dato['fecha']
+      };
+
+      this.lugaresDisponibles.push(lug);
       }
 
       this.initLugares()
