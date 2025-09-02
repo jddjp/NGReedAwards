@@ -21,7 +21,7 @@ export class LugaresService {
   constructor(private toastr: ToastrService, private firestore: Firestore) {
     this.db = getFirestore();
     this.categoriaCol = collection(this.db, 'lugares');
-    onSnapshot(
+    /*onSnapshot(
       this.categoriaCol,
       (snapshot) => {
         this.updatedSnapshot.next(snapshot);
@@ -29,7 +29,7 @@ export class LugaresService {
       (err) => {
         console.log(err);
       }
-    );
+    );*/
   }
 
   getLugares() {
@@ -72,7 +72,7 @@ export class LugaresService {
     for (let boleto of boletos) {
       let idLugar = boleto.idLugar;
       let apartado = true;
-      let fecha = boleto.hora;
+      let fecha =   new Date().toLocaleString('en-US');
       let comprado = true;
       const querySnapshot = await getDocs(
         query(

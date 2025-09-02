@@ -45,33 +45,33 @@ export class HomeComponent implements OnInit {
   mesa: boolean = true;
   StatusCargaLugares: boolean = false;
   userData: any;
-
+  mesaParaComprar = []
   mesas = [
-    { id: 'A2', type: 'M', precio: 7200, x: 40, y: 80 },
-    { id: 'B2', type: 'M', precio: 7200, x: 1120, y: 80 },
-    { id: 'C2', type: 'M', precio: 7200, x: 40, y: 270 },
-    { id: 'D2', type: 'M', precio: 7200, x: 1120, y: 270 },
-    { id: 'E1', type: 'M', precio: 7300, x: 40, y: 460 },
-    { id: 'F1', type: 'M', precio: 7300, x: 220, y: 400 },
-    { id: 'G1', type: 'M', precio: 7300, x: 940, y: 400 },
-    { id: 'H1', type: 'M', precio: 7300, x: 1120, y: 460 },
-    { id: 'J1', type: 'M', precio: 7300, x: 760, y: 500 },
-    { id: 'K3', type: 'U', precio: 7100, x: 40, y: 650 },
-    { id: 'I1', type: 'M', precio: 7300, x: 400, y: 500 },
-    { id: 'L3', type: 'U', precio: 7100, x: 220, y: 590 },
-    { id: 'M2', type: 'M', precio: 7200, x: 580, y: 600 },
-    { id: 'N3', type: 'U', precio: 7100, x: 940, y: 590 },
-    { id: 'O3', type: 'U', precio: 7100, x: 1120, y: 650 },
-    { id: 'P3', type: 'U', precio: 7100, x: 400, y: 680 },
-    { id: 'Q3', type: 'U', precio: 7100, x: 760, y: 680 },
-    { id: 'R3', type: 'U', precio: 7100, x: 40, y: 840 },
-    { id: 'S3', type: 'U', precio: 7100, x: 220, y: 780 },
-    { id: 'T3', type: 'U', precio: 7100, x: 580, y: 780 },
-    { id: 'U3', type: 'U', precio: 7100, x: 940, y: 780 },
-    { id: 'V3', type: 'U', precio: 7100, x: 1120, y: 840 },
-    { id: 'W3', type: 'U', precio: 7100, x: 220, y: 970 },
-    { id: 'X3', type: 'U', precio: 7100, x: 760, y: 970 },
-    { id: 'Y3', type: 'U', precio: 7100, x: 940, y: 970 },
+    { id: 'A2', type: 'M', precio: '7200 USD', x: 40, y: 80 },
+    { id: 'B2', type: 'M', precio: '7200 USD', x: 1120, y: 80 },
+    { id: 'C2', type: 'M', precio: '7200 USD', x: 40, y: 270 },
+    { id: 'D2', type: 'M', precio: '7200 USD', x: 1120, y: 270 },
+    { id: 'E1', type: 'M', precio: '7300 USD', x: 40, y: 460 },
+    { id: 'F1', type: 'M', precio: '7300 USD', x: 220, y: 400 },
+    { id: 'G1', type: 'M', precio: '7300 USD', x: 940, y: 400 },
+    { id: 'H1', type: 'M', precio: '7300 USD', x: 1120, y: 460 },
+    { id: 'J1', type: 'M', precio: '7300 USD', x: 760, y: 500 },
+    { id: 'K3', type: 'U', precio: '7100 USD', x: 40, y: 650 },
+    { id: 'I1', type: 'M', precio: '7300 USD', x: 400, y: 500 },
+    { id: 'L3', type: 'U', precio: '7100 USD', x: 220, y: 590 },
+    { id: 'M2', type: 'M', precio: '7200 USD', x: 580, y: 600 },
+    { id: 'N3', type: 'U', precio: '7100 USD', x: 940, y: 590 },
+    { id: 'O3', type: 'U', precio: '7100 USD', x: 1120, y: 650 },
+    { id: 'P3', type: 'U', precio: '7100 USD', x: 400, y: 680 },
+    { id: 'Q3', type: 'U', precio: '7100 USD', x: 760, y: 680 },
+    { id: 'R3', type: 'U', precio: '7100 USD', x: 40, y: 840 },
+    { id: 'S3', type: 'U', precio: '7100 USD', x: 220, y: 780 },
+    { id: 'T3', type: 'U', precio: '7100 USD', x: 580, y: 780 },
+    { id: 'U3', type: 'U', precio: '7100 USD', x: 940, y: 780 },
+    { id: 'V3', type: 'U', precio: '7100 USD', x: 1120, y: 840 },
+    { id: 'W3', type: 'U', precio: '7100 USD', x: 220, y: 970 },
+    { id: 'X3', type: 'U', precio: '7100 USD', x: 760, y: 970 },
+    { id: 'Y3', type: 'U', precio: '7100 USD', x: 940, y: 970 },
   ];
 
   constructor(
@@ -111,7 +111,6 @@ export class HomeComponent implements OnInit {
   async getLugares() {
     await this.lugaresService.getLugares().subscribe((data) => {
       this.lugares = data
-
       this.StatusCargaLugares = true;
 
       this.lugaresDisponibles = []
@@ -119,8 +118,6 @@ export class HomeComponent implements OnInit {
         let lug: boleto = { idLugar: dato['idLugar'], precio: dato['precio'], comprado: dato['comprado'], apartado: dato['apartado'], hora: dato['fecha'] }
         this.lugaresDisponibles.push(lug)
       }
-
-
 
       this.initLugares()
       this.cargando = true
@@ -141,9 +138,19 @@ export class HomeComponent implements OnInit {
       }
       let ref: ElementRef<HTMLInputElement> = toArray.find(el => el?.nativeElement?.id == lugar.idLugar)
       if (lugar.apartado || lugar.comprado) {
+        
         if (lugar.comprado) {
 
           ref?.nativeElement?.setAttribute('style', this.enableColor)
+          //console.log
+          //console.log(lugar.idLugar)
+          var type = this.mesas.find(el => el.id == lugar.idLugar.substring(0, 2))
+         // console.log(type)
+          if (type.type == 'M') {
+             let mesaRef: ElementRef<HTMLInputElement> = toArray.find(el => el?.nativeElement?.id == type.id)
+            mesaRef?.nativeElement?.setAttribute('style', this.enableColor)
+          }
+         // return
         }
         else {
 
@@ -152,6 +159,7 @@ export class HomeComponent implements OnInit {
               this.cancelarApartado(lugar)
               ref?.nativeElement?.setAttribute('style', this.enableColor)
             }
+            console.log(lugar)
             ref?.nativeElement?.setAttribute('style', this.enableColor)
           }
         }
@@ -228,10 +236,17 @@ export class HomeComponent implements OnInit {
 
     if (this.componetesSeleccionados.length > 0) {
 
-
+      this.boletosSeleccionados = []
       for (let boleto of this.componetesSeleccionados) {
-        let newBoleto = { "idLugar": boleto?.nativeElement?.id, "precio": "660USD", "comprado": false, "apartado": false, "hora": this.now.toLocaleString('en-US') }
-        let estatus = this.lugaresService.getLugaresPagados(newBoleto)
+        
+        let idMesa = boleto?.nativeElement?.id
+
+        var silla  = this.lugaresDisponibles.find(el => el.idLugar == idMesa)
+        console.log(silla);
+        this.boletosSeleccionados.push(silla)
+        //this.boletosSeleccionados = this.lugaresDisponibles.filter(el => el.idLugar.startsWith(idMesa))
+        //let newBoleto = { "idLugar": boleto?.nativeElement?.id, "precio": "660USD", "comprado": false, "apartado": false, "hora": this.now.toLocaleString('en-US') }
+       // let estatus = this.lugaresService.getLugaresPagados(newBoleto)
 
 
       }
@@ -239,7 +254,8 @@ export class HomeComponent implements OnInit {
 
 
       this.visibleSidebar2 = true;
-      if (this.targetVip === 'VIP1') {
+     // this.boletosSeleccionados = []
+     /* if (this.targetVip === 'VIP1') {
         for (let boleto of this.componetesSeleccionados) {
           let newBoleto = { "idLugar": boleto?.nativeElement?.id, "precio": "700USD", "comprado": false, "apartado": false, "hora": this.now.toLocaleString('en-US') }
           this.boletosSeleccionados.push(newBoleto)
@@ -259,7 +275,12 @@ export class HomeComponent implements OnInit {
           let newBoleto = { "idLugar": boleto?.nativeElement?.id, "precio": "660USD", "comprado": false, "apartado": false, "hora": this.now.toLocaleString('en-US') }
           this.boletosSeleccionados.push(newBoleto)
         }
-      }
+      }*/
+
+      this.boletosSeleccionados.forEach(element => {
+        element.hora = this.now.toLocaleString('en-US')
+      })
+      console.log(this.boletosSeleccionados);
       this.actualizarBoleto()
 
     }
@@ -284,15 +305,17 @@ export class HomeComponent implements OnInit {
   }
 
   actualizarBoleto() {
-
     this.lugaresService.updatelugarApartado(this.boletosSeleccionados)
-
 
   }
 
   comprarMesa(idMesa, target: string) {
     console.log(idMesa);
+    //this.boletosSeleccionados = []
     let disponiblidad = this.lugaresDisponibles.find(el => el.idLugar == idMesa + "1")
+    
+   //console.log(mesaCompleta);
+    //console.log(disponiblidad);
     if (!disponiblidad.comprado && !disponiblidad.apartado) {
       let toArray = this.inputsArray.toArray()
       let colorMesa = false
@@ -322,20 +345,21 @@ export class HomeComponent implements OnInit {
       }
 
     }
+   // console.log(this.boletosSeleccionados);
   }
   showBasicDialog() {
     this.displayBasic = true;
   }
 
-  addedLugares() {
+  /*addedLugares() {
     var mesa = "B2"
     for (let i = 0; i < 11; i++) {
       console.log(mesa + i)
       this.lugaresService.addLugar(mesa + i, true, true, '', '575');
     }
-  }
+  }*/
 
-  updateLugar() {
+  /*updateLugar() {
     var boletos = []
     var mesa = 'C2';
     for (let i = 1; i < 11; i++) {
@@ -348,7 +372,7 @@ export class HomeComponent implements OnInit {
     }
     console.log(boletos)
     this.lugaresService.updatelugarApartadoV2(boletos);
-  }
+  }*/
 
     async putNewLugar() {
     function generarCombinaciones(ids: string[], numeros: string[]): string[] {
