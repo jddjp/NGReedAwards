@@ -257,13 +257,13 @@ opcionSeleccionado:any;
 
   calcularPrecio() {
     let sum = 0
-    for(let boleto of this.boletosSeleccionados) {
-      //console.log(boleto)
-      sum += Number(boleto.precio.toString().replace(' USD',''))
-    }
-    /*for(let i = 0; this.boletosSeleccionados.length > i; i++) {
+    // for(let boleto of this.boletosSeleccionados) {
+    //   console.log(boleto)
+    //   sum += Number(boleto.precio.toString().replace(' USD',''))
+    // }
+    for(let i = 0; this.boletosSeleccionados.length > i; i++) {
       sum += Number(this.boletosSeleccionados[i].precio.substring(0, 3))
-    }*/
+    }
 
     return sum
   }
