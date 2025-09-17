@@ -261,11 +261,13 @@ opcionSeleccionado:any;
     //   console.log(boleto)
     //   sum += Number(boleto.precio.toString().replace(' USD',''))
     // }
-    for(let i = 0; this.boletosSeleccionados.length > i; i++) {
-      sum += Number(this.boletosSeleccionados[i].precio.substring(0, 3))
-    }
+    console.log(this.boletosSeleccionados)
+    // for(let i = 0; this.boletosSeleccionados.length > i; i++) {
+    //   sum += Number(this.boletosSeleccionados[i].precio.substring(0, 3))
+    // }
 
-    return sum
+    return this.boletosSeleccionados.reduce((acc, boleto) => acc + Number(boleto.precio), 0);
+    //return sum
   }
 
   llenarTabla() {

@@ -6,12 +6,14 @@
         </ng-template>
         <ng-template pTemplate="right">
 
-            <button pButton pRipple label="Exportar" icon="pi pi-download" class="p-button-info mr-2" (click)="Excel()" [style]="{marginRight: '6px'}"></button>
+            <button pButton pRipple label="Exportar" icon="pi pi-download" class="p-button-info mr-2" (click)="Excel()" [style]="{marginRight: '4px'}"></button>
             <button pButton pRipple label="Nueva Reservacion" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
         </ng-template>
     </p-toolbar>
 
-    <p-table [value]="reservacionCollectiondata" [rows]="20" [paginator]="true" [loading]="loading" [rowsPerPageOptions]="[20,35,50]">
+   <p-table [value]="reservacionCollectiondata" [rows]="20" [paginator]="true" [loading]="loading"
+         [rowsPerPageOptions]="[20,35,50]" styleClass="p-datatable-sm p-datatable-gridlines" responsiveLayout="scroll"
+         [autoLayout]="true">
         <ng-template pTemplate="header">
             <tr>
                 <th>
@@ -23,9 +25,12 @@
 
                 </th>
                 <th>
+                    Fecha de compra
+                </th>
+                <!-- <th>
                     codigotiket
 
-                </th>
+                </th> -->
                 <th>
                     descripcionpago
 
@@ -40,6 +45,10 @@
                 </th>
                 <th>
                     montopago
+
+                </th>
+                   <th>
+                    Nombre comprador
 
                 </th>
                 <th style="display: none;">
@@ -58,9 +67,12 @@
                 <td>
                     <p>{{reservacion.LugaresComprados}}</p>
                 </td>
-                <td>
-                    <p>{{reservacion.codigotiket}}</p>
+                 <td>
+                    <p>{{reservacion.fechaCreacion}}</p>
                 </td>
+                <!-- <td>
+                    <p>{{reservacion.codigotiket}}</p>
+                </td> -->
                 <td>
                     <p>{{reservacion.descripcionpago}}</p>
                 </td>
@@ -73,7 +85,9 @@
                 <td>
                     <p>${{reservacion.montopago}}</p>
                 </td>
-
+                <td>
+                    <p>{{reservacion.Nombrecomprador}}</p>
+                </td>
                 <td style="display: none;">
                   <qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="dataToString" [colorDark]="'#94969e'" [colorLight]="'#000000'" [imageSrc]="'https://firebasestorage.googleapis.com/v0/b/rewards-latino.appspot.com/o/files%2FEscudo-RL.png?alt=media&token=58ee9622-0c5e-4d17-90f1-39a9447a7472'"
                                     [imageHeight]="170" [imageWidth]="170" [title]="'A custom title attributesss'" allowEmptyString="true" [width]="256" [errorCorrectionLevel]="'M'">Datos</qrcode>

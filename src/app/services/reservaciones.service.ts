@@ -96,14 +96,19 @@ export class reservacionService {
     });
   }
 
-  async deletereservacion(deletereservacion: ReservacionModel){
+async deletereservacion(id: any) {
+  console.log("Intentando eliminar reservación con ID:", id);
 
-    const db = getFirestore();
-    const reservacionRef = doc(db, "reservaciones", deletereservacion.id);
+  const db = getFirestore();
+  const reservacionRef = doc(db, "reservaciones", id);
 
+  try {
     await deleteDoc(reservacionRef);
+    console.log(`Documento con ID ${id} eliminado correctamente`);
+  } catch (error) {
+    console.error("Error al eliminar documento:", error);
   }
-
+}
   async getreservaciones(){
     this.listareservaciones = [];
     let uid = JSON.parse(localStorage.x).uid;

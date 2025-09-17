@@ -139,6 +139,7 @@ this.submitted = false
           'Ticket de compra: '+ data[0].codigotiket,
           'Estatus de Pago: '+ data[0].descripcionpago,
           'Fecha de compra: '+ data[0].fechaCreacion,
+          'Nombrecomprador: '+ data[0].Nombrecomprador,
         ]
         this.dataToString = JSON.stringify(dataString);
         console.log('datatostring ', this.dataToString);
@@ -159,8 +160,9 @@ this.submitted = false
   }
 
   async delete(docId: any) {
+    console.log(docId);
     this.confirmationService.confirm({
-      message: '¿Está seguro de que desea eliminar la Reservacion  '+ docId.nombre + '?',
+      message: '¿Está seguro de que desea eliminar la Reservacion  '+ docId.Nombrecomprador + '?',
       header: 'Confirmacion',
       icon: 'pi pi-exclamation-triangle',
 
