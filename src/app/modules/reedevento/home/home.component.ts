@@ -171,6 +171,9 @@ export class HomeComponent implements OnInit {
         else {
 
           if (lugar.apartado) {
+            if(lugar.comprado){
+              return
+            }
             if (!lugar.comprado && this.diferencia > 2) {
               this.cancelarApartado(lugar)
               ref?.nativeElement?.setAttribute('style', this.enableColor)
@@ -222,6 +225,7 @@ export class HomeComponent implements OnInit {
 
 
   cancelarApartado(boleto: boleto) {
+    console.log("cancelar apartado")
     this.lugaresService.cancelarLugarAparatdo(boleto)
   }
 
