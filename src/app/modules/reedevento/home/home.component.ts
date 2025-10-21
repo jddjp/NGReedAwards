@@ -104,11 +104,12 @@ export class HomeComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    if (!this.soldout) {
     Swal.fire(
       'Importante',
       'Realizar el proceso de reserva en PC para tener una mejor experiencia',
       'info'
-    )
+    )}
   }
 
   async getLugares() {
