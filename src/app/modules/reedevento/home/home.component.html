@@ -1,6 +1,6 @@
 <!-- Aqui se agrega el spiner antes de cargar los lugares -->
  
- <div *ngIf="StatusCargaLugares==false" class="flex flex-column align-items-center justify-content-center" [style]="styleOBJ">
+ <div *ngIf="StatusCargaLugares==false && !soldout" class="flex flex-column align-items-center justify-content-center" [style]="styleOBJ">
   <h5>Cargando Información... Solo podrá continuar su compra si terminó de cargar la información</h5>
 
   <p-progressSpinner 
@@ -12,7 +12,7 @@
   </p-progressSpinner>
 </div>
 
-<div class="container">
+<div class="container" *ngIf="!soldout">
   <div class="row align-items-center">
     <!-- Columna de texto -->
     <div class="col-12 col-md-6">
@@ -38,8 +38,8 @@
 
 
   <div class="container">
-    
-    <div class="col-12">
+    <img src="assets/img/soldout.jpeg" *ngIf="soldout" style="width: 100%; max-width: 600px; margin: 0 auto; display: block;" alt="Sold Out Image">
+    <div class="col-12" *ngIf="!soldout">
       <!-- <div class="main-card responsive-scale" style="position: relative; width: 100%; min-height: 400px;"> -->
 <div class="main-card responsive-scale"
      style="position: relative; width: 100%; max-width: 1200px; margin: 0 auto; aspect-ratio: 1024 / 1200; border: 1px solid #000;">

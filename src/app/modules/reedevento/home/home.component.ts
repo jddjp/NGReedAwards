@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
     { id: 'X3', type: 'U', precio: '700 USD Individual', x: 760, y: 970 },
     { id: 'Y3', type: 'U', precio: '700 USD Individual', x: 940, y: 970 },
   ];
-
+  soldout = true;
   constructor(
     private lugaresService: LugaresService,
     public datepipe: DatePipe,
@@ -94,10 +94,13 @@ export class HomeComponent implements OnInit {
       }
     },
     );
-    this.getLugares();
-    this.clock = this.source.subscribe(t => {
-      this.now = new Date();
-    });
+    if (!this.soldout) {
+        this.getLugares();
+        this.clock = this.source.subscribe(t => {
+        this.now = new Date();
+      });
+    }
+  
 
   }
   ngOnInit(): void {
