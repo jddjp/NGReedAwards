@@ -39,10 +39,11 @@ export class LoginUserEventoComponent implements OnInit {
       .then((userCredential) => {
 
         if (userCredential.user?.emailVerified) {
+          
+          // this.setLocalStorage(userCredential.user);
+          window.location.href = 'https://reedlatino.com/galeria-2025/';
           this.toastr.success('Bienvenido', 'Login correcto');
           localStorage.x = JSON.stringify(userCredential.user);
-          // this.setLocalStorage(userCredential.user);
-          this.router.navigate(['/reedevento/home']);
         } else {
           this.toastr.error('El usuario no ha verificado su cuenta', 'Error');
           this.router.navigate(['/reedevento/verificarCorreo']);

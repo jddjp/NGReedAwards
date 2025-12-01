@@ -18,5 +18,5 @@ export const reedeventoRoutes: Routes = [
     { path: 'registro', component: RegistroUserEventoComponent },
     { path: 'recuperarPassword', component: RecuperarPasswordEventoComponent },
     { path: 'verificarCorreo', component: VerificarCorreoComponent },
-    { path: '**', redirectTo: 'home' }
+    { path: '**', redirectTo: 'login' }
 ];
