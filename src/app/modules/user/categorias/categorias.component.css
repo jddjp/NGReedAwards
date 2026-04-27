@@ -15,7 +15,7 @@
 
 /* Título */
 .custom-title {
-  color: #1a5e32; /* Verde Wiked */
+  color: #000000; /* Verde Wiked */
   font-family: 'Transat', sans-serif;
   font-weight: bold;
   font-size: 2rem;
@@ -24,7 +24,7 @@
 
 /* Divider */
 .custom-divider {
-  border-top: 2px solid #1a5e32; /* Línea divisoria en verde */
+  border-top: 2px solid #000000; /* Línea divisoria en verde */
   margin-bottom: 20px;
 }
 
@@ -48,7 +48,7 @@
 
 /* Estilos para los botones */
 .custom-button {
-  background-color: #1a5e32; /* Verde Wiked */
+  background-color: #000000; /* Verde Wiked */
   color: #fff;
   border-radius: 8px;
   padding: 8px 15px;
@@ -72,7 +72,7 @@
 }
 
 .custom-input:focus {
-  border-color: #1a5e32; /* Resaltar el borde con verde al hacer focus */
+  border-color: #000000; /* Resaltar el borde con verde al hacer focus */
 }
 
 /* Estilos del dropdown */
@@ -97,7 +97,7 @@
 }
 
 .p-sidebar .p-sidebar-header {
-  background-color: #1a5e32; /* Fondo verde Wiked */
+  background-color: #000000; /* Fondo verde Wiked */
   color: #fff;
   font-family: 'Transat', sans-serif;
   font-weight: bold;

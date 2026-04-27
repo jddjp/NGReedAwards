@@ -8,7 +8,7 @@
   
   /* Estilos del título */
   .custom-title {
-    color: #1a5e32; /* Color violeta */
+    color: #000000; /* Color violeta */
     font-size: 1.75rem;
     font-family: 'Transat', sans-serif;
     margin-bottom: 20px;
@@ -34,12 +34,12 @@
   }
   
   .custom-form-control:focus {
-    border-color: #1a5e32;
+    border-color: #000000;
   }
   
   /* Estilos de los botones */
   .custom-btn {
-    background-color: #1a5e32;
+    background-color: #000000;
     color: #fff;
     font-weight: bold;
     border-radius: 8px;
@@ -48,7 +48,7 @@
   }
   
   .custom-btn:hover {
-    background-color: #1a5e32; /* Violeta más oscuro */
+    background-color: #000000; /* Violeta más oscuro */
   }
   
   /* Estilos para los errores en los formularios */

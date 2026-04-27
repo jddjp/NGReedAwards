@@ -11,7 +11,7 @@
   .custom-title {
     font-family: 'Transat', sans-serif;
     font-size: 2rem;  /* Tamaño de fuente grande */
-    color: #1a5e32; /* Verde oscuro */
+    color: #000000; /* Verde oscuro */
     margin-bottom: 15px;  /* Espaciado debajo del título */
   }
   
@@ -27,7 +27,7 @@
   
   /* Botón con estilo moderno */
   .custom-btn {
-    background-color: #1a5e32;  /* Verde oscuro */
+    background-color: #000000;  /* Verde oscuro */
     color: white;
     border-radius: 25px;  /* Bordes redondeados */
     padding: 12px 25px;  /* Espaciado interno */

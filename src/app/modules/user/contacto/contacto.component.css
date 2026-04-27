@@ -21,7 +21,7 @@
   }
   
   .custom-card-title {
-    color: #1a5e32; /* Verde Wiked */
+    color: #000000; /* Verde Wiked */
     font-family: 'Transat', sans-serif;
     font-size: 1.5rem;
     margin-bottom: 20px;
@@ -40,7 +40,7 @@
   .contact-link {
     display: block;
     font-size: 1.1rem;
-    color: #1a5e32; /* Verde Wiked */
+    color: #000000; /* Verde Wiked */
     text-decoration: none;
     margin-top: 10px;
   }

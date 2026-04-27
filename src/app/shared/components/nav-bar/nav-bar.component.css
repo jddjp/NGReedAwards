@@ -1,6 +1,6 @@
 /* Navbar personalizado con el color verde Wiked y tipografía Transat */
 .custom-navbar {
-    background-color: #1a5e32; /* Verde Wiked */
+    background-color: #000000; /* Verde Wiked */
     font-family: 'Transat', sans-serif;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Sombra sutil para agregar profundidad */
   }
@@ -20,7 +20,7 @@
   
   /* Estilo para el dropdown */
   .custom-dropdown-item {
-    color: #1a5e32; /* Verde Wiked */
+    color: #000000; /* Verde Wiked */
     font-size: 1rem;
   }
   
