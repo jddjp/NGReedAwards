@@ -11,6 +11,7 @@ import { AuthGuard } from 'src/config/auth.guard';
 import { EvaluacionNominacionesComponent } from './evaluacion-nominaciones/evaluacion-nominaciones.component';
 import { MensajesContactoComponent } from './mensajes-contacto/mensajes-contacto.component';
 import { CategoriasNComponent } from './categoriasN/categoriasn.component';
+import { CodigosDescuentoComponent } from './codigos-descuento/codigos-descuento.component';
 export const adminRoutes: Routes = [
     { path: 'login', component: LoginAdminComponent },
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -22,6 +23,7 @@ export const adminRoutes: Routes = [
     { path: 'nominaciones', component: NominacionesComponent, canActivate: [AuthGuard] },
     { path: 'mensajes-contacto', component: MensajesContactoComponent, canActivate: [AuthGuard] },
     { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
+    { path: 'codigos-descuento', component: CodigosDescuentoComponent, canActivate: [AuthGuard] },
     // { path: 'not-found', component: NotFoundComponent },
     { path: '**', redirectTo: 'login' }
 ];

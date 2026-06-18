@@ -37,6 +37,7 @@ import { NominacionesComponent } from './nominaciones/nominaciones.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { EvaluacionNominacionesComponent } from './evaluacion-nominaciones/evaluacion-nominaciones.component';
 import { MensajesContactoComponent } from './mensajes-contacto/mensajes-contacto.component';
+import { CodigosDescuentoComponent } from './codigos-descuento/codigos-descuento.component';
 
 //PrimeNG
 import { ToastModule } from 'primeng/toast';
@@ -53,6 +54,7 @@ import { AddNominacionAdminComponent } from './nominaciones/add-nominacion/add-n
 import { CategoriasNComponent } from './categoriasN/categoriasn.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ListboxModule } from 'primeng/listbox';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
     imports: [
@@ -95,6 +97,7 @@ import { ListboxModule } from 'primeng/listbox';
         PickListModule,
         CheckboxModule,
         ListboxModule,
+        TagModule,
     ],  providers: [ConfirmationService],
     declarations: [
         AdminComponent,
@@ -108,6 +111,7 @@ import { ListboxModule } from 'primeng/listbox';
         EvaluacionNominacionesComponent,
         MensajesContactoComponent,
         AddNominacionAdminComponent,
+        CodigosDescuentoComponent,
     ]
 })
 export class AdminModule { }

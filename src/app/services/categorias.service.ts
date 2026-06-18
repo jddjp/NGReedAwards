@@ -9,6 +9,7 @@ import { initializeApp } from "firebase/app";
   providedIn: 'root'
 })
 export class CategoriasService {
+
   db: Firestore;
   categoriaCol: CollectionReference<DocumentData>;
   private updatedSnapshot = new Subject<QuerySnapshot<DocumentData>>();
@@ -41,7 +42,7 @@ export class CategoriasService {
 
   getCategorias(){
     const categoriasCollection = collection(this.firestore, 'categorias');
-    return collectionData(query(categoriasCollection, orderBy("id", "asc")));
+    return collectionData(categoriasCollection);
   }
 
   

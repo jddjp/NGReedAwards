@@ -20,56 +20,56 @@ declare var paypal;
 })
 export class AddNominacionComponent implements OnInit, OnDestroy {
 
-  @ViewChild('paypal', { static: true }) paypalElement : ElementRef;
+  @ViewChild('paypal', { static: false }) paypalElement: ElementRef;
 
   @Input() accion: string;
   @Input() nominacionEditar: any;
   @Output() fetchNominaciones: EventEmitter<boolean> = new EventEmitter<boolean>()
-   producto = {
-     descripcion : 'Compra por Nominacion de Reedlatino',
-     precio      :  165.00
-   }
+  producto = {
+    descripcion: 'Compra por Nominacion de Reedlatino',
+    precio: 152.00
+  };
 
-  codigosDescuento = [
-    // { codigo: 'AICODI20', descuento: 20 },
-    // { codigo: 'REED20DESC', descuento: 20 },
-    // { codigo: 'ANUNREED2024', descuento: 20 },
-    // { codigo: 'REED20QROMPIO', descuento: 20 },
-    // { codigo: 'REED20CORMPIO', descuento: 20 },
-    // { codigo: 'REED20PUEEDO', descuento: 20 },
-    // { codigo: 'REED20PUEMPIO', descuento: 20 },
-    // { codigo: 'REED20NLEDO', descuento: 20 },
-    // { codigo: 'REED20CHIEDO', descuento: 20 },
-    // { codigo: 'REED20ATIZMPIO', descuento: 20 },
-    // { codigo: 'REED20HUIXMPIO', descuento: 20 },
-    // { codigo: 'REED20GTOEDO', descuento: 20 },
-    // { codigo: 'REED20LEONMPIO', descuento: 20 },
-    // { codigo: 'REED20NAUMPIO', descuento: 20 },
-    // { codigo: 'REED20BUAPEDU', descuento: 20 },
-    // { codigo: 'REED20QROOEDO', descuento: 20 },
-    // { codigo: 'REED20TAMEDO', descuento: 20 },
-    // { codigo: 'REED20ISTRATEGY ', descuento: 20 },
-    // { codigo: 'REED20SANMARTIN', descuento: 20 },
-    // { codigo: 'REED20ASOTA', descuento: 20 },
-    // { codigo: 'REED20ACEDENO', descuento: 20 },
-    // { codigo: 'REED20ADNA', descuento: 20 },
-    // { codigo: 'REED20ELIAS', descuento: 20 },
-    // { codigo: 'REED20COLB', descuento: 20 },
-    // { codigo: 'REED20ROLC', descuento: 20 },
-    // { codigo: 'REED20ROLC', descuento: 20 },
-    // { codigo: 'REED20BT', descuento: 20 },
-    // { codigo: 'REED20AVILL', descuento: 20 },
-    // { codigo: 'REED20MASS', descuento: 20 },
-    // { codigo: 'REED20GUTTI', descuento: 20 },
-    // { codigo: 'REED20HEU', descuento: 20 },
-    // { codigo: 'REED20PAN', descuento: 20 },
-    // { codigo: 'REED20ACH', descuento: 20 },
-    // { codigo: 'REED20GCE', descuento: 20 },
-    // { codigo: 'REED20MEJ', descuento: 20 },
-    // { codigo: 'REED20RUB', descuento: 20 },
-    // { codigo: 'REED20POLI', descuento: 20 },
-    // { codigo: 'REED20POLI', descuento: 20 },
-  ];
+  // codigosDescuento = [
+  //   // { codigo: 'AICODI20', descuento: 20 },
+  //   // { codigo: 'REED20DESC', descuento: 20 },
+  //   // { codigo: 'ANUNREED2024', descuento: 20 },
+  //   // { codigo: 'REED20QROMPIO', descuento: 20 },
+  //   // { codigo: 'REED20CORMPIO', descuento: 20 },
+  //   // { codigo: 'REED20PUEEDO', descuento: 20 },
+  //   // { codigo: 'REED20PUEMPIO', descuento: 20 },
+  //   // { codigo: 'REED20NLEDO', descuento: 20 },
+  //   // { codigo: 'REED20CHIEDO', descuento: 20 },
+  //   // { codigo: 'REED20ATIZMPIO', descuento: 20 },
+  //   // { codigo: 'REED20HUIXMPIO', descuento: 20 },
+  //   // { codigo: 'REED20GTOEDO', descuento: 20 },
+  //   // { codigo: 'REED20LEONMPIO', descuento: 20 },
+  //   // { codigo: 'REED20NAUMPIO', descuento: 20 },
+  //   // { codigo: 'REED20BUAPEDU', descuento: 20 },
+  //   // { codigo: 'REED20QROOEDO', descuento: 20 },
+  //   // { codigo: 'REED20TAMEDO', descuento: 20 },
+  //   // { codigo: 'REED20ISTRATEGY ', descuento: 20 },
+  //   // { codigo: 'REED20SANMARTIN', descuento: 20 },
+  //   // { codigo: 'REED20ASOTA', descuento: 20 },
+  //   // { codigo: 'REED20ACEDENO', descuento: 20 },
+  //   // { codigo: 'REED20ADNA', descuento: 20 },
+  //   // { codigo: 'REED20ELIAS', descuento: 20 },
+  //   // { codigo: 'REED20COLB', descuento: 20 },
+  //   // { codigo: 'REED20ROLC', descuento: 20 },
+  //   // { codigo: 'REED20ROLC', descuento: 20 },
+  //   // { codigo: 'REED20BT', descuento: 20 },
+  //   // { codigo: 'REED20AVILL', descuento: 20 },
+  //   // { codigo: 'REED20MASS', descuento: 20 },
+  //   // { codigo: 'REED20GUTTI', descuento: 20 },
+  //   // { codigo: 'REED20HEU', descuento: 20 },
+  //   // { codigo: 'REED20PAN', descuento: 20 },
+  //   // { codigo: 'REED20ACH', descuento: 20 },
+  //   // { codigo: 'REED20GCE', descuento: 20 },
+  //   // { codigo: 'REED20MEJ', descuento: 20 },
+  //   // { codigo: 'REED20RUB', descuento: 20 },
+  //   // { codigo: 'REED20POLI', descuento: 20 },
+  //   // { codigo: 'REED20POLI', descuento: 20 },
+  // ];
   codigoDesc: string = '';
   descuentoAplicado: boolean = false;
 
@@ -93,6 +93,7 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
   agregarFileBaucher: boolean = true;
   preloadCategoria: CategoriaModel;
   disabledPaypal: boolean = true;
+  codigosDescuento: any[] = [];
   constructor(
     private fb: FormBuilder,
     private toastr: ToastrService,
@@ -105,11 +106,19 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
   ) {
     this.getCategorias();
     this.getPaises();
+    this.getCodigosDescuento();
   }
+ 
+  getCodigosDescuento() {
+  this.nominacionService.getCodigosDescuento().subscribe((data: any[]) => {
+    console.log('data codigos descuento ', data);
+    this.codigosDescuento = data || [];
+  });
+}
 
 
   ngAfterViewInit() {
-   this.initPaypalButtons();
+    this.initPaypalButtons();
   }
   initPaypalButtons() {
     paypal
@@ -119,7 +128,7 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
           return actions.order.create({
             purchase_units: [
               {
-                description: this.producto.descripcion+"Nominado:"+this.nominacionForm.get('nominado').value,
+                description: this.producto.descripcion + "Nominado:" + this.nominacionForm.get('nominado').value,
                 amount: {
                   currency_code: 'USD',
                   value: this.producto.precio
@@ -134,65 +143,77 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
           this.nominacionForm.controls['statuspago'].setValue("Pago Realizado");
           this.nominacionForm.controls['idpago'].setValue(JSON.stringify(order));
 
-         this. crearNominacionPago();
+          this.crearNominacionPago();
 
 
         },
         onError: err => {
           this.nominacionForm.controls['statuspago'].setValue("Pago No Realizado");
           this.nominacionForm.controls['idpago'].setValue(JSON.stringify(err));
-         // console.log(err);
-       //   this.pagoRealizado = false;
+          // console.log(err);
+          //   this.pagoRealizado = false;
 
         }
       })
       .render(this.paypalElement.nativeElement);
   }
 
+
   ngOnInit(): void {
     this.initForm();
-      this.nominacionForm.valueChanges.subscribe(() => {
-          if(this.nominacionForm.get('titulo')?.valid &&
-          this.nominacionForm.get('categoria')?.valid  && 
-          this.nominacionForm.get('nominado')?.valid  &&
-          this.nominacionForm.get('descripcion')?.valid  &&
-          this.nominacionForm.get('fileLogoEmpresa')?.valid  &&
-          this.nominacionForm.get('organizacion')?.valid  &&
-          this.nominacionForm.get('responsable')?.valid  &&
-          this.nominacionForm.get('telefono')?.valid  &&
-          this.nominacionForm.get('pais')?.valid  &&
-          this.nominacionForm.get('rsInstagram')?.valid  &&
-          this.nominacionForm.get('rsTwitter')?.valid  &&
-          this.nominacionForm.get('rsFacebook')?.valid  &&
-          this.nominacionForm.get('rsYoutube')?.valid  &&
-          this.nominacionForm.get('fileCesionDerechos')?.valid  &&
-          this.nominacionForm.get('fileCartaIntencion')?.valid  &&
-          this.nominacionForm.get('fileMaterialMultimedia')?.valid )
-          {
-            this.disabledPaypal = false;
-          }
-          else{
-            this.disabledPaypal = true;
-          }
-    });
-   }
 
-  ngOnDestroy(): void {
-      this.variablesGL.preloadCategoria.next(null);
+    // Función auxiliar para actualizar PayPal
+    const updatePaypalStatus = () => {
+      const isValid =
+        this.nominacionForm.get('titulo')?.valid &&
+        this.nominacionForm.get('categoria')?.valid &&
+        this.nominacionForm.get('nominado')?.valid &&
+        this.nominacionForm.get('descripcion')?.valid &&
+        this.nominacionForm.get('fileLogoEmpresa')?.valid &&
+        this.nominacionForm.get('organizacion')?.valid &&
+        this.nominacionForm.get('responsable')?.valid &&
+        this.nominacionForm.get('telefono')?.valid &&
+        this.nominacionForm.get('pais')?.valid &&
+        this.nominacionForm.get('rsInstagram')?.valid &&
+        this.nominacionForm.get('rsTwitter')?.valid &&
+        this.nominacionForm.get('rsFacebook')?.valid &&
+        this.nominacionForm.get('rsYoutube')?.valid &&
+        this.nominacionForm.get('fileCesionDerechos')?.valid &&
+        this.nominacionForm.get('fileCartaIntencion')?.valid &&
+        this.nominacionForm.get('fileMaterialMultimedia')?.valid;
+
+      this.disabledPaypal = !isValid;
+      console.log('✅ PayPal Status Updated - Enabled:', !this.disabledPaypal);
+    };
+
+    // Ejecutar una vez al cargar
+    setTimeout(() => {
+      updatePaypalStatus();
+    }, 100);
+
+    // Escuchar cambios después
+    this.nominacionForm.valueChanges.subscribe(() => {
+      updatePaypalStatus();
+    });
   }
 
-  getCategorias(){
-    this.categoriasService.getCategorias().subscribe( (data) => {
-      if(data.length > 0){
+  ngOnDestroy(): void {
+    this.variablesGL.preloadCategoria.next(null);
+  }
+
+  getCategorias() {
+    this.categoriasService.getCategorias().subscribe((data) => {
+      console.log('data categorias ', data)
+      if (data.length > 0) {
         this.categorias = data;
         this.preloadCategoria = this.variablesGL.preloadCategoria.getValue();
-        if(this.preloadCategoria){
+        if (this.preloadCategoria) {
           this.nominacionForm.patchValue({
             categoria: this.preloadCategoria.nombre,
           });
         }
         //console.log('data categorias ', this.categorias);
-        if(this.accion == 'editar'){
+        if (this.accion == 'editar') {
           this.agregarLogo = false;
           this.agregarFileCDerechos = false;
           this.agregarFileCIntencion = false;
@@ -204,16 +225,16 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
     });
   }
 
-  getPaises(){
-      this.paisesService.getPaises().subscribe( (data: any) => {
-          if(data.length > 0){
-            this.paises = data.sort((a, b) => a.name.common - b.name.common);
-            //console.log('data content paises ordenados', this.paises);
-          }
-      });
+  getPaises() {
+    this.paisesService.getPaises().subscribe((data: any) => {
+      if (data.length > 0) {
+        this.paises = data.sort((a, b) => a.name.common - b.name.common);
+        //console.log('data content paises ordenados', this.paises);
+      }
+    });
   }
 
-  initForm(){
+  initForm() {
     this.nominacionForm = this.fb.group({
       titulo: ['', [Validators.required]],
       categoria: ['', [Validators.required]],
@@ -224,7 +245,7 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
       responsable: ['', [Validators.required]],
       telefono: ['', [Validators.required]],
       pais: ['', [Validators.required]],
-      rsInstagram: ['',[Validators.required]],
+      rsInstagram: ['', [Validators.required]],
       rsTwitter: ['', [Validators.required]],
       rsFacebook: ['', [Validators.required]],
       rsYoutube: ['', [Validators.required]],
@@ -238,14 +259,14 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
     });
   }
 
-  setValueForm(){
+  setValueForm() {
     let searchCat = this.categorias.find(x => x.nombre == this.nominacionEditar.categoria);
     // console.log('CATEGORIA ENCONTRADA ', searchCat, this.nominacionEditar.categoria, this.categorias.length);
 
     setTimeout(() => {
       this.nominacionForm.patchValue({
         titulo: this.nominacionEditar.titulo,
-        categoria: searchCat?.nombre ? searchCat.nombre:'',
+        categoria: searchCat?.nombre ? searchCat.nombre : '',
         nominado: this.nominacionEditar.nominado,
         descripcion: this.nominacionEditar.descripcion,
         fileLogoEmpresa: this.nominacionEditar?.fileLogoEmpresa?.url ? 'ya cargo archivo' : '',
@@ -268,8 +289,8 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
     }, 100);
   }
 
-  async crearNominacionPago(){
-    if(this.accion == 'agregar' && !this.nominacionForm.valid){
+  async crearNominacionPago() {
+    if (this.accion == 'agregar' && !this.nominacionForm.valid) {
 
       Swal.fire({
         title: 'Por favor espera...',
@@ -283,64 +304,64 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
       this.guardando = true;
 
 
-        //console.log("ACCION AGREGAR");
-        const dataNominacion: NominacionModel = {
-          id: Date.now().toString(),
-          titulo: this.nominacionForm.get('titulo').value,
-          categoria: this.nominacionForm.get('categoria').value,
-          nominado: this.nominacionForm.get('nominado').value,
-          descripcion: this.nominacionForm.get('descripcion').value,
-          fileLogoEmpresa: [],
-          organizacion: this.nominacionForm.get('organizacion').value,
-          responsable: this.nominacionForm.get('responsable').value,
-          telefono: this.nominacionForm.get('telefono').value,
-          pais: this.nominacionForm.get('pais').value,
-          rsInstagram: this.nominacionForm.get('rsInstagram').value,
-          rsTwitter: this.nominacionForm.get('rsTwitter').value,
-          rsFacebook: this.nominacionForm.get('rsFacebook').value,
-          rsYoutube: this.nominacionForm.get('rsYoutube').value,
-          fileCesionDerechos:[],
-          fileCartaIntencion: [],
-          materialMultimedia:[],
-          // fileBaucher: { idFile: imgSave.find(x => x.fileMapped == 'FileBaucher').idDoc, url: imgSave.find(x => x.fileMapped == 'FileBaucher').url },
-          fileBaucher: '',
-          pagarCon: this.nominacionForm.get('pagarCon').value,
-          statuspago: this.nominacionForm.get('statuspago').value,
-          idpago:  this.nominacionForm.get('idpago').value,
-          montopago: this.producto.precio.toString(),
-          uid: JSON.parse(localStorage.d).uid,
-          fechaCreacion: "",
-          fechaActualizacion: "",
-          evaluacion:""
-        };
+      //console.log("ACCION AGREGAR");
+      const dataNominacion: NominacionModel = {
+        id: Date.now().toString(),
+        titulo: this.nominacionForm.get('titulo').value,
+        categoria: this.nominacionForm.get('categoria').value,
+        nominado: this.nominacionForm.get('nominado').value,
+        descripcion: this.nominacionForm.get('descripcion').value,
+        fileLogoEmpresa: [],
+        organizacion: this.nominacionForm.get('organizacion').value,
+        responsable: this.nominacionForm.get('responsable').value,
+        telefono: this.nominacionForm.get('telefono').value,
+        pais: this.nominacionForm.get('pais').value,
+        rsInstagram: this.nominacionForm.get('rsInstagram').value,
+        rsTwitter: this.nominacionForm.get('rsTwitter').value,
+        rsFacebook: this.nominacionForm.get('rsFacebook').value,
+        rsYoutube: this.nominacionForm.get('rsYoutube').value,
+        fileCesionDerechos: [],
+        fileCartaIntencion: [],
+        materialMultimedia: [],
+        // fileBaucher: { idFile: imgSave.find(x => x.fileMapped == 'FileBaucher').idDoc, url: imgSave.find(x => x.fileMapped == 'FileBaucher').url },
+        fileBaucher: '',
+        pagarCon: this.nominacionForm.get('pagarCon').value,
+        statuspago: this.nominacionForm.get('statuspago').value,
+        idpago: this.nominacionForm.get('idpago').value,
+        montopago: this.producto.precio.toString(),
+        uid: JSON.parse(localStorage.d).uid,
+        fechaCreacion: "",
+        fechaActualizacion: "",
+        evaluacion: ""
+      };
 
 
-          this.nominacionService.addNominacion(dataNominacion);
+      this.nominacionService.addNominacion(dataNominacion);
 
 
-        this.variablesGL.endProcessNominacion.subscribe(endProcessNominacion => {
-          if(endProcessNominacion != '' && endProcessNominacion != null){
-            this.toastr.success('Nominación creada con exito!!', 'Success');
-            this.submitted = false;
-            this.guardando = false;
-            this.nominacionForm.reset();
-            this.archivos = [];
-            console.log("END PROCESS CREATE");
-            this.variablesGL.endProcessCargaCompleta.next(null);
-            this.variablesGL.endProcessNominacion.next(null);
-            this.fetchNominaciones.emit(true);
-            Swal.close();
-          }else if(endProcessNominacion == ''){
-            Swal.close();
-            this.toastr.error('Hubo un error al guardar la nominacion!', 'Error');
-            this.submitted = false;
-            this.guardando = false;
-          }
+      this.variablesGL.endProcessNominacion.subscribe(endProcessNominacion => {
+        if (endProcessNominacion != '' && endProcessNominacion != null) {
+          this.toastr.success('Nominación creada con exito!!', 'Success');
+          this.submitted = false;
+          this.guardando = false;
+          this.nominacionForm.reset();
+          this.archivos = [];
+          console.log("END PROCESS CREATE");
+          this.variablesGL.endProcessCargaCompleta.next(null);
+          this.variablesGL.endProcessNominacion.next(null);
+          this.fetchNominaciones.emit(true);
+          Swal.close();
+        } else if (endProcessNominacion == '') {
+          Swal.close();
+          this.toastr.error('Hubo un error al guardar la nominacion!', 'Error');
+          this.submitted = false;
+          this.guardando = false;
+        }
 
-        });
+      });
 
 
-    }else if(this.accion == 'editar' && !this.nominacionForm.valid){
+    } else if (this.accion == 'editar' && !this.nominacionForm.valid) {
 
       let dataNominacion = {
         id: this.nominacionEditar.id,
@@ -368,14 +389,14 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
         uid: JSON.parse(localStorage.d).uid,
         fechaCreacion: this.nominacionEditar.fechaCreacion,
         fechaActualizacion: "",
-        evaluacion:""
+        evaluacion: ""
       }
 
 
-        await this.nominacionService.updateNominacion(dataNominacion);
-        this.toastr.success('Nominación actualizada con exito!!', 'Success');
-        console.log("END PROCESS UPDATE");
-        this.fetchNominaciones.emit(true);
+      await this.nominacionService.updateNominacion(dataNominacion);
+      this.toastr.success('Nominación actualizada con exito!!', 'Success');
+      console.log("END PROCESS UPDATE");
+      this.fetchNominaciones.emit(true);
 
       this.submitted = false;
       this.guardando = false;
@@ -385,8 +406,8 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
 
       this.variablesGL.endProcessCargaCompleta.next(null);
       this.variablesGL.endProcessNominacion.next(null);
-    }else{
-      if(this.nominacionForm.valid){
+    } else {
+      if (this.nominacionForm.valid) {
 
         Swal.fire({
           title: 'Por favor espera...',
@@ -399,7 +420,7 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
 
         this.guardando = true;
 
-        if(this.accion == 'agregar'){
+        if (this.accion == 'agregar') {
           this.archivos = [];
           this.setListaArchivos(this.fileLogo, "FileLogoEmpresa");
           this.setListaArchivos(this.fileCDerechos, "FileCesionDerechos");
@@ -412,60 +433,60 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
           }
           else {
 
-            if(this.nominacionForm.get('pagarCon').value != 'paypal'){
+            if (this.nominacionForm.get('pagarCon').value != 'paypal') {
               this.toastr.warning('No seleccionaste un archivo de baucher', 'Atención');
             }
             //return;
           }
           //Carga las imagenes solo si no se han cargado
-          if(!this.variablesGL.endProcessCargaCompleta.value){
-            this.cargaImagenesFBService.upload(this.archivos,this.nominacionForm.get('categoria').value,this.nominacionForm.get('nominado').value);
+          if (!this.variablesGL.endProcessCargaCompleta.value) {
+            this.cargaImagenesFBService.upload(this.archivos, this.nominacionForm.get('categoria').value, this.nominacionForm.get('nominado').value);
           }
-        }else{
+        } else {
           //Si no desea modificar ningun archivo se salta el upload
-          if(!this.agregarLogo && !this.agregarFileCDerechos && !this.agregarFileCIntencion && !this.agregarFilesMultimedia && !this.agregarFileBaucher){
-              this.variablesGL.endProcessCargaCompleta.next(true);
+          if (!this.agregarLogo && !this.agregarFileCDerechos && !this.agregarFileCIntencion && !this.agregarFilesMultimedia && !this.agregarFileBaucher) {
+            this.variablesGL.endProcessCargaCompleta.next(true);
           }
           //Si desea modificar algun archivo lo carga
-          else{
-              this.archivos = [];
-              if(this.agregarLogo){
-                this.setListaArchivos(this.fileLogo, "FileLogoEmpresa");
+          else {
+            this.archivos = [];
+            if (this.agregarLogo) {
+              this.setListaArchivos(this.fileLogo, "FileLogoEmpresa");
+            }
+            if (this.agregarFileCDerechos) {
+              this.setListaArchivos(this.fileCDerechos, "FileCesionDerechos");
+            }
+            if (this.agregarFileCIntencion) {
+              this.setListaArchivos(this.fileCIntencion, "FileCartaIntencion");
+            }
+            if (this.agregarFilesMultimedia) {
+              this.setListaArchivos(this.fileMMultimedia, "FileMaterialMultimedia");
+            }
+            if (this.agregarFileBaucher) {
+              if (this.fileBaucher) {
+                this.setListaArchivos(this.fileBaucher, "FileBaucher");
               }
-              if(this.agregarFileCDerechos){
-                this.setListaArchivos(this.fileCDerechos, "FileCesionDerechos");
-              }
-              if(this.agregarFileCIntencion){
-                this.setListaArchivos(this.fileCIntencion, "FileCartaIntencion");
-              }
-              if(this.agregarFilesMultimedia){
-                this.setListaArchivos(this.fileMMultimedia, "FileMaterialMultimedia");
-              }
-              if(this.agregarFileBaucher){
-                if(this.fileBaucher){
-                  this.setListaArchivos(this.fileBaucher, "FileBaucher");
-                }
-              }
-              //Carga las imagenes solo si no se han cargado
-              if(this.archivos.length > 0){
-                this.cargaImagenesFBService.upload(this.archivos,this.nominacionForm.get('categoria').value,this.nominacionForm.get('nominado').value);
-                //console.log("Entro a cargar los archivos al actualizar ", this.archivos.length);
-              }else{
-                this.variablesGL.endProcessCargaCompleta.next(true);
-              }
+            }
+            //Carga las imagenes solo si no se han cargado
+            if (this.archivos.length > 0) {
+              this.cargaImagenesFBService.upload(this.archivos, this.nominacionForm.get('categoria').value, this.nominacionForm.get('nominado').value);
+              //console.log("Entro a cargar los archivos al actualizar ", this.archivos.length);
+            } else {
+              this.variablesGL.endProcessCargaCompleta.next(true);
+            }
           }
         }
 
         this.variablesGL.endProcessCargaCompleta.subscribe(endProcessUpload => {
           //Aqui ya terminó de subir los archivos al storage y agregar las url a firestore
-          if(endProcessUpload){
-            if(this.archivos.length > 0){
-              this.toastr.success(this.archivos.length+' Archivos cargados con exito!!', 'Success');
+          if (endProcessUpload) {
+            if (this.archivos.length > 0) {
+              this.toastr.success(this.archivos.length + ' Archivos cargados con exito!!', 'Success');
             }
-            if(this.accion == 'agregar'){
+            if (this.accion == 'agregar') {
               this.saveDataNominacion();
               //console.log("ACCION AGREGAR");
-            }else{
+            } else {
               this.updateDataNominacion();
               //console.log("ACCION EDITAR");
             }
@@ -478,11 +499,11 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
 
 
   }
-  crearNominacion(){
+  crearNominacion() {
     this.submitted = true;
 
 
-    if(this.nominacionForm.valid){
+    if (this.nominacionForm.valid) {
 
       Swal.fire({
         title: 'Por favor espera...',
@@ -495,7 +516,7 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
 
       this.guardando = true;
 
-      if(this.accion == 'agregar'){
+      if (this.accion == 'agregar') {
         this.archivos = [];
         this.setListaArchivos(this.fileLogo, "FileLogoEmpresa");
         this.setListaArchivos(this.fileCDerechos, "FileCesionDerechos");
@@ -508,60 +529,60 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
         }
         else {
 
-          if(this.nominacionForm.get('pagarCon').value != 'paypal'){
+          if (this.nominacionForm.get('pagarCon').value != 'paypal') {
             this.toastr.warning('No seleccionaste un archivo de baucher', 'Atención');
           }
           //return;
         }
         //Carga las imagenes solo si no se han cargado
-        if(!this.variablesGL.endProcessCargaCompleta.value){
-          this.cargaImagenesFBService.upload(this.archivos,this.nominacionForm.get('categoria').value,this.nominacionForm.get('nominado').value);
+        if (!this.variablesGL.endProcessCargaCompleta.value) {
+          this.cargaImagenesFBService.upload(this.archivos, this.nominacionForm.get('categoria').value, this.nominacionForm.get('nominado').value);
         }
-      }else{
+      } else {
         //Si no desea modificar ningun archivo se salta el upload
-        if(!this.agregarLogo && !this.agregarFileCDerechos && !this.agregarFileCIntencion && !this.agregarFilesMultimedia && !this.agregarFileBaucher){
-            this.variablesGL.endProcessCargaCompleta.next(true);
+        if (!this.agregarLogo && !this.agregarFileCDerechos && !this.agregarFileCIntencion && !this.agregarFilesMultimedia && !this.agregarFileBaucher) {
+          this.variablesGL.endProcessCargaCompleta.next(true);
         }
         //Si desea modificar algun archivo lo carga
-        else{
-            this.archivos = [];
-            if(this.agregarLogo){
-              this.setListaArchivos(this.fileLogo, "FileLogoEmpresa");
+        else {
+          this.archivos = [];
+          if (this.agregarLogo) {
+            this.setListaArchivos(this.fileLogo, "FileLogoEmpresa");
+          }
+          if (this.agregarFileCDerechos) {
+            this.setListaArchivos(this.fileCDerechos, "FileCesionDerechos");
+          }
+          if (this.agregarFileCIntencion) {
+            this.setListaArchivos(this.fileCIntencion, "FileCartaIntencion");
+          }
+          if (this.agregarFilesMultimedia) {
+            this.setListaArchivos(this.fileMMultimedia, "FileMaterialMultimedia");
+          }
+          if (this.agregarFileBaucher) {
+            if (this.fileBaucher) {
+              this.setListaArchivos(this.fileBaucher, "FileBaucher");
             }
-            if(this.agregarFileCDerechos){
-              this.setListaArchivos(this.fileCDerechos, "FileCesionDerechos");
-            }
-            if(this.agregarFileCIntencion){
-              this.setListaArchivos(this.fileCIntencion, "FileCartaIntencion");
-            }
-            if(this.agregarFilesMultimedia){
-              this.setListaArchivos(this.fileMMultimedia, "FileMaterialMultimedia");
-            }
-            if(this.agregarFileBaucher){
-              if(this.fileBaucher){
-                this.setListaArchivos(this.fileBaucher, "FileBaucher");
-              }
-            }
-            //Carga las imagenes solo si no se han cargado
-            if(this.archivos.length > 0){
-              this.cargaImagenesFBService.upload(this.archivos,this.nominacionForm.get('categoria').value,this.nominacionForm.get('nominado').value);
-              //console.log("Entro a cargar los archivos al actualizar ", this.archivos.length);
-            }else{
-              this.variablesGL.endProcessCargaCompleta.next(true);
-            }
+          }
+          //Carga las imagenes solo si no se han cargado
+          if (this.archivos.length > 0) {
+            this.cargaImagenesFBService.upload(this.archivos, this.nominacionForm.get('categoria').value, this.nominacionForm.get('nominado').value);
+            //console.log("Entro a cargar los archivos al actualizar ", this.archivos.length);
+          } else {
+            this.variablesGL.endProcessCargaCompleta.next(true);
+          }
         }
       }
 
       this.variablesGL.endProcessCargaCompleta.subscribe(endProcessUpload => {
         //Aqui ya terminó de subir los archivos al storage y agregar las url a firestore
-        if(endProcessUpload){
-          if(this.archivos.length > 0){
-            this.toastr.success(this.archivos.length+' Archivos cargados con exito!!', 'Success');
+        if (endProcessUpload) {
+          if (this.archivos.length > 0) {
+            this.toastr.success(this.archivos.length + ' Archivos cargados con exito!!', 'Success');
           }
-          if(this.accion == 'agregar'){
+          if (this.accion == 'agregar') {
             this.saveDataNominacion();
             //console.log("ACCION AGREGAR");
-          }else{
+          } else {
             this.updateDataNominacion();
             //console.log("ACCION EDITAR");
           }
@@ -572,260 +593,260 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
 
   }
 
-  saveDataNominacion(){
-      let imgSave = this.cargaImagenesFBService.idsImageSave;
-      let imgError = this.cargaImagenesFBService.idsImageErr;
-      if(imgError.length && imgError.length > 0){
-        imgError.forEach(imgErr => {
-          this.toastr.error('Hubo un error al cargar este archivo! :('+imgErr.img.nombre, 'Error');
-        });
-        this.archivos = [];
-        this.variablesGL.endProcessCargaCompleta.next(false);
-      }else{
-        const dataNominacion: NominacionModel = {
-          id: Date.now().toString(),
-          titulo: this.nominacionForm.get('titulo').value,
-          categoria: this.nominacionForm.get('categoria').value,
-          nominado: this.nominacionForm.get('nominado').value,
-          descripcion: this.nominacionForm.get('descripcion').value,
-          fileLogoEmpresa: { idFile: imgSave.find(x => x.fileMapped == 'FileLogoEmpresa').idDoc, url: imgSave.find(x => x.fileMapped == 'FileLogoEmpresa').url },
-          organizacion: this.nominacionForm.get('organizacion').value,
-          responsable: this.nominacionForm.get('responsable').value,
-          telefono: this.nominacionForm.get('telefono').value,
-          pais: this.nominacionForm.get('pais').value,
-          rsInstagram: this.nominacionForm.get('rsInstagram').value,
-          rsTwitter: this.nominacionForm.get('rsTwitter').value,
-          rsFacebook: this.nominacionForm.get('rsFacebook').value,
-          rsYoutube: this.nominacionForm.get('rsYoutube').value,
-          fileCesionDerechos: { idFile: imgSave.find(x => x.fileMapped == 'FileCesionDerechos').idDoc, url: imgSave.find(x => x.fileMapped == 'FileCesionDerechos').url },
-          fileCartaIntencion: { idFile: imgSave.find(x => x.fileMapped == 'FileCartaIntencion').idDoc, url: imgSave.find(x => x.fileMapped == 'FileCartaIntencion').url },
-          materialMultimedia: imgSave.filter(x => x.fileMapped == 'FileMaterialMultimedia').map( (data) => { return { idFile: data.idDoc, url: data.url }} ),
-          // fileBaucher: { idFile: imgSave.find(x => x.fileMapped == 'FileBaucher').idDoc, url: imgSave.find(x => x.fileMapped == 'FileBaucher').url },
-          fileBaucher: imgSave.find(x => x.fileMapped == 'FileBaucher') ? { idFile: imgSave.find(x => x.fileMapped == 'FileBaucher').idDoc, url: imgSave.find(x => x.fileMapped == 'FileBaucher').url } : '',
-          pagarCon: this.nominacionForm.get('pagarCon').value,
-          statuspago: this.nominacionForm.get('statuspago').value,
-          idpago:  this.nominacionForm.get('idpago').value,
-          montopago: this.producto.precio.toString(),
-          uid: JSON.parse(localStorage.d).uid,
-          fechaCreacion: "",
-          fechaActualizacion: "",
-          evaluacion:""
-        };
+  saveDataNominacion() {
+    let imgSave = this.cargaImagenesFBService.idsImageSave;
+    let imgError = this.cargaImagenesFBService.idsImageErr;
+    if (imgError.length && imgError.length > 0) {
+      imgError.forEach(imgErr => {
+        this.toastr.error('Hubo un error al cargar este archivo! :(' + imgErr.img.nombre, 'Error');
+      });
+      this.archivos = [];
+      this.variablesGL.endProcessCargaCompleta.next(false);
+    } else {
+      const dataNominacion: NominacionModel = {
+        id: Date.now().toString(),
+        titulo: this.nominacionForm.get('titulo').value,
+        categoria: this.nominacionForm.get('categoria').value,
+        nominado: this.nominacionForm.get('nominado').value,
+        descripcion: this.nominacionForm.get('descripcion').value,
+        fileLogoEmpresa: { idFile: imgSave.find(x => x.fileMapped == 'FileLogoEmpresa').idDoc, url: imgSave.find(x => x.fileMapped == 'FileLogoEmpresa').url },
+        organizacion: this.nominacionForm.get('organizacion').value,
+        responsable: this.nominacionForm.get('responsable').value,
+        telefono: this.nominacionForm.get('telefono').value,
+        pais: this.nominacionForm.get('pais').value,
+        rsInstagram: this.nominacionForm.get('rsInstagram').value,
+        rsTwitter: this.nominacionForm.get('rsTwitter').value,
+        rsFacebook: this.nominacionForm.get('rsFacebook').value,
+        rsYoutube: this.nominacionForm.get('rsYoutube').value,
+        fileCesionDerechos: { idFile: imgSave.find(x => x.fileMapped == 'FileCesionDerechos').idDoc, url: imgSave.find(x => x.fileMapped == 'FileCesionDerechos').url },
+        fileCartaIntencion: { idFile: imgSave.find(x => x.fileMapped == 'FileCartaIntencion').idDoc, url: imgSave.find(x => x.fileMapped == 'FileCartaIntencion').url },
+        materialMultimedia: imgSave.filter(x => x.fileMapped == 'FileMaterialMultimedia').map((data) => { return { idFile: data.idDoc, url: data.url } }),
+        // fileBaucher: { idFile: imgSave.find(x => x.fileMapped == 'FileBaucher').idDoc, url: imgSave.find(x => x.fileMapped == 'FileBaucher').url },
+        fileBaucher: imgSave.find(x => x.fileMapped == 'FileBaucher') ? { idFile: imgSave.find(x => x.fileMapped == 'FileBaucher').idDoc, url: imgSave.find(x => x.fileMapped == 'FileBaucher').url } : '',
+        pagarCon: this.nominacionForm.get('pagarCon').value,
+        statuspago: this.nominacionForm.get('statuspago').value,
+        idpago: this.nominacionForm.get('idpago').value,
+        montopago: this.producto.precio.toString(),
+        uid: JSON.parse(localStorage.d).uid,
+        fechaCreacion: "",
+        fechaActualizacion: "",
+        evaluacion: ""
+      };
 
-        if(dataNominacion.titulo && dataNominacion.nominado && dataNominacion.descripcion){
-          this.nominacionService.addNominacion(dataNominacion);
-        }
-
-        this.variablesGL.endProcessNominacion.subscribe(endProcessNominacion => {
-          if(endProcessNominacion != '' && endProcessNominacion != null){
-            this.toastr.success('Nominación creada con exito!!', 'Success');
-            this.submitted = false;
-            this.guardando = false;
-            this.nominacionForm.reset();
-            this.archivos = [];
-            console.log("END PROCESS CREATE");
-            this.variablesGL.endProcessCargaCompleta.next(null);
-            this.variablesGL.endProcessNominacion.next(null);
-            this.fetchNominaciones.emit(true);
-            Swal.close();
-          }else if(endProcessNominacion == ''){
-            Swal.close();
-            this.toastr.error('Hubo un error al guardar la nominacion!', 'Error');
-            this.submitted = false;
-            this.guardando = false;
-          }
-        });
+      if (dataNominacion.titulo && dataNominacion.nominado && dataNominacion.descripcion) {
+        this.nominacionService.addNominacion(dataNominacion);
       }
-  }
 
-  async updateDataNominacion(){
-      this.filesSave = [];
-      this.filesSave = this.cargaImagenesFBService.idsImageSave;
-      let imgError = this.cargaImagenesFBService.idsImageErr;
-      if(imgError.length && imgError.length > 0){
-        imgError.forEach(imgErr => {
-          this.toastr.error('Hubo un error al cargar este archivo! :('+imgErr.img.nombre, 'Error');
-        });
-        this.archivos = [];
-        this.variablesGL.endProcessCargaCompleta.next(false);
-      }else{
-        let dataNominacion = {
-          id: this.nominacionEditar.id,
-          titulo: this.nominacionForm.get('titulo').value,
-          categoria: this.nominacionForm.get('categoria').value,
-          nominado: this.nominacionForm.get('nominado').value,
-          descripcion: this.nominacionForm.get('descripcion').value,
-          fileLogoEmpresa: this.agregarLogo ? { idFile: this.filesSave.find(x => x.fileMapped == 'FileLogoEmpresa').idDoc, url: this.filesSave.find(x => x.fileMapped == 'FileLogoEmpresa').url } : this.nominacionEditar.fileLogoEmpresa,
-          organizacion: this.nominacionForm.get('organizacion').value,
-          responsable: this.nominacionForm.get('responsable').value,
-          telefono: this.nominacionForm.get('telefono').value,
-          pais: this.nominacionForm.get('pais').value,
-          rsInstagram: this.nominacionForm.get('rsInstagram').value,
-          rsTwitter: this.nominacionForm.get('rsTwitter').value,
-          rsFacebook: this.nominacionForm.get('rsFacebook').value,
-          rsYoutube: this.nominacionForm.get('rsYoutube').value,
-          fileCesionDerechos: this.agregarFileCDerechos ? { idFile: this.filesSave.find(x => x.fileMapped == 'FileCesionDerechos').idDoc, url: this.filesSave.find(x => x.fileMapped == 'FileCesionDerechos').url } : this.nominacionEditar.fileCesionDerechos,
-          fileCartaIntencion: this.agregarFileCIntencion ? { idFile: this.filesSave.find(x => x.fileMapped == 'FileCartaIntencion').idDoc, url: this.filesSave.find(x => x.fileMapped == 'FileCartaIntencion').url } : this.nominacionEditar.fileCartaIntencion,
-          materialMultimedia: this.agregarFilesMultimedia ? this.setFilesMultimedia() : this.nominacionEditar.materialMultimedia,
-          fileBaucher: this.filesSave.find(x => x.fileMapped == 'FileBaucher') ? { idFile: this.filesSave.find(x => x.fileMapped == 'FileBaucher').idDoc, url: this.filesSave.find(x => x.fileMapped == 'FileBaucher').url } : this.nominacionEditar.fileBaucher,
-          pagarCon: this.nominacionForm.get('pagarCon').value,
-          statuspago: this.nominacionForm.get('statuspago').value,
-          idpago: this.nominacionForm.get('idpago').value,
-          montopago: this.nominacionEditar.montopago,
-          uid: JSON.parse(localStorage.d).uid,
-          fechaCreacion: this.nominacionEditar.fechaCreacion,
-          fechaActualizacion: "",
-          evaluacion:""
-        }
-
-        if(dataNominacion.titulo && dataNominacion.nominado && dataNominacion.descripcion){
-          await this.nominacionService.updateNominacion(dataNominacion);
-          this.toastr.success('Nominación actualizada con exito!!', 'Success');
-          console.log("END PROCESS UPDATE");
+      this.variablesGL.endProcessNominacion.subscribe(endProcessNominacion => {
+        if (endProcessNominacion != '' && endProcessNominacion != null) {
+          this.toastr.success('Nominación creada con exito!!', 'Success');
+          this.submitted = false;
+          this.guardando = false;
+          this.nominacionForm.reset();
+          this.archivos = [];
+          console.log("END PROCESS CREATE");
+          this.variablesGL.endProcessCargaCompleta.next(null);
+          this.variablesGL.endProcessNominacion.next(null);
           this.fetchNominaciones.emit(true);
-        }else{
-          console.log('********** datos vacios, que no deberian ir... ******************');
+          Swal.close();
+        } else if (endProcessNominacion == '') {
+          Swal.close();
+          this.toastr.error('Hubo un error al guardar la nominacion!', 'Error');
+          this.submitted = false;
+          this.guardando = false;
         }
-        this.submitted = false;
-        this.guardando = false;
-        this.nominacionForm.reset();
-        this.archivos = [];
-        Swal.close();
-
-        this.variablesGL.endProcessCargaCompleta.next(null);
-        this.variablesGL.endProcessNominacion.next(null);
-
-      }
+      });
+    }
   }
 
-  onFileSelected(event: any, fileMapped: string){
-    switch(fileMapped){
+  async updateDataNominacion() {
+    this.filesSave = [];
+    this.filesSave = this.cargaImagenesFBService.idsImageSave;
+    let imgError = this.cargaImagenesFBService.idsImageErr;
+    if (imgError.length && imgError.length > 0) {
+      imgError.forEach(imgErr => {
+        this.toastr.error('Hubo un error al cargar este archivo! :(' + imgErr.img.nombre, 'Error');
+      });
+      this.archivos = [];
+      this.variablesGL.endProcessCargaCompleta.next(false);
+    } else {
+      let dataNominacion = {
+        id: this.nominacionEditar.id,
+        titulo: this.nominacionForm.get('titulo').value,
+        categoria: this.nominacionForm.get('categoria').value,
+        nominado: this.nominacionForm.get('nominado').value,
+        descripcion: this.nominacionForm.get('descripcion').value,
+        fileLogoEmpresa: this.agregarLogo ? { idFile: this.filesSave.find(x => x.fileMapped == 'FileLogoEmpresa').idDoc, url: this.filesSave.find(x => x.fileMapped == 'FileLogoEmpresa').url } : this.nominacionEditar.fileLogoEmpresa,
+        organizacion: this.nominacionForm.get('organizacion').value,
+        responsable: this.nominacionForm.get('responsable').value,
+        telefono: this.nominacionForm.get('telefono').value,
+        pais: this.nominacionForm.get('pais').value,
+        rsInstagram: this.nominacionForm.get('rsInstagram').value,
+        rsTwitter: this.nominacionForm.get('rsTwitter').value,
+        rsFacebook: this.nominacionForm.get('rsFacebook').value,
+        rsYoutube: this.nominacionForm.get('rsYoutube').value,
+        fileCesionDerechos: this.agregarFileCDerechos ? { idFile: this.filesSave.find(x => x.fileMapped == 'FileCesionDerechos').idDoc, url: this.filesSave.find(x => x.fileMapped == 'FileCesionDerechos').url } : this.nominacionEditar.fileCesionDerechos,
+        fileCartaIntencion: this.agregarFileCIntencion ? { idFile: this.filesSave.find(x => x.fileMapped == 'FileCartaIntencion').idDoc, url: this.filesSave.find(x => x.fileMapped == 'FileCartaIntencion').url } : this.nominacionEditar.fileCartaIntencion,
+        materialMultimedia: this.agregarFilesMultimedia ? this.setFilesMultimedia() : this.nominacionEditar.materialMultimedia,
+        fileBaucher: this.filesSave.find(x => x.fileMapped == 'FileBaucher') ? { idFile: this.filesSave.find(x => x.fileMapped == 'FileBaucher').idDoc, url: this.filesSave.find(x => x.fileMapped == 'FileBaucher').url } : this.nominacionEditar.fileBaucher,
+        pagarCon: this.nominacionForm.get('pagarCon').value,
+        statuspago: this.nominacionForm.get('statuspago').value,
+        idpago: this.nominacionForm.get('idpago').value,
+        montopago: this.nominacionEditar.montopago,
+        uid: JSON.parse(localStorage.d).uid,
+        fechaCreacion: this.nominacionEditar.fechaCreacion,
+        fechaActualizacion: "",
+        evaluacion: ""
+      }
+
+      if (dataNominacion.titulo && dataNominacion.nominado && dataNominacion.descripcion) {
+        await this.nominacionService.updateNominacion(dataNominacion);
+        this.toastr.success('Nominación actualizada con exito!!', 'Success');
+        console.log("END PROCESS UPDATE");
+        this.fetchNominaciones.emit(true);
+      } else {
+        console.log('********** datos vacios, que no deberian ir... ******************');
+      }
+      this.submitted = false;
+      this.guardando = false;
+      this.nominacionForm.reset();
+      this.archivos = [];
+      Swal.close();
+
+      this.variablesGL.endProcessCargaCompleta.next(null);
+      this.variablesGL.endProcessNominacion.next(null);
+
+    }
+  }
+
+  onFileSelected(event: any, fileMapped: string) {
+    switch (fileMapped) {
       case "FileLogoEmpresa":
-        if(event.target.files.length>0){
+        if (event.target.files.length > 0) {
           console.log(event.target.files);
 
-          if(this._archivoPuedeSerCargado(event.target.files[0])){
+          if (this._archivoPuedeSerCargado(event.target.files[0])) {
             this.fileLogo = event.target.files;
             this.nominacionForm.get('fileLogoEmpresa').setValue("ya cargo archivo");
-          }else{
+          } else {
             event.target.files = null;
             this.toastr.error("Solo puedes cargar imagenes como logo de la organización", "Error");
             this.nominacionForm.get('fileLogoEmpresa').reset();
           }
-        }else{
+        } else {
           this.fileLogo = null;
           this.nominacionForm.get('fileLogoEmpresa').reset();
         }
         break;
       case "FileCesionDerechos":
-        if(event.target.files.length>0){
+        if (event.target.files.length > 0) {
           this.fileCDerechos = event.target.files;
           this.nominacionForm.get('fileCesionDerechos').setValue("ya cargo archivo");
-        }else{
+        } else {
           this.fileCDerechos = null;
           this.nominacionForm.get('fileCesionDerechos').reset();
         }
         break;
       case "FileCartaIntencion":
-        if(event.target.files.length>0){
+        if (event.target.files.length > 0) {
           this.fileCIntencion = event.target.files;
           this.nominacionForm.get('fileCartaIntencion').setValue("ya cargo archivo");
-        }else{
+        } else {
           this.fileCIntencion = null;
           this.nominacionForm.get('fileCartaIntencion').reset();
         }
         break;
       case "FileMaterialMultimedia":
-        if(event.target.files.length>0){
+        if (event.target.files.length > 0) {
           this.fileMMultimedia = event.target.files;
           this.nominacionForm.get('fileMaterialMultimedia').setValue("ya cargo archivo");
-        }else{
+        } else {
           this.fileMMultimedia = null;
           this.nominacionForm.get('fileMaterialMultimedia').reset();
         }
         break;
-        case "FileBaucher":
-          this.agregarFileBaucher = true;
-          if(event.target.files.length>0){
-            this.fileBaucher = event.target.files;
-            this.nominacionForm.get('fileBaucher').setValue("ya cargo archivo");
-          }else{
-            this.fileBaucher = null;
-            console.log("fileBaucher", this.fileBaucher);
-            this.nominacionForm.get('fileBaucher').reset();
-          }
-          break;
+      case "FileBaucher":
+        this.agregarFileBaucher = true;
+        if (event.target.files.length > 0) {
+          this.fileBaucher = event.target.files;
+          this.nominacionForm.get('fileBaucher').setValue("ya cargo archivo");
+        } else {
+          this.fileBaucher = null;
+          console.log("fileBaucher", this.fileBaucher);
+          this.nominacionForm.get('fileBaucher').reset();
+        }
+        break;
     }
   }
 
-  setListaArchivos(archivosLista: FileList, fileMapped){
+  setListaArchivos(archivosLista: FileList, fileMapped) {
     this._extraerArchivos(archivosLista, fileMapped);
     //console.log('lista archivos ', this.archivos);
   }
 
-  private _extraerArchivos(archivosLista: FileList, fileMapped: string){
+  private _extraerArchivos(archivosLista: FileList, fileMapped: string) {
     //console.log(archivosLista);
 
-    for (const propiedad in Object.getOwnPropertyNames( archivosLista )) {
+    for (const propiedad in Object.getOwnPropertyNames(archivosLista)) {
       const archivoTemp = archivosLista[propiedad];
-      if(fileMapped == "FileLogoEmpresa"){
-        if(this._archivoPuedeSerCargado(archivoTemp)){
+      if (fileMapped == "FileLogoEmpresa") {
+        if (this._archivoPuedeSerCargado(archivoTemp)) {
           const newArchivo = new FileItem(archivoTemp);
           newArchivo.fileMapped = fileMapped;
           this.archivos.push(newArchivo);
-        }else{
+        } else {
           this.toastr.error("Solo puedes cargar imagenes como logo de la organización", "Error");
         }
-      }else{
-          const newArchivo = new FileItem(archivoTemp);
-          newArchivo.fileMapped = fileMapped;
-          this.archivos.push(newArchivo);
+      } else {
+        const newArchivo = new FileItem(archivoTemp);
+        newArchivo.fileMapped = fileMapped;
+        this.archivos.push(newArchivo);
       }
     }
   }
 
-  cambiarArchivo(fileMapped: string){
+  cambiarArchivo(fileMapped: string) {
     this.addandSetArchivosAlert();
     this.setTypeArchivo(fileMapped);
   }
 
-  setTypeArchivo(fileMapped: string){
-    switch(fileMapped){
+  setTypeArchivo(fileMapped: string) {
+    switch (fileMapped) {
       case 'FileLogoEmpresa':
-          this.agregarLogo = true;
-          this.nominacionForm.get('fileLogoEmpresa').reset();
+        this.agregarLogo = true;
+        this.nominacionForm.get('fileLogoEmpresa').reset();
         break;
       case 'FileCesionDerechos':
-          this.agregarFileCDerechos = true;
-          this.nominacionForm.get('fileCesionDerechos').reset();
+        this.agregarFileCDerechos = true;
+        this.nominacionForm.get('fileCesionDerechos').reset();
         break;
       case 'FileCartaIntencion':
-          this.agregarFileCIntencion = true;
-          this.nominacionForm.get('fileCartaIntencion').reset();
+        this.agregarFileCIntencion = true;
+        this.nominacionForm.get('fileCartaIntencion').reset();
         break;
       case 'FileMaterialMultimedia':
-          this.agregarFilesMultimedia = true;
-          this.nominacionForm.get('fileMaterialMultimedia').reset();
+        this.agregarFilesMultimedia = true;
+        this.nominacionForm.get('fileMaterialMultimedia').reset();
         break;
       case 'FileBaucher':
-          this.agregarFileBaucher = true;
-          this.nominacionForm.get('fileBaucher').setValue('');
+        this.agregarFileBaucher = true;
+        this.nominacionForm.get('fileBaucher').setValue('');
         break;
     }
   }
 
-  private _archivoPuedeSerCargado(archivo: File): boolean{
-    if(this.esImagen(archivo.type)){
+  private _archivoPuedeSerCargado(archivo: File): boolean {
+    if (this.esImagen(archivo.type)) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
-  private esImagen(tipoArchivo: string): boolean{
+  private esImagen(tipoArchivo: string): boolean {
     return (tipoArchivo === '' || tipoArchivo === undefined) ? false : tipoArchivo.startsWith('image');
   }
 
-  addandSetArchivosAlert(){
+  addandSetArchivosAlert() {
     Swal.fire({
       title: 'Agregar uno o Cargar todos?',
       text: `Agregar uno: Agregará los archivos que selecciones a los ya cargados.
@@ -841,56 +862,52 @@ export class AddNominacionComponent implements OnInit, OnDestroy {
       if (result.isConfirmed) {
         console.log('Agregar Uno');
         this.addOnlyOneFileMultimedia = true;
-      }else{
+      } else {
         console.log('Cargar Todos');
         this.addOnlyOneFileMultimedia = false;
       }
     });
   }
 
-  setFilesMultimedia(){
+  setFilesMultimedia() {
     let archivos: any[];
 
-    if(this.addOnlyOneFileMultimedia){//Agregará los archivos que selecciones a los ya cargados
-        archivos = this.nominacionEditar.materialMultimedia;
-        this.filesSave.filter(x => x.fileMapped == 'FileMaterialMultimedia').forEach( (data) => {
-          if(!archivos.find(z => z.idFile == data.idDoc)){
-            archivos.push({ idFile: data.idDoc, url: data.url });
-          }
-        });
-    }else{//Eliminará los archivos ya cargados por los que selecciones.
-        archivos = this.filesSave.filter(x => x.fileMapped == 'FileMaterialMultimedia').map( (data) => { return { idFile: data.idDoc, url: data.url }} );
+    if (this.addOnlyOneFileMultimedia) {//Agregará los archivos que selecciones a los ya cargados
+      archivos = this.nominacionEditar.materialMultimedia;
+      this.filesSave.filter(x => x.fileMapped == 'FileMaterialMultimedia').forEach((data) => {
+        if (!archivos.find(z => z.idFile == data.idDoc)) {
+          archivos.push({ idFile: data.idDoc, url: data.url });
+        }
+      });
+    } else {//Eliminará los archivos ya cargados por los que selecciones.
+      archivos = this.filesSave.filter(x => x.fileMapped == 'FileMaterialMultimedia').map((data) => { return { idFile: data.idDoc, url: data.url } });
     }
     return archivos;
 
   }
 
-  aplicarDescuento(){
-    if(this.codigoDesc){
-      let existeCodigoDesc = this.codigosDescuento.find(x => x.codigo == this.codigoDesc);
-      console.log('codigo de descuento aplicado ', existeCodigoDesc);
-      console.log('Precio normal ', this.producto);
 
-      if(existeCodigoDesc){
-        if(existeCodigoDesc.descuento==20){
+ aplicarDescuento() {
+    const codigo = this.codigoDesc.trim().toUpperCase();
 
-          this.producto.precio =  135.00;
-        }
-        if(existeCodigoDesc.descuento==15){
+    const existeCodigoDesc = this.codigosDescuento.find(
+      x => x.codigo?.trim()?.toUpperCase() === codigo && x.activo !== false
+    );
 
-          this.producto.precio =  147.25;
-        }
-
-      //  this.producto.precio =  147.25;
-        console.log('nuevo precio ', this.producto);
-        this.toastr.success('Descuento aplicado ', 'Exito!');
-        this.descuentoAplicado = true;
-      }else{
-        this.toastr.error('Codigo de descuento no valido', 'Error!');
-        this.codigoDesc = '';
-      }
+    if (!existeCodigoDesc) {
+      this.toastr.error('Código de descuento no válido o inactivo', 'Error!');
+      return;
     }
+
+    const precioFinal = Number(existeCodigoDesc.precioFinal);
+
+    if (!isFinite(precioFinal) || precioFinal < 0) {
+      this.toastr.error('El código tiene un precio final inválido', 'Error!');
+      return;
+    }
+
+    this.producto.precio = precioFinal;
+    this.toastr.success('Descuento aplicado', 'Éxito!');
+    this.descuentoAplicado = true;
   }
-
-
 }

@@ -1,0 +1,90 @@
+<div class="container">
+  <p-toolbar>
+    <ng-template pTemplate="left">
+      <h3 class="text-dark">Códigos de descuento</h3>
+    </ng-template>
+    <ng-template pTemplate="right">
+      <button pButton pRipple label="Nuevo código" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+    </ng-template>
+  </p-toolbar>
+
+  <p-table [value]="codigosDescuento" [rows]="20" [paginator]="true" [loading]="loading" [rowsPerPageOptions]="[20,35,50]">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Código</th>
+        <th>Descuento</th>
+        <th>Precio final</th>
+        <th>Activo</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-codigo>
+      <tr>
+        <td>{{ codigo.codigo }}</td>
+        <td>{{ codigo.descuento }}%</td>
+        <td>{{ codigo.precioFinal | number:'1.2-2' }}</td>
+        <td>
+          <p-tag [severity]="codigo.activo ? 'success' : 'danger'" [value]="codigo.activo ? 'Sí' : 'No'"></p-tag>
+        </td>
+        <td>
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editar(codigo)"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="delete(codigo)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog [(visible)]="visible" [style]="{width: '450px'}" header="Nuevo código de descuento" [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <form [formGroup]="codigoForm">
+      <div class="field">
+        <label for="codigo">Código</label>
+        <input type="text" pInputText formControlName="codigo" />
+      </div>
+      <div class="field">
+        <label for="descuento">Descuento (%)</label>
+        <input type="number" pInputText formControlName="descuento" />
+      </div>
+      <div class="field">
+        <label for="precioFinal">Precio final</label>
+        <input type="number" pInputText formControlName="precioFinal" />
+      </div>
+      <div class="field mt-3">
+        <p-checkbox label="Activo" formControlName="activo" binary="true"></p-checkbox>
+      </div>
+    </form>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="add()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="edit" [style]="{width: '450px'}" header="Editar código de descuento" [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <form [formGroup]="codigoForm">
+      <div class="field">
+        <label for="codigo">Código</label>
+        <input type="text" pInputText formControlName="codigo" />
+      </div>
+      <div class="field">
+        <label for="descuento">Descuento (%)</label>
+        <input type="number" pInputText formControlName="descuento" />
+      </div>
+      <div class="field">
+        <label for="precioFinal">Precio final</label>
+        <input type="number" pInputText formControlName="precioFinal" />
+      </div>
+      <div class="field mt-3">
+        <p-checkbox label="Activo" formControlName="activo" binary="true"></p-checkbox>
+      </div>
+    </form>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Actualizar" icon="pi pi-check" class="p-button-text" (click)="update()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

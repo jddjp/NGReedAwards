@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, addDoc, updateDoc, deleteDoc, getFirestore } from '@angular/fire/firestore';
-import { doc, getDocs, query, where } from 'firebase/firestore';
+import { Firestore, collection, collectionData, addDoc, updateDoc, deleteDoc, doc } from '@angular/fire/firestore';
+import { getDocs, query, where, getFirestore } from 'firebase/firestore';
 import { NominacionModel } from '../models/nominacion.model';
 import { VariablesService } from './variablesGL.service';
 import { HttpClient } from '@angular/common/http';
@@ -11,6 +11,29 @@ import { Observable, map } from 'rxjs';
   providedIn: 'root',
 })
 export class NominacionService {
+
+
+ 
+  getCodigosDescuento() {
+    const ref = collection(this.afs, 'codigosDescuento');
+    return collectionData(ref, { idField: 'id' });
+  }
+
+  async addCodigoDescuento(codigo: any) {
+    const ref = collection(this.afs, 'codigosDescuento');
+    await addDoc(ref, codigo);
+  }
+
+  async updateCodigoDescuento(id: string, codigo: any) {
+    const ref = doc(this.afs, 'codigosDescuento', id);
+    await updateDoc(ref, codigo);
+  }
+
+  async deleteCodigoDescuento(id: string) {
+    const ref = doc(this.afs, 'codigosDescuento', id);
+    await deleteDoc(ref);
+  }
+ 
   listaNominaciones: NominacionModel[] = [];
   pipe = new DatePipe('en-US');
   constructor(
@@ -19,11 +42,13 @@ export class NominacionService {
     private http: HttpClient
   ) {}
 
+
+
   async addNominacion(nominacion: NominacionModel) {
     nominacion.fechaCreacion = this.pipe.transform(
       Date.now(),
       'dd/MM/yyyy, h:mm:ss a'
-    );
+    ) || '';
     await addDoc(collection(this.afs, 'nominaciones'), nominacion)
       .then((docRef) => {
         console.log('La nominacion se grabo con el ID: ', docRef.id);
@@ -37,10 +62,7 @@ export class NominacionService {
 
   async updateNominacion(updateNominacion: NominacionModel) {
     const db = getFirestore();
-    // const cityRef = doc(db, 'nominaciones', 'updateNominacion.id');
-    // setDoc(cityRef, { capital: true }, { merge: true });
-
-    const nominacionesRef = doc(db, 'nominaciones', updateNominacion.id);
+    const nominacionesRef = doc(db, 'nominaciones', updateNominacion.id || '');
     //console.log('datatatata ', getDoc(washingtonRef));
 
     await updateDoc(nominacionesRef, {
@@ -78,10 +100,7 @@ export class NominacionService {
 
   async updateStatusPagoNominacion(updateNominacion: NominacionModel) {
     const db = getFirestore();
-    // const cityRef = doc(db, 'nominaciones', 'updateNominacion.id');
-    // setDoc(cityRef, { capital: true }, { merge: true });
-
-    const nominacionesRef = doc(db, 'nominaciones', updateNominacion.id);
+    const nominacionesRef = doc(db, 'nominaciones', updateNominacion.id || '');
     //console.log('datatatata ', getDoc(washingtonRef));
 
     await updateDoc(nominacionesRef, {
@@ -92,7 +111,7 @@ export class NominacionService {
 
   async deleteNominacion(deleteNominacion: NominacionModel) {
     const db = getFirestore();
-    const nominacionRef = doc(db, 'nominaciones', deleteNominacion.id);
+    const nominacionRef = doc(db, 'nominaciones', deleteNominacion.id || '');
 
     await deleteDoc(nominacionRef);
   }
