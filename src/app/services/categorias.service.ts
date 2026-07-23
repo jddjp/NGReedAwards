@@ -45,6 +45,23 @@ export class CategoriasService {
     return collectionData(categoriasCollection);
   }
 
+  async getSubCategorias(){
+    let data = [];
+    const categoriasCollection = collection(this.firestore, 'categorias');
+    const q = query(categoriasCollection, orderBy("nombre", "asc"));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      data.push({
+        uid: doc.id,
+        id: doc.data().id ?? 0,
+        nombre: doc.data().nombre ?? '',
+        activo: doc.data().activo ?? 0
+      })
+    });
+    return data;
+  }
+
+
   
   async getCategoriaId(id: string) {
     const ref = doc(this.db, 'categorias', id);
@@ -64,24 +81,16 @@ export class CategoriasService {
     return this.toastr.success('Registro Guardado  con exito!!', 'Exito');
   }
   
-  async deletecategoria(id: string) {
-    const querySnapshot = await getDocs(query(collection(this.db, "categorias/"), where("id", "==", id)));
-querySnapshot.forEach((doc) => {
-  this.id = doc.id
-})
-const docRef = doc(this.db, 'categorias/'+ this.id)
-  deleteDoc(docRef)
-  return    this.toastr.error('Registro Eliminado con exito!!','Advertencia');
+  async deletecategoria(uid: string) {
+    const docRef = doc(this.db, `categorias/${uid}`);
+    await deleteDoc(docRef);
+    return this.toastr.error('Registro Eliminado con exito!!','Advertencia');
   }
   
-  async updatecategoria(id: number, nombre: any, activo: number) {
-    const querySnapshot = await getDocs(query(collection(this.db, "categorias/"), where("id", "==", id)));
-querySnapshot.forEach((doc) => {
-  this.id = doc.id
-})
-    const docRef = doc(this.db, 'categorias/'+ this.id);
-  await updateDoc( docRef, { id, nombre,activo })
-  return this.toastr.warning('Registro Actualizado con exito!!','Actualizacion'); 
+  async updatecategoria(uid: string, id: number, nombre: any, activo: number) {
+    const docRef = doc(this.db, `categorias/${uid}`);
+    await updateDoc(docRef, { id, nombre, activo });
+    return this.toastr.warning('Registro Actualizado con exito!!','Actualizacion'); 
   }
   
   

@@ -52,7 +52,7 @@ export class CategoriasService {
   async getSubCategorias(){
     let data = [];
     const categoriasCollection = collection(this.firestore, 'categorias');
-    const q = query(categoriasCollection, orderBy("id", "asc"));
+    const q = query(categoriasCollection, orderBy("nombre", "asc"));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       data.push({

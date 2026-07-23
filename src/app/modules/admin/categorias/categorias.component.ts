@@ -104,12 +104,25 @@ this.submitted = false
 
 
   async get() {
-    this.firebaseService.getCategorias().subscribe((data) => {
-      this.categoriaCollectiondata = data;
+    const parseNum = (value: any) => {
+      const num = Number(value);
+      if (!Number.isNaN(num)) {
+        return num;
+      }
+      const digits = String(value).match(/\d+/);
+      return digits ? Number(digits[0]) : Number.MAX_SAFE_INTEGER;
+    };
 
-      this.loading= false
+    const data = await this.firebaseService.getSubCategorias();
+    this.categoriaCollectiondata = [...data].sort((a, b) => {
+      const aValue = parseNum(a.nombre ?? a.id);
+      const bValue = parseNum(b.nombre ?? b.id);
+      if (aValue !== bValue) {
+        return aValue - bValue;
+      }
+      return String(a.nombre ?? a.id).localeCompare(String(b.nombre ?? b.id));
     });
-    //this.updatecategoriaCollection(snapshot);
+    this.loading= false
   }
 
 
@@ -127,13 +140,13 @@ this.submitted = false
       icon: 'pi pi-exclamation-triangle',
 
       accept: () => {
-
-          this.firebaseService.deletecategoria(docId.id);
+          this.firebaseService.deletecategoria(docId.uid || docId.id);
       }
   });
   }
 edit: boolean = false
   editar(categoria: any) {
+    console.log(categoria);
     if(typeof this.categoriaForm.value.activo != 'undefined'){
       this.categoriaForm.patchValue({activo: categoria.activo});
     }else{
@@ -152,8 +165,9 @@ edit: boolean = false
     if(typeof this.categoriaForm.value.activo == 'undefined'){
       this.categoriaForm.patchValue({activo: "0"});
     }
-this.firebaseService.updatecategoria(this.categoriaModel.id, this.categoriaModel.nombre, this.categoriaForm.value.activo);
-this.edit= false
+    const uid = this.categoriaModel.uid || this.categoriaModel.id;
+    this.firebaseService.updatecategoria(uid, this.categoriaModel.id, this.categoriaModel.nombre, this.categoriaForm.value.activo);
+    this.edit= false
   }
 
 

@@ -78,14 +78,17 @@
             <h3 class="text-dark">Sub - Categorías</h3>
         </ng-template>
         <ng-template pTemplate="right">
-
-          <button pButton pRipple class="p-button-info mr-2" (click)="GenereteReportMasterExcel()" label="Exportar Reporte" icon="pi pi-upload"> </button>
-
+            <span class="p-input-icon-left mr-2">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" placeholder="Buscar Subcategoría" (input)="dt.filterGlobal($event.target.value, 'contains')" />
+            </span>
+            <div style="border-left:1px solid rgba(0,0,0,0.12); height:1.5rem; margin:0 0.75rem;"></div>
+            <button pButton pRipple class="p-button-info mr-2" (click)="GenereteReportMasterExcel()" label="Exportar Reporte" icon="pi pi-upload"> </button>
             <button pButton pRipple label="Nueva categoria" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
         </ng-template>
     </p-toolbar>
 
-    <p-table [value]="categoriaCollectiondata" [rows]="20" [paginator]="true" [loading]="loading" [rowsPerPageOptions]="[20,35,50]">
+    <p-table #dt [value]="categoriaCollectiondata" [rows]="20" [paginator]="true" [loading]="loading" [rowsPerPageOptions]="[20,35,50]" [globalFilterFields]="['nombre']">
         <ng-template pTemplate="header">
             <tr>
                 <th>

@@ -23,8 +23,10 @@ interface City {
 export class CategoriasNComponent implements OnInit {
 
   // ----------------------
-  countries: any[]
-  selectedCategorias: any[];
+  subcategories: any[] = [];
+  subcategoriesByCat: any[] = [];
+  selectedCategorias: any[] = [];
+  subcategoryMap: Record<string, string> = {};
 
   // ----------------------
   piezasPorCategoria: any = [
@@ -68,8 +70,8 @@ export class CategoriasNComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
-    this.initForm();
+  async ngOnInit(): Promise<void> {
+    await this.initForm();
     this.get();
     this.firebaseService.obsr_UpdatedSnapshot.subscribe((snapshot) => {
       this.updatecategoriaCollection(snapshot);
@@ -81,11 +83,28 @@ export class CategoriasNComponent implements OnInit {
       id: ['', [Validators.required]],
       nombre: ['', [Validators.required]],
       activo: ['', []],
-      subcategorias: ['', []],
+      subcategorias: [[], []],
       // fechaFin: ['', [Validators.required]],
-
     });
-    this.countries = await this.firebaseService.getSubCategorias();
+    this.subcategories = await this.firebaseService.getSubCategorias();
+    this.subcategories.sort((a, b) => {
+      const parseNum = (value: any) => {
+        const num = Number(value);
+        if (!Number.isNaN(num)) {
+          return num;
+        }
+        const digits = String(value).match(/\d+/);
+        return digits ? Number(digits[0]) : Number.MAX_SAFE_INTEGER;
+      };
+
+      const aValue = parseNum(a.id ?? a.nombre);
+      const bValue = parseNum(b.id ?? b.nombre);
+      if (aValue !== bValue) {
+        return aValue - bValue;
+      }
+      return String(a.nombre ?? a.id).localeCompare(String(b.nombre ?? b.id));
+    });
+    this.subcategoriesByCat = [];
   }
 
   async add() {
@@ -158,21 +177,23 @@ this.submitted = false
   }
 edit: boolean = false
   editar(categoria: any) {
-    console.log("------getCategorias");
-    console.log(categoria);
     this.selectedCategorias = [];
-    if(typeof categoria.subcategorias != 'undefined' && categoria.subcategorias.length > 0){
-      categoria.subcategorias.map((item) => {
-        this.selectedCategorias.push({uid: item});
-      });
+    if (Array.isArray(categoria.subcategorias) && categoria.subcategorias.length > 0) {
+      this.selectedCategorias = categoria.subcategorias
+        .map((id: any) => this.subcategories.find((item) => item.uid === id))
+        .filter((item) => item);
+      this.categoriaForm.patchValue({ subcategorias: this.selectedCategorias });
+    } else {
+      this.selectedCategorias = [];
+      this.categoriaForm.patchValue({ subcategorias: [] });
     }
-    this.categoriaModel = { ...categoria }
-    if(typeof this.categoriaForm.value.activo != 'undefined'){
-      this.categoriaForm.patchValue({activo: categoria.activo});
-    }else{
-      this.categoriaForm.patchValue({activo: ""});
+    this.categoriaModel = { ...categoria };
+    if (typeof this.categoriaForm.value.activo !== 'undefined') {
+      this.categoriaForm.patchValue({ activo: categoria.activo });
+    } else {
+      this.categoriaForm.patchValue({ activo: '' });
     }
-    this.edit = true
+    this.edit = true;
 
 
     // console.log(this.categoriaModel);
@@ -181,17 +202,20 @@ edit: boolean = false
 
   }
   update() {
-    let subcategorias = [];
-    this.selectedCategorias.map(async (item) =>{
-      let exists = await this.firebaseService.existsCategory(item.uid);
-      if(exists){
-        subcategorias.push(item.uid);
-      }
-      
-      
-    });
+    const selectedItems = this.categoriaForm.value.subcategorias || [];
+    const subcategorias = selectedItems.map((item: any) => item.uid);
+    this.categoriaModel.subcategorias = subcategorias;
+    //console.log(this.categoriaModel);
     this.firebaseService.updatecategoria(this.categoriaModel.id, this.categoriaModel.nombre, this.categoriaForm.value.activo, subcategorias);
-    this.edit= false
+    this.edit = false;
+  }
+
+  onSubcategoryChange(event: any) {
+    if (event && event.value) {
+      this.selectedCategorias = event.value;
+      this.categoriaForm.patchValue({ subcategorias: event.value });
+      console.log('Selected subcategories:', this.selectedCategorias);
+    }
   }
 
 
