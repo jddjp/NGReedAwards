@@ -1,0 +1,436 @@
+/* Estilos simples para el admin de lugares */
+.p-4 {
+  padding: 1rem;
+}
+
+.lugares-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+}
+
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: #1d336f;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.icon-btn:hover {
+  background: #16264f;
+}
+
+.search-container {
+  flex: 1 1 260px;
+  max-width: 320px;
+}
+
+.search-container.inside-mesas {
+  margin-bottom: 1rem;
+}
+
+.lugares-search {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid #c4c4c4;
+  background: #fff;
+  outline: none;
+}
+
+.admin-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.mesas-panel {
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.panel-header {
+  font-weight: 700;
+  color: #1d336f;
+  margin-bottom: 1rem;
+}
+
+.mesa-list {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.mesa-item {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  background: #f8f9ff;
+  cursor: pointer;
+  color: #1f305d;
+}
+
+.mesa-item.active {
+  background: #1d336f;
+  color: #fff;
+  border-color: #1d336f;
+}
+
+.add-mesa-form {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #f5f6ff;
+  border: 1px solid #e3e7ff;
+  border-radius: 14px;
+}
+
+.form-header {
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #1d336f;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.65rem;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  padding: 0.45rem 0 0.6rem;
+}
+
+.field-group label {
+  font-size: 0.78rem;
+  color: #4b4f62;
+}
+
+.field-group input,
+.field-group select {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #c4c4c4;
+  border-radius: 10px;
+  background: #fff;
+  outline: none;
+}
+
+.add-mesa-btn {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 0.85rem;
+  background: #1d336f;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.add-mesa-btn:hover {
+  background: #16264f;
+}
+
+.mesa-detail {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  background: #faf9ff;
+}
+
+.mesa-detail h4 {
+  margin: 0 0 0.65rem 0;
+  font-size: 0.95rem;
+  color: #1d336f;
+}
+
+.save-mesa-btn {
+  margin-top: 0.35rem;
+  border: none;
+  border-radius: 10px;
+  padding: 0.55rem 0.85rem;
+  background: #1976d2;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.save-mesa-btn:hover {
+  background: #165b9e;
+}
+
+.lugares-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.lugares-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.lugar-card {
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  padding: 0.75rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 120px;
+}
+
+.no-mesa-message {
+  padding: 2rem;
+  border: 1px dashed #c4c4c4;
+  border-radius: 12px;
+  background: #fafafa;
+  color: #5f6368;
+}
+
+.lugar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.lugar-id {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1d336f;
+}
+
+.lugar-type {
+  font-size: 0.75rem;
+  color: #4b6cb7;
+  text-transform: uppercase;
+}
+
+.lugar-body {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.lugar-precio {
+  font-weight: 600;
+  color: #222;
+  font-size: 0.9rem;
+}
+
+.lugar-status {
+  display: none;
+}
+
+.estado-vendido {
+  background: #ffebee;
+  border-color: #d32f2f;
+}
+
+.estado-apartado {
+  background: #fff8e1;
+  border-color: #f9a825;
+}
+
+.estado-disponible {
+  background: #e8f5e9;
+  border-color: #2e7d32;
+}
+
+.lugar-actions {
+  display: flex;
+  gap: 0.35rem;
+  margin-top: 0.65rem;
+}
+
+.action-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.action-btn.add {
+  width: auto;
+  min-width: 40px;
+  padding: 0.45rem 0.75rem;
+  border-radius: 10px;
+  background: #1976d2;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.action-btn.add:hover {
+  background: #0f5cb2;
+}
+
+.action-btn.bulk-add {
+  width: auto;
+  min-width: 48px;
+  padding: 0.45rem 0.8rem;
+  border-radius: 10px;
+  background: #388e3c;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.action-btn.bulk-add:hover {
+  background: #2e7d32;
+}
+
+.action-btn.available {
+  background: #2e7d32;
+}
+
+.action-btn.reserved {
+  background: #f9a825;
+  color: #222;
+}
+
+.action-btn.sold {
+  background: #d84315;
+}
+
+.lugar-footer {
+  margin-top: 0.6rem;
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.lugar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.lugar-id {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.lugar-type {
+  font-size: 0.85rem;
+  color: #555;
+  text-transform: uppercase;
+}
+
+.lugar-body {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.lugar-precio {
+  font-weight: 600;
+  color: #222;
+}
+
+.lugar-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-occupied {
+  background: #d84315;
+}
+
+.status-reserved {
+  background: #f9a825;
+}
+
+.status-available {
+  background: #2e7d32;
+}
+
+.lugar-footer {
+  margin-top: 0.8rem;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.lugares-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.grupo-lugar {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1rem;
+  background: #fafafa;
+}
+
+.grupo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #1a237e;
+}
+
+.reset-mesa-btn {
+  background: #37474f;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.reset-mesa-btn:hover {
+  background: #263238;
+}

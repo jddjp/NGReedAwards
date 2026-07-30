@@ -47,33 +47,39 @@ export class HomeComponent implements OnInit {
   userData: any;
   mesaParaComprar = []
   mesas = [
-    { id: 'A2', type: 'M', precio: '7200 USD', x: 40, y: 80 },
-    { id: 'B2', type: 'M', precio: '7200 USD', x: 1120, y: 80 },
-    { id: 'C2', type: 'M', precio: '7200 USD', x: 40, y: 270 },
-    { id: 'D2', type: 'M', precio: '7200 USD', x: 1120, y: 270 },
-    { id: 'E1', type: 'M', precio: '7300 USD', x: 40, y: 460 },
-    { id: 'F1', type: 'M', precio: '7300 USD', x: 220, y: 400 },
-    { id: 'G1', type: 'M', precio: '7300 USD', x: 940, y: 400 },
-    { id: 'H1', type: 'M', precio: '7300 USD', x: 1120, y: 460 },
-    { id: 'J1', type: 'M', precio: '7300 USD', x: 760, y: 500 },
-    { id: 'K3', type: 'M', precio: '7100 USD', x: 40, y: 650 },
-    { id: 'I1', type: 'M', precio: '7300 USD', x: 400, y: 500 },
-    { id: 'L3', type: 'M', precio: '7100 USD', x: 220, y: 590 },
-    { id: 'M2', type: 'M', precio: '7200 USD', x: 580, y: 600 },
-    { id: 'N3', type: 'M', precio: '7100 USD', x: 940, y: 590 },
-    { id: 'O3', type: 'M', precio: '7100 USD', x: 1120, y: 650 },
-    { id: 'P3', type: 'U', precio: '700 USD Individual', x: 400, y: 680 },
-    { id: 'Q3', type: 'U', precio: '700 USD Individual', x: 760, y: 680 },
-    { id: 'R3', type: 'U', precio: '700 USD Individual', x: 40, y: 840 },
-    { id: 'S3', type: 'U', precio: '700 USD Individual', x: 220, y: 780 },
-    { id: 'T3', type: 'U', precio: '700 USD Individual', x: 580, y: 780 },
-    { id: 'U3', type: 'U', precio: '700 USD Individual', x: 940, y: 780 },
-    { id: 'V3', type: 'U', precio: '700 USD Individual', x: 1120, y: 840 },
-    { id: 'W3', type: 'U', precio: '700 USD Individual', x: 220, y: 970 },
-    { id: 'X3', type: 'U', precio: '700 USD Individual', x: 760, y: 970 },
-    { id: 'Y3', type: 'U', precio: '700 USD Individual', x: 940, y: 970 },
+    { id: 'A1', type: 'M', precio: '7200 USD', x: 140, y: 100 },
+    { id: 'B1', type: 'M', precio: '7200 USD', x: 340, y: 100 },
+    { id: 'C1', type: 'M', precio: '7200 USD', x: 540, y: 100 },
+    { id: 'D1', type: 'M', precio: '7200 USD', x: 740, y: 100 },
+    { id: 'E1', type: 'M', precio: '7300 USD', x: 940, y: 100 },
+    { id: 'F1', type: 'M', precio: '7300 USD', x: 140, y: 300 },
+    { id: 'G1', type: 'M', precio: '7300 USD', x: 340, y: 300 },
+    { id: 'H1', type: 'M', precio: '7300 USD', x: 540, y: 300 },
+    { id: 'J1', type: 'M', precio: '7300 USD', x: 740, y: 300 },
+    { id: 'K1', type: 'M', precio: '7100 USD', x: 940, y: 300 },
+    { id: 'I1', type: 'M', precio: '7300 USD', x: 140, y: 500 },
+    { id: 'L1', type: 'M', precio: '7100 USD', x: 340, y: 500 },
+    { id: 'M1', type: 'M', precio: '7200 USD', x: 540, y: 500 },
+    { id: 'N1', type: 'M', precio: '7100 USD', x: 740, y: 500 },
+    { id: 'O1', type: 'M', precio: '7100 USD', x: 940, y: 500 },
+    { id: 'P1', type: 'U', precio: '700 USD Individual', x: 140, y: 700 },
+    { id: 'Q1', type: 'U', precio: '700 USD Individual', x: 340, y: 700 },
+    { id: 'R1', type: 'U', precio: '700 USD Individual', x: 540, y: 700 },
+    { id: 'S1', type: 'U', precio: '700 USD Individual', x: 740, y: 700 },
+    { id: 'T1', type: 'U', precio: '700 USD Individual', x: 940, y: 700 },
+    { id: 'U1', type: 'U', precio: '700 USD Individual', x: 140, y: 900 },
+    { id: 'V1', type: 'U', precio: '700 USD Individual', x: 340, y: 900 },
+    { id: 'W1', type: 'U', precio: '700 USD Individual', x: 540, y: 900 },
+    { id: 'X1', type: 'U', precio: '700 USD Individual', x: 740, y: 900 },
+    { id: 'Y1', type: 'U', precio: '700 USD Individual', x: 940, y: 900 },
+    { id: 'Z1', type: 'U', precio: '700 USD Individual', x: 140, y: 1100 },
+    { id: 'A2', type: 'M', precio: '7200 USD', x: 140, y: 1100 },
+    { id: 'B2', type: 'M', precio: '7200 USD', x: 340, y: 1100 },
+    { id: 'C2', type: 'M', precio: '7200 USD', x: 540, y: 1100 },
+    { id: 'D2', type: 'M', precio: '7200 USD', x: 740, y: 1100 },
+    { id: 'E2', type: 'M', precio: '7300 USD', x: 940, y: 1100 },
   ];
-  soldout = true;
+  soldout = false;
   constructor(
     private lugaresService: LugaresService,
     public datepipe: DatePipe,
@@ -88,7 +94,7 @@ export class HomeComponent implements OnInit {
 
         this.userData = data.filter(item => item.uid === user?.uid);
 
-        console.log(this.userData[0])
+        //console.log(this.userData[0])
 
 
       }
@@ -121,12 +127,12 @@ export class HomeComponent implements OnInit {
       for (let dato of data) {
 
       const idLugar: string = dato['idLugar'] ?? '';
-      const prefijos = ['R3', 'S3', 'W3', 'P3', 'T3', 'Q3', 'U3', 'V3', 'X3', 'Y3'];
+      //const prefijos = ['R3', 'S3', 'W3', 'P3', 'T3', 'Q3', 'U3', 'V3', 'X3', 'Y3'];
       
       let precio = dato['precio'];
-      if (prefijos.some(pref => idLugar.startsWith(pref))) {
+      /*if (prefijos.some(pref => idLugar.startsWith(pref))) {
         precio = 700;
-      }
+      }*/
 
       let lug: boleto = {
         idLugar: idLugar,
@@ -147,14 +153,16 @@ export class HomeComponent implements OnInit {
 
   }
   initLugares() {
-
-
     let toArray = this.inputsArray.toArray()
     for (let lugar of this.lugaresDisponibles) {
       if (lugar.hora) {
         let f = lugar.hora.toString()
         let newDate = new Date(f);
         this.diferencia = (this.now.getTime() - newDate.getTime()) / 60000;
+      }
+
+      if(lugar.hora == null || lugar.hora == undefined || lugar.hora == ''){
+        //console.log("Lugar sin hora: ", lugar.idLugar);
       }
       let ref: ElementRef<HTMLInputElement> = toArray.find(el => el?.nativeElement?.id == lugar.idLugar)
       if (lugar.apartado || lugar.comprado) {
@@ -173,7 +181,7 @@ export class HomeComponent implements OnInit {
          // return
         }
         else {
-
+         
           if (lugar.apartado) {
             if(lugar.comprado){
               return
@@ -399,66 +407,47 @@ export class HomeComponent implements OnInit {
   }*/
 
     async putNewLugar() {
-    function generarCombinaciones(ids: string[], numeros: string[]): string[] {
-      const combinaciones: string[] = [];
-      for (let i = 0; i < ids.length; i++) {
-        for (let j = 0; j < numeros.length; j++) {
-          combinaciones.push(ids[i] + numeros[j]);
+      const seatNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+      const promises = [];
+
+      for (const mesa of this.mesas) {
+        for (const seat of seatNumbers) {
+          const idLugar = `${mesa.id}${seat}`;
+          promises.push(this.lugaresService.addLugar2026(idLugar, false, false, '', mesa.precio, mesa.type, mesa.id));
         }
       }
-      return combinaciones;
+
+      await Promise.all(promises);
+      Swal.fire('Registro completo', 'Todos los lugares han sido guardados en la base de datos.', 'success');
     }
 
-    const mesasId = [
-      'A2',
-      'B2',
-      'C2',
-      'D2',
-      'E1',
-      'F1',
-      'G1',
-      'H1',
-      'I1',
-      'J1',
-      'K3',
-      'L3',
-      'M2',
-      'N3',
-      'O3',
-      'P3',
-      'Q3',
-      'R3',
-      'S3',
-      'T3',
-      'U3',
-      'V3',
-      'W3',
-      'X3',
-      'Y3'
-    ];
+  insertAllMesas() {
+    const subscription = this.lugaresService.getMesas2026().subscribe(async (existingMesas: any[]) => {
+      const existingIds = new Set(existingMesas.map((mesa) => mesa.id?.toString().toUpperCase()));
+      const promises = this.mesas
+        .map((mesa, index) => ({ mesa, orden: index + 1 }))
+        .filter((item) => !existingIds.has(item.mesa.id.toUpperCase()))
+        .map((item) =>
+          this.lugaresService.addMesa2026(
+            item.mesa.id,
+            item.mesa.type,
+            item.mesa.precio,
+            item.mesa.x,
+            item.mesa.y,
+            item.orden
+          )
+        );
 
-    const chair = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
-    const combinacionesGeneradas = generarCombinaciones(mesasId, chair);
+      subscription.unsubscribe();
 
-    combinacionesGeneradas.forEach(combinacion => {
-      {
-        if (combinacion[1] === '1') {
-          this.lugaresService.addLugar(combinacion, false, false, '', '7300');
-          //console.log(combinacion);
-        }
-        if (combinacion[1] === '2') {
-          this.lugaresService.addLugar(combinacion, false, false, '', '7200');
-          //console.log(combinacion);
-
-        }
-        if (combinacion[1] === '3') {
-          this.lugaresService.addLugar(combinacion, false, false, '', '7100');
-          //console.log(combinacion);
-        }
-
+      if (promises.length === 0) {
+        Swal.fire('Sin cambios', 'Ya existen todas las mesas en mesa2026.', 'info');
+        return;
       }
-    })
 
+      await Promise.all(promises);
+      Swal.fire('Mesas guardadas', 'Todas las mesas se insertaron en mesa2026.', 'success');
+    });
   }
 
 }

@@ -42,10 +42,15 @@
     <div class="col-12" *ngIf="!soldout">
       <!-- <div class="main-card responsive-scale" style="position: relative; width: 100%; min-height: 400px;"> -->
 <div class="main-card responsive-scale"
-     style="position: relative; width: 100%; max-width: 1200px; margin: 0 auto; aspect-ratio: 1024 / 1200; border: 1px solid #000;">
+     style="position: relative;
+      width: 100%; max-width: 1200px; 
+      height: 1200px;  margin: 0 auto; aspect-ratio: 1024 / 1200; 
+      border: 1px solid #000;
+      padding-bottom: 1rem;
+      ">
         <!-- Logos / Pantalla / Tarima / Fuente -->
         <div class="logo-container d-flex justify-content-around flex-wrap mb-3">
-          <div class="pantalla">
+         <!-- <div class="pantalla">
             <span class="rectangle-text">PANTALLA</span>
           </div>
           <div class="tarima">
@@ -53,13 +58,13 @@
           </div>
           <div class="fuente">
             <span class="rectangle-text">FUENTE</span>
-          </div>
+          </div>-->
         </div>
 
         <!-- Mesas -->
       <div *ngFor="let mesa of mesas">
   <div class="positioned-component"
-    [style.left.%]="(mesa.x/1024)*100-8"
+    [style.left.%]="(mesa.x/1024)*100"
     [style.top.%]="(mesa.y/1200)*100"
        style="position: absolute;">
        
@@ -96,6 +101,10 @@
                         <div *ngIf="StatusCargaLugares==true">
                     <div class="container-fluid">
                         <a  class="btn-flotante" style="user-select: none;" (click)="realizarCompra()"  pTooltip="Pagar Lugares seleccionados" tooltipPosition="left" ><i class="pi pi-shopping-cart"></i> Continuar compra</a>
+                        <!--<button type="button" class="btn btn-success" style="margin-left: 0.75rem;" (click)="insertAllMesas()" pTooltip="Insertar todas las mesas en mesa2026" tooltipPosition="left">
+                          Agregar todas las mesas
+                        </button>-->
+                        <!--<button type="button" class="register-all-button" (click)="putNewLugar()">Agregar todos los lugares</button>-->
                         <!-- <p-button label="Continuar compra" icon="pi pi-shopping-cart" styleClass="p-button-lg " (click)="realizarCompra()"></p-button> -->
                         <!-- <button class="btn btn-primary" (click)="realizarCompra()">Siguiente</button> -->
                     </div>

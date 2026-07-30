@@ -6,6 +6,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { LoginAdminEventoComponent } from '../../auth/adminEvento/login-admin/login-admin.component';
 import { ReservacionesComponent } from './reservaciones/reservaciones.component';
 import { ReservasComponent } from './reservas/reservas.component';
+import { LugaresComponent } from './lugares/lugares.component';
 
 export const reedeventoadminRoutes: Routes = [
   { path: 'login', component: LoginAdminEventoComponent },
@@ -25,7 +26,11 @@ export const reedeventoadminRoutes: Routes = [
     component: ReservasComponent,
     canActivate: [AuthGuard],
   },
-
+  {
+    path: 'lugares',
+    component: LugaresComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'home' },
 ];

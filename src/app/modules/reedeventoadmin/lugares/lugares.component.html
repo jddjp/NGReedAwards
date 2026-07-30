@@ -1,0 +1,189 @@
+<div class="p-4">
+  <div class="lugares-toolbar">
+    <h3>Administración de lugares</h3>
+    <div class="toolbar-actions">
+      <button type="button" class="icon-btn" (click)="showAddMesaDialog = true" title="Nueva mesa">
+        <i class="pi pi-plus"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="admin-layout">
+    <aside class="mesas-panel">
+      <div class="panel-header">Mesas</div>
+      <div class="search-container inside-mesas">
+        <input
+          type="text"
+          class="lugares-search"
+          placeholder="Buscar por mesa..."
+          [(ngModel)]="searchTerm"
+          (input)="onSearchChange(searchTerm)"
+        />
+      </div>
+      <div class="mesa-list">
+        <button
+          type="button"
+          class="mesa-item"
+          *ngFor="let mesa of filteredMesas"
+          [class.active]="mesa.id === selectedGrupo"
+          (click)="selectGrupo(mesa.id)">
+          <span>{{ mesa.id }}</span>
+          <span>{{ lugaresAgrupados[mesa.id]?.length || 0 }}</span>
+        </button>
+      </div>
+    </aside>
+
+    <section class="lugares-panel">
+      <div class="grupo-header">
+        <span>Mesa {{ selectedGrupo || '-' }}</span>
+        <div class="panel-buttons">
+          <button
+            type="button"
+            class="action-btn add"
+            [disabled]="!selectedGrupo"
+            (click)="selectedGrupo && (showAddLugarDialog = true)"
+            pTooltip="Agregar lugar"
+            tooltipPosition="top">
+            +
+          </button>
+          <button
+            type="button"
+            class="action-btn bulk-add"
+            [disabled]="!selectedGrupo"
+            (click)="addAllLugaresMesa()"
+            pTooltip="Agregar todos los lugares de esta mesa"
+            tooltipPosition="top">
+            Todos
+          </button>
+          <button
+            type="button"
+            class="reset-mesa-btn"
+            [disabled]="!selectedGrupo"
+            (click)="selectedGrupo && resetMesa(selectedGrupo)"
+            title="Reiniciar toda la mesa {{ selectedGrupo }}">
+            Reiniciar mesa
+          </button>
+        </div>
+      </div>
+
+      <div class="mesa-detail" *ngIf="selectedMesaDetails">
+        <h4>Detalle de mesa</h4>
+        <div class="detail-grid">
+          <div class="field-group">
+            <label>ID</label>
+            <input type="text" [value]="selectedMesaDetails.id" readonly />
+          </div>
+          <div class="field-group">
+            <label>Tipo</label>
+            <select [(ngModel)]="selectedMesaDetails.type" name="detalleType">
+              <option value="M">M</option>
+              <option value="U">U</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Precio</label>
+            <input type="text" [(ngModel)]="selectedMesaDetails.precio" name="detallePrecio" />
+          </div>
+          <div class="field-group">
+            <label>X</label>
+            <input type="number" [(ngModel)]="selectedMesaDetails.x" name="detalleX" />
+          </div>
+          <div class="field-group">
+            <label>Y</label>
+            <input type="number" [(ngModel)]="selectedMesaDetails.y" name="detalleY" />
+          </div>
+          <div class="field-group">
+            <label>Orden</label>
+            <input type="number" [(ngModel)]="selectedMesaDetails.orden" name="detalleOrden" />
+          </div>
+        </div>
+        <button type="button" class="save-mesa-btn" (click)="saveMesaDetails()">Guardar cambios</button>
+      </div>
+
+      <div *ngIf="selectedGrupo; else noMesaSelected">
+        <div class="lugares-grid">
+          <div class="lugar-card" *ngFor="let lugar of getSelectedLugares()" [ngClass]="{
+                'estado-vendido': lugar.comprado,
+                'estado-apartado': !lugar.comprado && lugar.apartado,
+                'estado-disponible': !lugar.comprado && !lugar.apartado
+              }">
+            <div class="lugar-header">
+              <span class="lugar-id">{{ lugar.idLugar }}</span>
+              <span class="lugar-type">{{ lugar.type }}</span>
+            </div>
+            <div class="lugar-body">
+              <div class="lugar-precio">{{ lugar.precio }}</div>
+            </div>
+            <div class="lugar-actions">
+              <button type="button" class="action-btn sold" (click)="changeLugarStatus(lugar, 'cancel')" pTooltip="Cancelar Venta" tooltipPosition="top">X</button>
+              <button type="button" class="action-btn reserved" (click)="changeLugarStatus(lugar, 'reserved')" pTooltip="Apartar asiento" tooltipPosition="top">A</button>
+              <button type="button" class="action-btn available" (click)="changeLugarStatus(lugar, 'sold')" pTooltip="Vender asiento" tooltipPosition="top">V</button>
+              <button type="button" class="action-btn edit" (click)="editPrecio(lugar)" pTooltip="Modificar precio" tooltipPosition="top">$</button>
+            </div>
+            <div class="lugar-footer">{{ lugar.fecha || '-' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #noMesaSelected>
+        <div class="no-mesa-message">No hay ninguna mesa seleccionada.</div>
+      </ng-template>
+    </section>
+  </div>
+
+  <p-dialog header="Agregar mesa nueva" [(visible)]="showAddMesaDialog" [modal]="true" [closable]="true" [style]="{ width: '400px' }">
+    <div class="field-group">
+      <label for="mesaId">ID</label>
+      <input id="mesaId" type="text" [(ngModel)]="newMesa.id" name="mesaId" placeholder="A1" />
+    </div>
+    <div class="field-group">
+      <label for="mesaType">Tipo</label>
+      <select id="mesaType" [(ngModel)]="newMesa.type" name="mesaType">
+        <option value="M">M</option>
+        <option value="U">U</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label for="mesaPrecio">Precio</label>
+      <input id="mesaPrecio" type="text" [(ngModel)]="newMesa.precio" name="mesaPrecio" placeholder="7200 USD" />
+    </div>
+    <div class="field-row">
+      <div class="field-group">
+        <label for="mesaX">X</label>
+        <input id="mesaX" type="number" [(ngModel)]="newMesa.x" name="mesaX" placeholder="140" />
+      </div>
+      <div class="field-group">
+        <label for="mesaY">Y</label>
+        <input id="mesaY" type="number" [(ngModel)]="newMesa.y" name="mesaY" placeholder="100" />
+      </div>
+    </div>
+    <div class="field-group">
+      <label for="mesaOrden">Orden</label>
+      <input id="mesaOrden" type="number" [(ngModel)]="newMesa.orden" name="mesaOrden" placeholder="1" />
+    </div>
+    <div class="dialog-actions">
+      <button type="button" class="add-mesa-btn" (click)="addMesa()">Guardar mesa</button>
+    </div>
+  </p-dialog>
+
+  <p-dialog header="Agregar lugar nuevo" [(visible)]="showAddLugarDialog" [modal]="true" [closable]="true" [style]="{ width: '400px' }">
+    <div class="field-group">
+      <label for="lugarId">ID de lugar</label>
+      <input id="lugarId" type="text" [(ngModel)]="newLugar.idLugar" name="lugarId" placeholder="01" />
+    </div>
+    <div class="field-group">
+      <label for="lugarType">Tipo</label>
+      <select id="lugarType" [(ngModel)]="newLugar.type" name="lugarType">
+        <option value="U">U</option>
+        <option value="M">M</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label for="lugarPrecio">Precio</label>
+      <input id="lugarPrecio" type="text" [(ngModel)]="newLugar.precio" name="lugarPrecio" placeholder="700 USD Individual" />
+    </div>
+    <div class="dialog-actions">
+      <button type="button" class="add-mesa-btn" (click)="addLugar()">Guardar lugar</button>
+    </div>
+  </p-dialog>
+</div>

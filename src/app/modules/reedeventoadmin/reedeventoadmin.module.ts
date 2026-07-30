@@ -32,9 +32,11 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ReservacionesComponent } from './reservaciones/reservaciones.component';
 
 import { ToastModule } from 'primeng/toast';
+import { TooltipModule } from 'primeng/tooltip';
 //QR
 import { QRCodeModule } from 'angularx-qrcode';
 import { ReservasComponent } from './reservas/reservas.component';
+import { LugaresComponent } from './lugares/lugares.component';
 
 @NgModule({
     imports: [
@@ -56,6 +58,7 @@ import { ReservasComponent } from './reservas/reservas.component';
         ContextMenuModule,
         DropdownModule,
         ToastModule,
+        TooltipModule,
         ProgressBarModule,
         FileUploadModule,
         ToolbarModule,
@@ -75,6 +78,7 @@ import { ReservasComponent } from './reservas/reservas.component';
         UsuariosComponent,
         ReservacionesComponent,
         ReservasComponent,
+        LugaresComponent,
     ]
 })
 export class ReedEventoAdminModule { }
