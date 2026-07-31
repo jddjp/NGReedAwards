@@ -73,11 +73,11 @@ export class HomeComponent implements OnInit {
     { id: 'X1', type: 'U', precio: '700 USD Individual', x: 740, y: 900 },
     { id: 'Y1', type: 'U', precio: '700 USD Individual', x: 940, y: 900 },
     { id: 'Z1', type: 'U', precio: '700 USD Individual', x: 140, y: 1100 },
-    { id: 'A2', type: 'M', precio: '7200 USD', x: 140, y: 1100 },
-    { id: 'B2', type: 'M', precio: '7200 USD', x: 340, y: 1100 },
-    { id: 'C2', type: 'M', precio: '7200 USD', x: 540, y: 1100 },
-    { id: 'D2', type: 'M', precio: '7200 USD', x: 740, y: 1100 },
-    { id: 'E2', type: 'M', precio: '7300 USD', x: 940, y: 1100 },
+    { id: 'A2', type: 'U', precio: '7200 USD', x: 140, y: 1100 },
+    { id: 'B2', type: 'U', precio: '7200 USD', x: 340, y: 1100 },
+    { id: 'C2', type: 'U', precio: '7200 USD', x: 540, y: 1100 },
+    { id: 'D2', type: 'U', precio: '7200 USD', x: 740, y: 1100 },
+    { id: 'E2', type: 'U', precio: '7300 USD', x: 940, y: 1100 },
   ];
   soldout = false;
   constructor(
