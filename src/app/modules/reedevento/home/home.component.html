@@ -41,10 +41,14 @@
     <img src="assets/img/soldout.jpeg" *ngIf="soldout" style="width: 100%; max-width: 600px; margin: 0 auto; display: block;" alt="Sold Out Image">
     <div class="col-12" *ngIf="!soldout">
       <!-- <div class="main-card responsive-scale" style="position: relative; width: 100%; min-height: 400px;"> -->
+<div #stageWrap class="stage-wrap" [style.height.px]="1200 * escalaEscenario">
 <div class="main-card responsive-scale"
-     style="position: relative;
-      width: 100%; max-width: 1200px; 
-      height: 1200px;  margin: 0 auto; aspect-ratio: 1024 / 1200; 
+     [style.transform]="'scale(' + escalaEscenario + ')'"
+     style="transform-origin: top left;
+      position: relative;
+      width: 1024px;
+      height: 1200px;
+      margin: 0;
       border: 1px solid #000;
       padding-bottom: 1rem;
       ">
@@ -70,24 +74,34 @@
        
     <div *ngIf="mesa.type =='M'" class="icon bg-blue" #MyRef
          [id]="mesa.id"
-         (click)="comprarMesa(mesa.id, 'VIP1')"
+         (click)="seleccionarMesa(mesa)"
          [pTooltip]="'Mesa: '+mesa.id+'\n Precio: '+mesa.precio">
       {{mesa.id}}
       <ul class="menu">
         <li class="spread" *ngFor="let name of sillas">
-          <a #MyRef [id]="mesa.id+name" class="unitVIP">{{name}}</a>
+          <a #MyRef [id]="mesa.id+name" class="unitVIP">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19 18v-2c0-1.1-.9-2-2-2H7c-1.1 0-2 .9-2 2v2H3v2h18v-2h-2zm-4-8V7h-2v3H9V7H7v3H5c-1.1 0-2 .9-2 2v5h2V9h14v12h-2v-5c0-1.1-.9-2-2-2h-2z"/>
+            </svg>
+            <span class="chair-label">{{name}}</span>
+          </a>
         </li>
       </ul>
     </div>
 
-    <div *ngIf="mesa.type =='U'" class="icon">
+    <div *ngIf="mesa.type =='U'" class="icon"
+         (click)="seleccionarMesa(mesa)"
+         [pTooltip]="'Mesa: '+mesa.id+'\n Precio: '+mesa.precio">
       {{mesa.id}}
       <ul class="menu">
         <li class="spread" *ngFor="let name of sillas | slice:0:10">
           <a #MyRef [id]="mesa.id+name" class="unit"
              [pTooltip]="'Asiento: '+mesa.id+name+'\n Precio: '+mesa.precio"
-             (click)="selectedAsiento(mesa.id+name)">
-             {{name}}
+             (click)="selectedAsiento(mesa.id+name); $event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19 18v-2c0-1.1-.9-2-2-2H7c-1.1 0-2 .9-2 2v2H3v2h18v-2h-2zm-4-8V7h-2v3H9V7H7v3H5c-1.1 0-2 .9-2 2v5h2V9h14v12h-2v-5c0-1.1-.9-2-2-2h-2z"/>
+            </svg>
+            <span class="chair-label">{{name}}</span>
           </a>
         </li>
       </ul>
@@ -96,6 +110,7 @@
   </div>
 </div>
 
+      </div>
       </div>
       <div>
                         <div *ngIf="StatusCargaLugares==true">
@@ -125,4 +140,26 @@
     <ng-template pTemplate="footer">
         <p-button icon="pi pi-times" (click)="displayBasic=false" label="Aceptar  "></p-button>
     </ng-template>
+</p-dialog>
+
+<p-dialog header="Mesa {{mesaDialog ? mesaDialog.id : ''}}" [(visible)]="visibleDialogMesa" [style]="{width: '90vw', maxWidth: '520px'}" [baseZIndex]="10000">
+    <ng-container *ngIf="mesaDialog">
+        <div class="dialog-tabla">
+            <div class="dialog-mesa">{{mesaDialog.id}}</div>
+            <div class="dialog-sillas">
+                <div *ngFor="let name of sillas" class="dialog-silla"
+                     [class.seleccionada]="getEstadoSilla(mesaDialog.id + name) === 'seleccionada'"
+                     [class.ocupada]="getEstadoSilla(mesaDialog.id + name) === 'ocupada'"
+                     (click)="seleccionarSillaDialog(mesaDialog.id + name)">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M19 18v-2c0-1.1-.9-2-2-2H7c-1.1 0-2 .9-2 2v2H3v2h18v-2h-2zm-4-8V7h-2v3H9V7H7v3H5c-1.1 0-2 .9-2 2v5h2V9h14v12h-2v-5c0-1.1-.9-2-2-2h-2z"/>
+                    </svg>
+                    <span class="chair-label">{{name}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="dialog-acciones" *ngIf="mesaDialog.type == 'M'">
+            <p-button label="Comprar mesa completa" icon="pi pi-shopping-cart" (click)="comprarMesaDialog()"></p-button>
+        </div>
+    </ng-container>
 </p-dialog>

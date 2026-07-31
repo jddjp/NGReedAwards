@@ -1,6 +1,7 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, HostListener } from '@angular/core';
 import { Console } from 'console';
 import { boleto } from './pago/pago.component';
 import { LugaresService } from 'src/app/services/lugares.service';
@@ -15,8 +16,12 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('stageWrap') stageWrap: ElementRef<HTMLDivElement>;
+  escalaEscenario = 1;
+  mesaDialog: any = null;
+  visibleDialogMesa = false;
   targetVip = ''
   sillas: string[] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
   styleOBJ = { 'background': "RGB(217, 222, 224)" }
@@ -28,6 +33,8 @@ export class HomeComponent implements OnInit {
   selectedColor = 'background-color:rgb(143, 191, 22)'
   unselectedColor = 'background-color:rgb(0, 0, 0)&:hover:{background: rgb(211, 202, 26)}'
   enableColor = 'background-color:rgb(255, 6, 6)'
+  tableSelectedColor = 'rgb(143, 191, 22)'
+  tableEnableColor = 'rgb(255, 6, 6)'
   disbledColor = ''
   defaultColor = ''
   styleClickOn = ''
@@ -118,6 +125,62 @@ export class HomeComponent implements OnInit {
     )}
   }
 
+  ngAfterViewInit(): void {
+    this.setEscalaEscenario();
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.setEscalaEscenario();
+  }
+
+  setEscalaEscenario(): void {
+    const ancho = this.stageWrap?.nativeElement?.clientWidth;
+    if (ancho) {
+      this.escalaEscenario = Math.min(1, ancho / 1024);
+    }
+  }
+
+  seleccionarMesa(mesa: any) {
+    this.mesaDialog = mesa;
+    this.visibleDialogMesa = true;
+  }
+
+  getEstadoSilla(idLugar: string): string {
+    const disp = this.lugaresDisponibles.find(el => el.idLugar == idLugar);
+    if (disp && (disp.comprado || disp.apartado)) {
+      return 'ocupada';
+    }
+    const sel = this.componetesSeleccionados.find(el => el?.nativeElement?.id == idLugar);
+    if (sel) {
+      return 'seleccionada';
+    }
+    return 'disponible';
+  }
+
+  seleccionarSillaDialog(idLugar: string) {
+    if (this.mesaDialog?.type == 'M') {
+      this.comprarMesaDialog();
+      return;
+    }
+    const disp = this.lugaresDisponibles.find(el => el.idLugar == idLugar);
+    if (!disp || disp.comprado || disp.apartado) {
+      return;
+    }
+    this.selectedAsiento(idLugar);
+  }
+
+  comprarMesaDialog() {
+    if (!this.mesaDialog) {
+      return;
+    }
+    const disp = this.lugaresDisponibles.find(el => el.idLugar == this.mesaDialog.id + '1');
+    if (!disp || disp.comprado || disp.apartado) {
+      return;
+    }
+    this.comprarMesa(this.mesaDialog.id, 'VIP1');
+  }
+
   async getLugares() {
     await this.lugaresService.getLugares().subscribe((data) => {
       this.lugares = data
@@ -174,10 +237,12 @@ export class HomeComponent implements OnInit {
           //console.log(lugar.idLugar)
           var type = this.mesas.find(el => el.id == lugar.idLugar.substring(0, 2))
          // console.log(type)
-          if (type.type == 'M') {
-             let mesaRef: ElementRef<HTMLInputElement> = toArray.find(el => el?.nativeElement?.id == type.id)
-            mesaRef?.nativeElement?.setAttribute('style', this.enableColor)
-          }
+           if (type.type == 'M') {
+              let mesaRef: ElementRef<HTMLInputElement> = toArray.find(el => el?.nativeElement?.id == type.id)
+             if (mesaRef?.nativeElement) {
+               mesaRef.nativeElement.style.background = this.tableEnableColor
+             }
+           }
          // return
         }
         else {
@@ -370,10 +435,10 @@ export class HomeComponent implements OnInit {
       }
       let ref: ElementRef<HTMLInputElement> = toArray.find(el => el?.nativeElement?.id == idMesa)
       if (colorMesa) {
-        ref.nativeElement.setAttribute('style', this.selectedColor)
+        ref.nativeElement.style.background = this.tableSelectedColor
       }
       else {
-        ref.nativeElement.setAttribute('style', this.unselectedColor)
+        ref.nativeElement.style.background = ''
       }
 
     }

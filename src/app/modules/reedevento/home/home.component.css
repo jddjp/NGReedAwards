@@ -12,32 +12,33 @@
 .icon {
     user-select: none;
     position: relative;
-    background: rgb(207, 201, 201);
+    background: radial-gradient(circle at 50% 35%, #f2f2f2, #c9c9c9 65%, #a5a5a5);
     cursor: pointer;
     margin: auto;
-    color: rgb(255, 255, 255);
+    color: rgb(60, 60, 60);
     border-radius: 50%;
-    height: 100px;
-    width: 100px;
-    line-height: 100px;
+    height: 80px;
+    width: 80px;
+    line-height: 80px;
     text-align: center;
-    font-size: 2.5em;
+    font-size: 2em;
     font-weight: bold;
-    transform: rotate(90);
-
+    border: 3px solid #8a8a8a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 -5px 10px rgba(0, 0, 0, 0.15);
   }
 
   
 
   .menu {
     position: absolute;
-    top: -50px;
-    left: -50px;
+    top: -60px;
+    left: -60px;
     border: 100px solid transparent;
     cursor: default;
     border-radius: 50%;
-    transform: scale(0);
-    z-index: -5;
+    transform: scale(1);
+    z-index: 5;
+    pointer-events: none;
   }
 
   .spread {
@@ -46,11 +47,12 @@
     left: -90px;
     transform-origin: 90px 90px;
     cursor: pointer;
+    pointer-events: auto;
   }
 
 
 
-  .icon::content .menu {
+  .icon .menu {
     transition: transform 0.4s 0.08s, z-index 0s 0.5s;
     transform: scale(.7);
     z-index: 5;
@@ -59,121 +61,136 @@
 
 
   /** ALINEADO PARA 10 SILLAS */
-  .icon::content .spread:nth-child(1) {
+  .icon .spread:nth-child(1) {
 
     transform: rotate(80deg);
   }
-  .icon::content .spread:nth-child(1) .unit {
+  .icon .spread:nth-child(1) .unit {
 
     transform: rotate(640deg);
   }
-  .icon::content .spread:nth-child(2) {
+  .icon .spread:nth-child(2) {
 
     transform: rotate(116deg);
   }
-  .icon::content .spread:nth-child(2) .unit {
+  .icon .spread:nth-child(2) .unit {
 
     transform: rotate(605deg);
   }
-  .icon::content .spread:nth-child(3) {
+  .icon .spread:nth-child(3) {
 
     transform: rotate(152deg);
   }
-  .icon::content .spread:nth-child(3) .unit {
+  .icon .spread:nth-child(3) .unit {
 
     transform: rotate(570deg);
   }
-  .icon::content .spread:nth-child(4) {
+  .icon .spread:nth-child(4) {
 
     transform: rotate(188deg);
   }
-  .icon::content .spread:nth-child(4) .unit {
+  .icon .spread:nth-child(4) .unit {
 
     transform: rotate(535deg);
   }
-  .icon::content .spread:nth-child(5) {
+  .icon .spread:nth-child(5) {
 
     transform: rotate(224deg);
   }
-  .icon::content .spread:nth-child(5) .unit {
+  .icon .spread:nth-child(5) .unit {
 
     transform: rotate(495deg);
   }
-  .icon::content .spread:nth-child(6) {
+  .icon .spread:nth-child(6) {
 
     transform: rotate(260deg);
   }
-  .icon::content .spread:nth-child(6) .unit {
+  .icon .spread:nth-child(6) .unit {
 
     transform: rotate(462deg);
   }
-  .icon::content .spread:nth-child(7) {
+  .icon .spread:nth-child(7) {
 
     transform: rotate(296deg);
   }
-  .icon::content .spread:nth-child(7) .unit {
+  .icon .spread:nth-child(7) .unit {
 
     transform: rotate(425deg);
   }
-  .icon::content .spread:nth-child(8) {
+  .icon .spread:nth-child(8) {
 
     transform: rotate(332deg);
   }
-  .icon::content .spread:nth-child(8) .unit {
+  .icon .spread:nth-child(8) .unit {
 
     transform: rotate(390deg);
   }
-  .icon::content .spread:nth-child(9) {
+  .icon .spread:nth-child(9) {
 
     transform: rotate(368deg);
   }
-  .icon::content .spread:nth-child(9) .unit {
+  .icon .spread:nth-child(9) .unit {
 
     transform: rotate(350deg);
   }
-  .icon::content .spread:nth-child(10) {
+  .icon .spread:nth-child(10) {
 
     transform: rotate(404deg);
   }
-  .icon::content .spread:nth-child(10) .unit {
+  .icon .spread:nth-child(10) .unit {
 
     transform: rotate(315deg);
   }
 
-  /* END .icon:hover */
+  /* Sillas como sillas */
   .unit {
-    position: absolute;
     background: rgb(0, 0, 0);
-    font-size: 60%;
-    text-decoration: none;
-    width: 50px;
-    height: 50px;
-    line-height: 45px;
-    color: rgb(255, 255, 255);
-    border-radius: 50%;
-    /* transition: 0.6s; */
-  }
-  .unit:hover {
-    background: rgb(211, 202, 26);
-
   }
 
   .unitVIP {
-    position: absolute;
-    background:rgb(0, 16, 233);
-    font-size: 60%;
-    text-decoration: none;
-    width: 50px;
-    height: 50px;
-    line-height: 45px;
-    color: rgb(255, 255, 255);
-    border-radius: 50%;
+    background: rgb(0, 16, 233);
   }
 
-  .unitVIP:hover {
-    /* position: absolute; */
-    background: rgb(211, 202, 26);
+  .unit,
+  .unitVIP {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    width: 46px;
+    height: 46px;
+    text-decoration: none;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 3px;
+    box-sizing: border-box;
+  }
 
+  .unit svg,
+  .unitVIP svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .unit:hover {
+    zoom: 1.35;
+  }
+
+  .unit:hover svg,
+  .unitVIP:hover svg {
+    color: #d3ca1a;
+  }
+
+  .chair-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    user-select: none;
   }
   /* Just CodePen layout stuff: */
   body,
@@ -197,83 +214,83 @@
   }
   
 
-  .icon::content .spread:nth-child(1) {
+  .icon .spread:nth-child(1) {
 
     transform: rotate(80deg);
   }
-  .icon::content .spread:nth-child(1) .unitVIP {
+  .icon .spread:nth-child(1) .unitVIP {
 
     transform: rotate(640deg);
   }
-  .icon::content .spread:nth-child(2) {
+  .icon .spread:nth-child(2) {
 
     transform: rotate(116deg);
   }
-  .icon::content .spread:nth-child(2) .unitVIP {
+  .icon .spread:nth-child(2) .unitVIP {
 
     transform: rotate(605deg);
   }
-  .icon::content .spread:nth-child(3) {
+  .icon .spread:nth-child(3) {
 
     transform: rotate(152deg);
   }
-  .icon::content .spread:nth-child(3) .unitVIP {
+  .icon .spread:nth-child(3) .unitVIP {
 
     transform: rotate(570deg);
   }
-  .icon::content .spread:nth-child(4) {
+  .icon .spread:nth-child(4) {
 
     transform: rotate(188deg);
   }
-  .icon::content .spread:nth-child(4) .unitVIP {
+  .icon .spread:nth-child(4) .unitVIP {
 
     transform: rotate(535deg);
   }
-  .icon::content .spread:nth-child(5) {
+  .icon .spread:nth-child(5) {
 
     transform: rotate(224deg);
   }
-  .icon::content .spread:nth-child(5) .unitVIP {
+  .icon .spread:nth-child(5) .unitVIP {
 
     transform: rotate(495deg);
   }
-  .icon::content .spread:nth-child(6) {
+  .icon .spread:nth-child(6) {
 
     transform: rotate(260deg);
   }
-  .icon::content .spread:nth-child(6) .unitVIP {
+  .icon .spread:nth-child(6) .unitVIP {
 
     transform: rotate(462deg);
   }
-  .icon::content .spread:nth-child(7) {
+  .icon .spread:nth-child(7) {
 
     transform: rotate(296deg);
   }
-  .icon::content .spread:nth-child(7) .unitVIP {
+  .icon .spread:nth-child(7) .unitVIP {
 
     transform: rotate(425deg);
   }
-  .icon::content .spread:nth-child(8) {
+  .icon .spread:nth-child(8) {
 
     transform: rotate(332deg);
   }
-  .icon::content .spread:nth-child(8) .unitVIP {
+  .icon .spread:nth-child(8) .unitVIP {
 
     transform: rotate(390deg);
   }
-  .icon::content .spread:nth-child(9) {
+  .icon .spread:nth-child(9) {
 
     transform: rotate(368deg);
   }
-  .icon::content .spread:nth-child(9) .unitVIP {
+  .icon .spread:nth-child(9) .unitVIP {
 
     transform: rotate(350deg);
   }
-  .icon::content .spread:nth-child(10) {
+  .icon .spread:nth-child(10) {
 
     transform: rotate(404deg);
   }
-  .icon::content .spread:nth-child(10) .unitVIP {
+  .icon .spread:nth-child(10) .unitVIP {
 
     transform: rotate(315deg);
   }
@@ -335,6 +352,12 @@
 .status-img {
   width: 10%;
   height: 10%;
+}
+
+/* Contenedor que escala el escenario para adaptarse a pantallas moviles */
+.stage-wrap {
+  width: 100%;
+  position: relative;
 }
 
 /* Contenedor principal */
@@ -458,8 +481,97 @@
 }
 
 .bg-blue {
-    background-color: rgba(98, 98, 238, 0.432);  
-    color: white;  /* Cambia el texto a blanco */
+    background: radial-gradient(circle at 50% 35%, #7a7af0, #4242d4 65%, #2a2aa8);
+    color: white;
+    border-color: #1d1d8a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* En version movil se ocultan las sillas y solo se muestran las mesas */
+@media (max-width: 1024px) {
+  .menu {
+    display: none;
+  }
+
+  .icon {
+    width: 140px;
+    height: 140px;
+    line-height: 140px;
+    font-size: 2.8em;
+  }
+}
+
+/* Dialogo de mesa en version movil */
+.dialog-tabla {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.dialog-mesa {
+  width: 90px;
+  height: 90px;
+  line-height: 90px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  background: radial-gradient(circle at 50% 35%, #7a7af0, #4242d4 65%, #2a2aa8);
+  color: white;
+  border: 3px solid #1d1d8a;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 -5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dialog-sillas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.dialog-silla {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  background: rgb(0, 0, 0);
+  color: #ffffff;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dialog-silla:hover {
+  zoom: 1.15;
+}
+
+.dialog-silla.seleccionada {
+  background: rgb(143, 191, 22);
+}
+
+.dialog-silla.ocupada {
+  background: rgb(255, 6, 6);
+  cursor: not-allowed;
+}
+
+.dialog-silla svg {
+  width: 26px;
+  height: 26px;
+}
+
+.dialog-silla .chair-label {
+  font-size: 0.75rem;
+}
+
+.dialog-acciones {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
 }
 
 
