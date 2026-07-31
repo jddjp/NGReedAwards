@@ -90,8 +90,7 @@
     </div>
 
     <div *ngIf="mesa.type =='U'" class="icon"
-         (click)="seleccionarMesa(mesa)"
-         [pTooltip]="'Mesa: '+mesa.id+'\n Precio: '+mesa.precio">
+         (click)="seleccionarMesa(mesa)">
       {{mesa.id}}
       <ul class="menu">
         <li class="spread" *ngFor="let name of sillas | slice:0:10">
@@ -159,7 +158,7 @@
             </div>
         </div>
         <div class="dialog-acciones" *ngIf="mesaDialog.type == 'M'">
-            <p-button label="Comprar mesa completa" icon="pi pi-shopping-cart" (click)="comprarMesaDialog()"></p-button>
+            <p-button label="Seleccionar mesa completa" icon="pi pi-shopping-cart" (click)="comprarMesaDialog()"></p-button>
         </div>
     </ng-container>
 </p-dialog>
