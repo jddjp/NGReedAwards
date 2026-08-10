@@ -231,12 +231,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
       if (lugar.apartado || lugar.comprado) {
         
         if (lugar.comprado) {
-
           ref?.nativeElement?.setAttribute('style', this.enableColor)
-          //console.log
-          //console.log(lugar.idLugar)
           var type = this.mesas.find(el => el.id == lugar.idLugar.substring(0, 2))
-         // console.log(type)
            if (type.type == 'M') {
               let mesaRef: ElementRef<HTMLInputElement> = toArray.find(el => el?.nativeElement?.id == type.id)
              if (mesaRef?.nativeElement) {
@@ -251,11 +247,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
             if(lugar.comprado){
               return
             }
+            var type = this.mesas.find(el => el.id == lugar.idLugar.substring(0, 2))
+            if (type.type == 'M') {
+              let mesaRef: ElementRef<HTMLInputElement> = toArray.find(el => el?.nativeElement?.id == type.id)
+             if (mesaRef?.nativeElement) {
+               mesaRef.nativeElement.style.background = this.tableEnableColor
+             }
+           }
             if (!lugar.comprado && this.diferencia > 2) {
               this.cancelarApartado(lugar)
               ref?.nativeElement?.setAttribute('style', this.enableColor)
             }
-            console.log(lugar)
+            //console.log(lugar)
             ref?.nativeElement?.setAttribute('style', this.enableColor)
           }
         }
