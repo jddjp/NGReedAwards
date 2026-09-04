@@ -50,6 +50,16 @@ ws['!cols'] = [
     XLSX.writeFile(wb, 'categorias.xlsx')
     return this.toastr.success('Exportado con exito!!', 'Exito');
 }
+
+  categoriasSinNominaciones(categorias: any[]) {
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(categorias, {
+      header: ['id', 'nombre', 'total', 'pago']
+    });
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'CATEGORIAS SIN NOMINACIONES');
+    XLSX.writeFile(wb, 'categorias-sin-nominaciones.xlsx');
+    return this.toastr.success('Reporte de categorías sin nominaciones exportado con éxito!!', 'Exito');
+  }
   convoc(convoc: any){
     console.log(convoc);
 

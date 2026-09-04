@@ -36,7 +36,12 @@ export class CategoriasComponent implements OnInit {
 
   excel:any;
 
-
+  reportType: string = 'sin-nominaciones';
+  reportTypeOptions = [
+    { label: 'Categorías sin nominaciones', value: 'sin-nominaciones' },
+    { label: 'Categorías con nominaciones', value: 'con-nominaciones' },
+    { label: 'Todas las categorías', value: 'todas' }
+  ];
 
   visibleDe:boolean= false;
   id: any;
@@ -180,6 +185,53 @@ edit: boolean = false
 
   }
 
+  async exportarReporteSeleccionado() {
+    const nominaciones = await this.firebaseServiceNominacion.getAllNominaciones();
+
+    if (this.reportType === 'sin-nominaciones') {
+      const categoriasSinNominaciones = this.categoriaCollectiondata
+        .filter((categoria) => !nominaciones.some((nominacion) => nominacion.categoria == categoria.nombre))
+        .map((categoria) => ({
+          id: categoria.id,
+          nombre: categoria.nombre,
+          total: 0,
+          pago: 'Sin nominaciones'
+        }));
+
+      this.exporExcel.categoriasSinNominaciones(categoriasSinNominaciones);
+      return;
+    }
+
+    if (this.reportType === 'con-nominaciones') {
+      const categoriasConNominaciones = this.categoriaCollectiondata
+        .filter((categoria) => nominaciones.some((nominacion) => nominacion.categoria == categoria.nombre))
+        .map((categoria) => {
+          const categoriaNominaciones = nominaciones.filter((nominacion) => nominacion.categoria == categoria.nombre);
+          const total = categoriaNominaciones.length;
+          const pagadas = categoriaNominaciones.filter((nominacion) =>
+            nominacion.statuspago == 'Pago Realizado' || nominacion.statuspago == 'pagado'
+          ).length;
+
+          return {
+            id: categoria.id,
+            nombre: categoria.nombre,
+            total,
+            pago: total === pagadas ? 'Pagada' : 'Pago pendiente'
+          };
+        });
+
+      this.exporExcel.categoriasSinNominaciones(categoriasConNominaciones);
+      return;
+    }
+
+    await this.GenereteReportMasterExcel();
+  }
+
+  async generarReporteCategoriasSinNominaciones() {
+    this.reportType = 'sin-nominaciones';
+    await this.exportarReporteSeleccionado();
+  }
+
   async getUsersForReport() {
     var usuarios2 = [];
      await this.firebaseServiceUsuarios.getusuarios().subscribe((data) => {
@@ -216,46 +268,28 @@ edit: boolean = false
   }
 
   ExcelPiezasPorCategoria(nominaciones) {
-    //var nominaciones = [];
+    this.piezasPorCategoria = [];
 
-    //this.getUsersForReport();
+    this.categoriaCollectiondata.forEach((category) => {
+      const categoriaNominaciones = nominaciones.filter((nominacion) => nominacion.categoria == category.nombre);
+      const countCategories = categoriaNominaciones.length;
+      const countPagadas = categoriaNominaciones.filter((nominacion) =>
+        nominacion.statuspago == "Pago Realizado" || nominacion.statuspago == "pagado"
+      ).length;
 
-    //await this.firebaseServiceNominacion.getAllNominaciones().then((data) => {
+      let pago = 'Sin nominaciones';
+      if (countCategories > 0) {
+        pago = countCategories == countPagadas ? 'Pagada' : 'Pago pendiente';
+      }
 
-      //nominaciones = data;
-
-
-      /*Reporte piezas por categoria*/
-      this.categoriaCollectiondata.forEach((category) => {
-        var countCategories = 0;
-        var countPagadas = 0
-        nominaciones.forEach((nominacion) => {
-          if (nominacion.categoria == category.nombre) {
-            console.log("-----------" );
-            countCategories++;
-
-            if (nominacion.statuspago == "Pago Realizado" || nominacion.statuspago == "pagado") {
-              countPagadas++;
-            }
-          }
-        })
-
-        if(countCategories == countPagadas){
-          this.piezasPorCategoria.push(Object.assign(category, {total:countCategories, pago:"Pagada"}));
-        }
-
-        if(countCategories != countPagadas && countCategories > 0){
-          this.piezasPorCategoria.push(Object.assign(category, {total:countCategories, pago:"Pago pendiente"}));
-        }
-
-        if(countCategories == 0){
-          this.piezasPorCategoria.push(Object.assign(category, {total:countCategories, pago:"Pago pendiente"}));
-        }
+      this.piezasPorCategoria.push({
+        ...category,
+        total: countCategories,
+        pago
       });
+    });
 
-      return this.piezasPorCategoria;
-    //});
-   return this.piezasPorCategoria;
+    return this.piezasPorCategoria;
   }
 
   ExcelPiezasInscritas(usuarios, nominaciones) {
