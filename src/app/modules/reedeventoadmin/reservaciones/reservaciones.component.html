@@ -11,9 +11,31 @@
         </ng-template>
     </p-toolbar>
 
-   <p-table [value]="reservacionCollectiondata" [rows]="20" [paginator]="true" [loading]="loading"
-         [rowsPerPageOptions]="[20,35,50]" styleClass="p-datatable-sm p-datatable-gridlines" responsiveLayout="scroll"
-         [autoLayout]="true">
+   <p-table [value]="reservacionCollectionFiltrada" [rows]="20" [paginator]="true" [loading]="loading"
+          [rowsPerPageOptions]="[20,35,50]" styleClass="p-datatable-sm p-datatable-gridlines" responsiveLayout="scroll"
+          [autoLayout]="true">
+        <ng-template pTemplate="caption">
+            <div class="filtros-bar">
+                <div class="filtro-grupo">
+                    <label class="filtro-label"><i class="pi pi-calendar mr-1"></i> Año:</label>
+                    <select [(ngModel)]="selectedAnio" (ngModelChange)="filtrarPorAnio()" class="form-select form-select-sm">
+                        <option value="">Todos los años</option>
+                        <option *ngFor="let anio of aniosDisponibles" [value]="anio">{{anio}}</option>
+                    </select>
+                </div>
+                <div class="filtro-grupo filtro-busqueda">
+                    <span class="search-wrapper">
+                        <i class="pi pi-search search-icon"></i>
+                        <input type="text" [(ngModel)]="searchLugares" (ngModelChange)="filtrarPorAnio()" placeholder="Buscar Lugares Comprados..." class="form-control form-control-sm search-input">
+                    </span>
+                </div>
+                <div class="filtro-acciones">
+                    <button *ngIf="selectedAnio || searchLugares" pButton pRipple label="Limpiar" icon="pi pi-times" class="p-button-outlined p-button-secondary p-button-sm" (click)="limpiarFiltros()"></button>
+                </div>
+                <span class="filtro-contador" *ngIf="selectedAnio || searchLugares">Mostrando <strong>{{reservacionCollectionFiltrada.length}}</strong> de {{reservacionCollectiondata.length}}</span>
+                <span class="filtro-contador text-muted" *ngIf="!selectedAnio && !searchLugares && aniosDisponibles.length">Años disponibles: {{aniosDisponibles.join(', ')}}</span>
+            </div>
+        </ng-template>
         <ng-template pTemplate="header">
             <tr>
                 <th>
@@ -102,7 +124,7 @@
         </ng-template>
         <ng-template pTemplate="summary">
             <div class="flex align-items-center justify-content-between">
-                Total de Reservaciones{{reservacionCollectiondata ? reservacionCollectiondata.length : 0 }}.
+                Total de Reservaciones {{reservacionCollectionFiltrada ? reservacionCollectionFiltrada.length : 0 }}<span *ngIf="selectedAnio || searchLugares"> filtradas<span *ngIf="selectedAnio"> por año {{selectedAnio}}</span><span *ngIf="searchLugares"> por "{{searchLugares}}"</span> (total sin filtro: {{reservacionCollectiondata.length}})</span><span *ngIf="!selectedAnio && !searchLugares">.</span>
             </div>
         </ng-template>
     </p-table>

@@ -58,6 +58,11 @@ export class ReservacionesComponent implements OnInit, OnDestroy {
   visibleDe:boolean= false;
   id: any;
 
+  aniosDisponibles: string[] = [];
+  selectedAnio: string = '';
+  searchLugares: string = '';
+  reservacionCollectionFiltrada: any[] = [];
+
   subscriptionStatusTemplatePDF: Subscription;
 
   constructor(
@@ -125,39 +130,85 @@ this.submitted = false
   }
 
 
-  async get() {
-     console.log("get2")
-     this.firebaseServiceReservacion.getReservacionesAdmin().subscribe((data) => {
-       console.log(data)
-       this.reservacionCollectiondata = data;
+   async get() {
+      console.log("get2")
+      this.firebaseServiceReservacion.getReservacionesAdmin().subscribe((data) => {
+        console.log(data)
+        this.reservacionCollectiondata = data;
+        this.actualizarFiltroAnio();
 
-      if(data[0]){
-        let dataString = [
-          'INFORMACION DE TU COMPRA',
-          'Lugares Comprados:' + data[0].LugaresComprados,
-          'Total de la compra:$'+ data[0].montopago + ' US',
-          'Ticket de compra: '+ data[0].codigotiket,
-          'Estatus de Pago: '+ data[0].descripcionpago,
-          'Fecha de compra: '+ data[0].fechaCreacion,
-          'Nombrecomprador: '+ data[0].Nombrecomprador,
-        ]
-        this.dataToString = JSON.stringify(dataString);
-        console.log('datatostring ', this.dataToString);
+       if(data[0]){
+         let dataString = [
+           'INFORMACION DE TU COMPRA',
+           'Lugares Comprados:' + data[0].LugaresComprados,
+           'Total de la compra:$'+ data[0].montopago + ' US',
+           'Ticket de compra: '+ data[0].codigotiket,
+           'Estatus de Pago: '+ data[0].descripcionpago,
+           'Fecha de compra: '+ data[0].fechaCreacion,
+           'Nombrecomprador: '+ data[0].Nombrecomprador,
+         ]
+         this.dataToString = JSON.stringify(dataString);
+         console.log('datatostring ', this.dataToString);
 
-      }
+       }
 
-       this.loading= false
+        this.loading= false
+      });
+
+   }
+
+
+   updatereservacionCollection(snapshot: QuerySnapshot<DocumentData>) {
+     this.reservacionCollectiondata = [];
+     snapshot.docs.forEach((student) => {
+       this.reservacionCollectiondata.push({ ...student.data(), id: student.id });
+     })
+     this.actualizarFiltroAnio();
+   }
+
+   getYear(fecha: string): string {
+     if (!fecha) return '';
+     const m = (fecha as string).match(/\d{2}\/\d{2}\/(\d{4})/);
+     if (m) return m[1];
+     const f = (fecha as string).match(/\b(19|20)\d{2}\b/);
+     return f ? f[0] : '';
+   }
+
+   actualizarFiltroAnio() {
+     const anios = new Set<string>();
+     this.reservacionCollectiondata.forEach((r: any) => {
+       const y = this.getYear(r.fechaCreacion);
+       if (y) anios.add(y);
      });
+     this.aniosDisponibles = Array.from(anios).sort((a, b) => +b - +a);
+     this.filtrarPorAnio();
+   }
 
-  }
+    filtrarPorAnio() {
+      let data = [...this.reservacionCollectiondata];
+      if (this.selectedAnio) data = data.filter((r: any) => this.getYear(r.fechaCreacion) === this.selectedAnio);
+      if (this.searchLugares && this.searchLugares.trim()) {
+        const term = this.searchLugares.trim().toLowerCase();
+        data = data.filter((r: any) => (r.LugaresComprados ?? '').toString().toLowerCase().includes(term));
+      }
+      this.reservacionCollectionFiltrada = data;
+    }
 
+    limpiarFiltroAnio() {
+      this.selectedAnio = '';
+      this.filtrarPorAnio();
+    }
 
-  updatereservacionCollection(snapshot: QuerySnapshot<DocumentData>) {
-    this.reservacionCollectiondata = [];
-    snapshot.docs.forEach((student) => {
-      this.reservacionCollectiondata.push({ ...student.data(), id: student.id });
-    })
-  }
+    limpiarFiltroLugares() {
+      this.searchLugares = '';
+      this.filtrarPorAnio();
+    }
+
+    limpiarFiltros() {
+      this.selectedAnio = '';
+      this.searchLugares = '';
+      this.filtrarPorAnio();
+    }
 
   async delete(docId: any) {
     console.log(docId);
@@ -202,10 +253,11 @@ this.edit= false
 
   }
 
-  Excel() {
-    var reportExcel = [];
-    this.firebaseServiceUsuarios.getusuarios().subscribe((usuarios) => {
-      this.reservacionCollectiondata.forEach((reservacion) => {
+   Excel() {
+     var reportExcel = [];
+     const source = (this.selectedAnio || this.searchLugares) ? this.reservacionCollectionFiltrada : this.reservacionCollectiondata;
+     this.firebaseServiceUsuarios.getusuarios().subscribe((usuarios) => {
+       source.forEach((reservacion) => {
         //console.log(reservacion);
         usuarios.forEach((usuario) => {
          if (usuario.uid === reservacion.uid){
