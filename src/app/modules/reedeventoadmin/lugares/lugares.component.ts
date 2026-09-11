@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { LugaresService } from 'src/app/services/lugares.service';
 import Swal from 'sweetalert2';
+import * as XLSX from 'xlsx';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-lugares',
@@ -16,6 +18,14 @@ export class LugaresComponent implements OnInit {
   selectedMesaDetails: any = null;
   showAddMesaDialog = false;
   showAddLugarDialog = false;
+  showAllLugaresDialog = false;
+  todosLugares: any[] = [];
+  filteredTodosLugares: any[] = [];
+  searchAllLugares = '';
+  loadingAllLugares = false;
+  filtroEstado: 'todos' | 'disponible' | 'apartado' | 'vendido' = 'todos';
+  paginaActual = 1;
+  filasPorPagina = 30;
 
   newMesa = {
     id: '',
@@ -348,5 +358,159 @@ export class LugaresComponent implements OnInit {
 
   getStatus(value: boolean): string {
     return value ? 'Sí' : 'No';
+  }
+
+  openAllLugaresDialog(): void {
+    this.showAllLugaresDialog = true;
+    this.loadingAllLugares = true;
+    this.lugaresService.getLugares2026().subscribe((data: any[]) => {
+      this.todosLugares = (data || []).sort((a: any, b: any) => {
+        const pa = this.parseIdLugar(a.idLugar || '');
+        const pb = this.parseIdLugar(b.idLugar || '');
+        const blockA = pa.num.toString()[0] || '9';
+        const blockB = pb.num.toString()[0] || '9';
+        if (blockA !== blockB) return blockA.localeCompare(blockB);
+        const cmpL = pa.letters.localeCompare(pb.letters);
+        if (cmpL !== 0) return cmpL;
+        return pa.num - pb.num;
+      });
+      this.filteredTodosLugares = [...this.todosLugares];
+      this.searchAllLugares = '';
+      this.loadingAllLugares = false;
+    });
+  }
+
+  private parseIdLugar(id: string): { letters: string; num: number } {
+    const m = id.trim().toUpperCase().match(/^([A-Z]+)(\d+)$/);
+    if (m) return { letters: m[1], num: parseInt(m[2], 10) };
+    const n = id.match(/\d+/);
+    return { letters: id.replace(/\d/g, ''), num: n ? parseInt(n[0], 10) : 9999 };
+  }
+
+  filterAllLugares(): void {
+    let data = [...this.todosLugares];
+    if (this.filtroEstado !== 'todos') {
+      data = data.filter((l: any) => {
+        if (this.filtroEstado === 'vendido') return !!l.comprado;
+        if (this.filtroEstado === 'apartado') return !!l.apartado && !l.comprado;
+        if (this.filtroEstado === 'disponible') return !l.apartado && !l.comprado;
+        return true;
+      });
+    }
+    const term = this.searchAllLugares.trim().toLowerCase();
+    if (term) {
+      data = data.filter((l: any) =>
+        (l.idLugar || '').toLowerCase().includes(term) ||
+        (l.idMesa || '').toLowerCase().includes(term) ||
+        (l.precio || '').toLowerCase().includes(term) ||
+        (l.type || '').toLowerCase().includes(term) ||
+        this.getEstadoTexto(l).toLowerCase().includes(term)
+      );
+    }
+    this.filteredTodosLugares = data;
+    this.paginaActual = 1;
+  }
+
+  setFiltroEstado(estado: 'todos' | 'disponible' | 'apartado' | 'vendido'): void {
+    this.filtroEstado = estado;
+    this.filterAllLugares();
+  }
+
+  getEstadoTexto(lugar: any): string {
+    if (lugar.comprado) return 'Vendido';
+    if (lugar.apartado) return 'Apartado';
+    return 'Disponible';
+  }
+
+  getEstadoClase(lugar: any): string {
+    if (lugar.comprado) return 'estado-vendido';
+    if (lugar.apartado) return 'estado-apartado';
+    return 'estado-disponible';
+  }
+
+  get countDisponibles(): number { return this.todosLugares.filter((l: any) => !l.apartado && !l.comprado).length; }
+  get countApartados(): number { return this.todosLugares.filter((l: any) => l.apartado && !l.comprado).length; }
+  get countVendidos(): number { return this.todosLugares.filter((l: any) => l.comprado).length; }
+  get fechaHoy(): string { return new Date().toLocaleDateString('es-ES'); }
+  @ViewChild('gridTodosLugares') gridTodosLugaresRef!: ElementRef;
+
+  getMesaKey(lugar: any): string {
+    if (lugar.idMesa) return (lugar.idMesa + '').toUpperCase();
+    const id = (lugar.idLugar || '').toString().trim().toUpperCase();
+    const m = id.match(/^([A-Z]+\d)/);
+    if (m) return m[1];
+    const letters = id.replace(/\d/g, '');
+    const nums = (id.match(/\d+/) || [''])[0];
+    return (letters + (nums[0] || '')).toUpperCase() || 'OTROS';
+  }
+
+  get gruposFiltrados(): { mesa: string; lugares: any[] }[] {
+    const map = new Map<string, any[]>();
+    this.filteredTodosLugares.forEach((l: any) => {
+      const k = this.getMesaKey(l);
+      if (!map.has(k)) map.set(k, []);
+      map.get(k)!.push(l);
+    });
+    return Array.from(map.entries())
+      .sort((a, b) => {
+        const pa = this.parseIdLugar(a[0]);
+        const pb = this.parseIdLugar(b[0]);
+        if (pa.num !== pb.num) return pa.num - pb.num;
+        return pa.letters.localeCompare(pb.letters);
+      })
+      .map(([mesa, lugares]) => ({ mesa, lugares }));
+  }
+
+  getGrupoCount(grupo: { mesa: string; lugares: any[] }, tipo: 'disponible'|'apartado'|'vendido'): number {
+    if (tipo === 'vendido') return grupo.lugares.filter((l:any)=> !!l.comprado).length;
+    if (tipo === 'apartado') return grupo.lugares.filter((l:any)=> !!l.apartado && !l.comprado).length;
+    return grupo.lugares.filter((l:any)=> !l.apartado && !l.comprado).length;
+  }
+
+  get totalPaginas(): number { return Math.ceil(this.filteredTodosLugares.length / this.filasPorPagina) || 1; }
+  get paginatedTodosLugares(): any[] {
+    const start = (this.paginaActual - 1) * this.filasPorPagina;
+    return this.filteredTodosLugares.slice(start, start + this.filasPorPagina);
+  }
+  irPagina(p: number): void { if (p >= 1 && p <= this.totalPaginas) this.paginaActual = p; }
+  paginaAnterior(): void { if (this.paginaActual > 1) this.paginaActual--; }
+  paginaSiguiente(): void { if (this.paginaActual < this.totalPaginas) this.paginaActual++; }
+
+  exportExcelTodosLugares(): void {
+    const data = this.filteredTodosLugares.map((l: any) => ({
+      ID_LUGAR: l.idLugar,
+      MESA: l.idMesa || '',
+      PRECIO: l.precio,
+      TIPO: l.type,
+      ESTADO: this.getEstadoTexto(l),
+      FECHA: l.fecha || '',
+    }));
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+    ws['!cols'] = [{ wch: 12 }, { wch: 10 }, { wch: 18 }, { wch: 8 }, { wch: 12 }, { wch: 20 }];
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Lugares');
+    XLSX.writeFile(wb, `lugares_${this.filtroEstado}_${new Date().toISOString().slice(0,10)}.xlsx`);
+  }
+
+  async exportImagenTodosLugares(): Promise<void> {
+    if (!this.gridTodosLugaresRef?.nativeElement) {
+      Swal.fire('Sin contenido', 'No hay grid para exportar', 'warning');
+      return;
+    }
+    const el: HTMLElement = this.gridTodosLugaresRef.nativeElement;
+    const badges = el.querySelectorAll('.mesa-grupo-badges');
+    const prev: string[] = [];
+    badges.forEach((b: any) => { prev.push(b.style.display); b.style.display = 'none'; });
+    try {
+      const canvas = await html2canvas(el, { scale: 2, backgroundColor: '#f8f9ff', useCORS: true });
+      const link = document.createElement('a');
+      link.download = `lugares_${this.filtroEstado}_${new Date().toISOString().slice(0,10)}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    } catch (e) {
+      Swal.fire('Error', 'No se pudo generar la imagen', 'error');
+    } finally {
+      badges.forEach((b: any, i: number) => { b.style.display = prev[i]; });
+    }
   }
 }

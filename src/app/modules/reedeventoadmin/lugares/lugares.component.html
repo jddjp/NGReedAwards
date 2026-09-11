@@ -1,7 +1,8 @@
 <div class="p-4">
   <div class="lugares-toolbar">
     <h3>Administración de lugares</h3>
-    <div class="toolbar-actions">
+    <div class="toolbar-actions" style="gap: 8px;">
+      <button pButton pRipple label="Ver todos los lugares" icon="pi pi-th-large" class="p-button-info p-button-sm" (click)="openAllLugaresDialog()"></button>
       <button type="button" class="icon-btn" (click)="showAddMesaDialog = true" title="Nueva mesa">
         <i class="pi pi-plus"></i>
       </button>
@@ -184,6 +185,53 @@
     </div>
     <div class="dialog-actions">
       <button type="button" class="add-mesa-btn" (click)="addLugar()">Guardar lugar</button>
+    </div>
+  </p-dialog>
+
+  <p-dialog header="Todos los lugares — {{todosLugares.length}} lugares" [(visible)]="showAllLugaresDialog" [modal]="true" [closable]="true" [maximizable]="true" [style]="{ width: '98vw', maxWidth: '1750px' }" [contentStyle]="{ overflow: 'auto', display: 'flex', flexDirection: 'column', padding: '12px' }">
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; flex-shrink:0;">
+      <span style="position:relative; flex:1 1 280px; max-width:360px;">
+        <i class="pi pi-search" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:#6c757d;"></i>
+        <input type="text" [(ngModel)]="searchAllLugares" (ngModelChange)="filterAllLugares()" placeholder="Buscar ID, mesa o estado..." class="form-control" style="padding-left:36px; border-radius:8px; height:38px;">
+      </span>
+      <div style="display:flex; gap:6px; flex-wrap:wrap;">
+        <button type="button" class="estado-badge" [ngClass]="filtroEstado==='todos' ? 'estado-vendido' : ''" style="cursor:pointer; border:1px solid #dee2e6; background:#fff;" [style.background]="filtroEstado==='todos' ? '#1d336f' : '#fff'" [style.color]="filtroEstado==='todos' ? '#fff' : '#495057'" (click)="setFiltroEstado('todos')">Todos ({{todosLugares.length}})</button>
+        <button type="button" class="estado-badge estado-disponible" style="cursor:pointer;" [style.opacity]="filtroEstado==='disponible' ? '1' : '0.6'" [style.boxShadow]="filtroEstado==='disponible' ? '0 0 0 2px #2e7d32' : 'none'" (click)="setFiltroEstado('disponible')">Disponible: {{countDisponibles}}</button>
+        <button type="button" class="estado-badge estado-apartado" style="cursor:pointer;" [style.opacity]="filtroEstado==='apartado' ? '1' : '0.6'" [style.boxShadow]="filtroEstado==='apartado' ? '0 0 0 2px #f9a825' : 'none'" (click)="setFiltroEstado('apartado')">Apartado: {{countApartados}}</button>
+        <button type="button" class="estado-badge estado-vendido" style="cursor:pointer;" [style.opacity]="filtroEstado==='vendido' ? '1' : '0.6'" [style.boxShadow]="filtroEstado==='vendido' ? '0 0 0 2px #c62828' : 'none'" (click)="setFiltroEstado('vendido')">Vendido: {{countVendidos}}</button>
+      </div>
+      <button pButton pRipple icon="pi pi-file-excel" label="Excel" class="p-button-success p-button-sm" (click)="exportExcelTodosLugares()" pTooltip="Exportar filtrados a Excel"></button>
+      <button pButton pRipple icon="pi pi-image" label="Imagen" class="p-button-info p-button-sm" (click)="exportImagenTodosLugares()" pTooltip="Exportar vista a imagen PNG"></button>
+      <span style="font-size:0.85rem; color:#495057; margin-left:auto; font-weight:600;">{{filteredTodosLugares.length}} / {{todosLugares.length}} — 30 por fila</span>
+    </div>
+    <div *ngIf="loadingAllLugares" style="text-align:center; padding:2rem; color:#6c757d;"><i class="pi pi-spin pi-spinner"></i> Cargando lugares...</div>
+    <div *ngIf="!loadingAllLugares && filteredTodosLugares.length===0" style="text-align:center; padding:2rem; color:#6c757d; border:1px dashed #dee2e6; border-radius:8px;">No se encontraron lugares</div>
+    <div #gridTodosLugares *ngIf="!loadingAllLugares && filteredTodosLugares.length>0" class="todos-grid-scroll">
+      <div class="grid-totales-header">
+        <strong>REED LATINO — Lugares {{filteredTodosLugares.length}}/{{todosLugares.length}}</strong>
+        <span class="totales-sep">|</span> Disponible: <span class="mini-count disp" style="padding:1px 6px;">{{countDisponibles}}</span>
+        <span class="totales-sep">|</span> Apartado: <span class="mini-count apart" style="padding:1px 6px;">{{countApartados}}</span>
+        <span class="totales-sep">|</span> Vendido: <span class="mini-count vend" style="padding:1px 6px;">{{countVendidos}}</span>
+        <span class="totales-sep" *ngIf="filtroEstado!=='todos'">| Filtro: {{filtroEstado}}</span>
+        <span style="margin-left:auto; font-size:0.7rem; color:#6c757d;">{{fechaHoy}}</span>
+      </div>
+      <div class="mesas-grupos-grid">
+      <div *ngFor="let grupo of gruposFiltrados" class="mesa-grupo">
+        <div class="mesa-grupo-header">
+          <span class="mesa-grupo-title">{{grupo.mesa}}</span>
+          <span class="mesa-grupo-badges">
+            <span class="mini-count disp">{{getGrupoCount(grupo,'disponible')}}</span>
+            <span class="mini-count apart">{{getGrupoCount(grupo,'apartado')}}</span>
+            <span class="mini-count vend">{{getGrupoCount(grupo,'vendido')}}</span>
+          </span>
+        </div>
+        <div class="lugares-grid todos-grid">
+          <div class="lugar-card" *ngFor="let lugar of grupo.lugares" [ngClass]="getEstadoClase(lugar)" [pTooltip]="lugar.idLugar + ' — ' + getEstadoTexto(lugar)" tooltipPosition="top">
+            <span class="lugar-id">{{ lugar.idLugar }}</span>
+          </div>
+        </div>
+      </div>
+      </div>
     </div>
   </p-dialog>
 </div>

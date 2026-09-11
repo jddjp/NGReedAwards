@@ -434,3 +434,161 @@
 .reset-mesa-btn:hover {
   background: #263238;
 }
+.estado-badge{
+  display:inline-block;
+  padding:2px 8px;
+  border-radius:999px;
+  font-size:0.75rem;
+  font-weight:700;
+  border:1px solid transparent;
+}
+.estado-badge.estado-vendido{
+  background:#ffebee;
+  color:#c62828;
+  border-color:#ef9a9a;
+}
+.estado-badge.estado-apartado{
+  background:#fff8e1;
+  color:#e65100;
+  border-color:#ffe082;
+}
+.estado-badge.estado-disponible{
+  background:#e8f5e9;
+  color:#2e7d32;
+  border-color:#a5d6a7;
+}
+.todos-grid-scroll{
+  flex:1;
+  overflow:visible;
+  border:1px solid #dee2e6;
+  border-radius:12px;
+  padding:8px;
+  background:#f8f9ff;
+}
+.mesas-grupos-grid{
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap:10px;
+  align-items:start;
+}
+@media (max-width: 1500px){ .mesas-grupos-grid{ grid-template-columns: repeat(4, 1fr);} }
+@media (max-width: 1100px){ .mesas-grupos-grid{ grid-template-columns: repeat(3, 1fr);} }
+@media (max-width: 800px){ .mesas-grupos-grid{ grid-template-columns: repeat(2, 1fr);} }
+@media (max-width: 500px){ .mesas-grupos-grid{ grid-template-columns: 1fr;} }
+.todos-grid{
+  margin-top:0;
+  grid-template-columns: repeat(30, 1fr);
+  gap:3px;
+}
+.mesa-grupo .todos-grid{
+  grid-template-columns: repeat(8, 1fr);
+  gap:3px;
+}
+@media (max-width: 1600px){ .todos-grid{ grid-template-columns: repeat(20, 1fr);} .mesa-grupo .todos-grid{ grid-template-columns: repeat(7, 1fr);} }
+@media (max-width: 1100px){ .todos-grid{ grid-template-columns: repeat(12, 1fr);} .mesa-grupo .todos-grid{ grid-template-columns: repeat(6, 1fr);} }
+@media (max-width: 700px){ .todos-grid{ grid-template-columns: repeat(8, 1fr);} .mesa-grupo .todos-grid{ grid-template-columns: repeat(4, 1fr);} }
+@media (max-width: 480px){ .todos-grid{ grid-template-columns: repeat(5, 1fr);} .mesa-grupo .todos-grid{ grid-template-columns: repeat(3, 1fr);} }
+.todos-grid .lugar-card{
+  min-height:20px;
+  padding:1px 4px;
+  border-width:1px;
+  border-radius:4px;
+  justify-content:center;
+  align-items:center;
+  gap:1px;
+  line-height:1;
+}
+.todos-grid .lugar-card .lugar-header{
+  margin-bottom:0;
+  gap:1px;
+  justify-content:center;
+}
+.todos-grid .lugar-card .lugar-id{
+  font-size:0.58rem;
+  text-align:center;
+  line-height:1;
+}
+.todos-grid .lugar-card .lugar-body{
+  gap:0;
+  align-items:center;
+}
+.todos-grid .lugar-card .estado-badge{
+  font-size:0.42rem !important;
+  padding:0 4px !important;
+  line-height:1.3;
+}
+.todos-grid .lugar-card:hover{
+  transform:translateY(-1px);
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+  transition:all 0.12s;
+}
+:host ::ng-deep .p-dialog .p-dialog-content{
+  overflow:auto;
+}
+:host ::ng-deep .p-dialog-maximized .todos-grid-scroll{
+  overflow:visible;
+}
+.grid-totales-header{
+  grid-column: 1 / -1;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  background:#1d336f;
+  color:#fff;
+  padding:8px 12px;
+  border-radius:8px;
+  font-size:0.78rem;
+  font-weight:700;
+  margin-bottom:8px;
+}
+.grid-totales-header .mini-count{
+  font-size:0.68rem;
+}
+.grid-totales-header .totales-sep{
+  opacity:0.6;
+  margin:0 2px;
+}
+.mesa-grupo{
+  margin-bottom:0;
+  border:1px solid #e3e7ff;
+  border-radius:10px;
+  background:#fff;
+  padding:8px;
+  break-inside:avoid;
+}
+.mesa-grupo-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-bottom:4px;
+  padding:2px 6px;
+  background:#f0f2ff;
+  border-radius:5px;
+  font-size:0.66rem;
+  font-weight:700;
+  color:#1d336f;
+  line-height:1.2;
+}
+.mesa-grupo-title{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.mesa-grupo-badges{
+  display:flex;
+  gap:6px;
+  font-size:0.62rem;
+  font-weight:600;
+}
+.mini-count{
+  padding:1px 6px;
+  border-radius:999px;
+  border:1px solid #dee2e6;
+  background:#fff;
+}
+.mini-count.disp{ color:#2e7d32; border-color:#a5d6a7; background:#e8f5e9; }
+.mini-count.apart{ color:#e65100; border-color:#ffe082; background:#fff8e1; }
+.mini-count.vend{ color:#c62828; border-color:#ef9a9a; background:#ffebee; }
